@@ -1,9 +1,12 @@
+using Observers;
+using Observers.dto;
+using StateMachine.states;
 using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -34,6 +37,7 @@ public class MovementController : MonoBehaviour
     private bool isGrounded;
     private float inputY = 0;
 
+    private bool isWindActive = false;
     private bool isImpact = false;
     private bool canTilt = false;
     private bool hasFallen = false;
@@ -42,9 +46,15 @@ public class MovementController : MonoBehaviour
     public RectTransform tiltBar;
     public float maxArrowOffset = 50f;
     private Coroutine tiltCoroutine;
+    public ParticleSystem windLeft;
+    public ParticleSystem windRight;
+    public WindState windState;
+    public AnvilState anvilState;
 
     void Awake()
     {
+        windState.AddObserver(this);
+        anvilState.AddObserver(this);
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
@@ -64,11 +74,11 @@ public class MovementController : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(ImpactTilt(2.5f, -1f)); 
+        //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            InstantKill(); 
+       //     InstantKill(); 
         }
         HandleMovement();
         HandleMouseLook();
@@ -181,7 +191,10 @@ public class MovementController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(2f, 4f));
-            targetTiltDirection = Random.Range(0, 2) * 2 - 1; 
+            if (!isWindActive) 
+            {
+                targetTiltDirection = Random.Range(0, 2) * 2 - 1;
+            }
         }
     }
 
@@ -264,6 +277,56 @@ public class MovementController : MonoBehaviour
 
         currentTilt = 0f; 
         cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+    }
+
+    public void OnNotify(WindDTO dto)
+    {
+        if (dto._enabled)
+        {
+            isWindActive = true; 
+            tiltMultiplier = 2f;
+            targetTiltDirection = (dto._direction == 0) ? 1f : -1f; 
+
+            if (tiltCoroutine != null)
+            {
+                StopCoroutine(tiltCoroutine);
+                tiltCoroutine = null;
+            }
+
+            if (dto._direction == 0)
+            {
+                windLeft.Play();
+                windRight.Stop();
+                windRight.Clear();
+            }
+            else
+            {
+                windRight.Play();
+                windLeft.Stop();
+                windLeft.Clear();
+            }
+        }
+        else
+        {
+            isWindActive = false; 
+            windLeft.Stop();
+            windLeft.Clear();
+            windRight.Stop();
+            windRight.Clear();
+            tiltMultiplier = 1f;
+
+            if (tiltCoroutine == null)
+            {
+                tiltCoroutine = StartCoroutine(ChangeTiltDirection());
+            }
+        }
+    }
+
+    public void OnNotify(AnvilDTO dto)
+    {
+
+       InstantKill();
+
     }
 
 }

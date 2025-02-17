@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    public List<GameObject> objectPool; // Lista gotowych prefabów
+    public List<GameObject> objectPool; 
     [SerializeField]
 
     void Start()
     {
-        // Dezaktywujemy wszystkie obiekty na start
         foreach (var obj in objectPool)
         {
             obj.SetActive(false);
@@ -19,11 +18,11 @@ public class ObjectPooler : MonoBehaviour
     {
         foreach (var obj in objectPool)
         {
-            if (!obj.activeInHierarchy) // Znajdujemy pierwszy nieaktywny obiekt
+            if (!obj.activeInHierarchy) 
             {
                 obj.transform.position = spawnLocation.position;
                 obj.transform.rotation = spawnLocation.rotation;
-                obj.SetActive(true); // Aktywujemy obiekt
+                obj.SetActive(true);
                 break;
             }
         }
@@ -31,6 +30,6 @@ public class ObjectPooler : MonoBehaviour
 
     public void DespawnObject(GameObject obj)
     {
-        obj.SetActive(false); // Dezaktywujemy obiekt, by wróci³ do puli
+        obj.SetActive(false); 
     }
 }

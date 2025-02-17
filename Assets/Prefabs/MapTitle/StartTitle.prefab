@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPooler: {fileID: 0}
   transform: {fileID: 0}
-  mapTitle: {fileID: 7772161672518035389}
+  gameObject: {fileID: 6255814650417340719}
 --- !u!65 &780178237174995231
 BoxCollider:
   m_ObjectHideFlags: 0

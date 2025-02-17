@@ -8,25 +8,26 @@ public class MapSpawner : MonoBehaviour
     [SerializeField]
     Transform transform;
     [SerializeField]
-    GameObject mapTitle;
+    bool isSpawned;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
     {
         transform = GetComponent<Transform>();
+
+    }
+    private void OnEnable()
+    {
+        isSpawned = false;
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player")&& !isSpawned)
         {
             objectPooler.SpawnObject(transform);
+            isSpawned = true;
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            objectPooler.DespawnObject(mapTitle);
-        }
+
     }
 }

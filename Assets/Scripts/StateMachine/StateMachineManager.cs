@@ -15,6 +15,7 @@ namespace StateMachine
         [SerializeField] DefaultState _defaultState;
         [SerializeField] WindState _windState;
         [SerializeField] AnvilState _anvilState;
+        [SerializeField] StormState _stormState;
         
         
         private StateQueue _stateQueue;
@@ -39,6 +40,7 @@ namespace StateMachine
             List<IBaseState> states = new List<IBaseState>();
             states.Add(_windState);
             states.Add(_anvilState);
+            states.Add(_stormState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;

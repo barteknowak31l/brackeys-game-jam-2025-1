@@ -82,9 +82,6 @@ namespace StateMachine.states
                 .Direction(_windDirection)
                 .Speed(_windSpeed);
             NotifyObservers(dto);
-        
-            Debug.Log("Updated wind: " + _windSpeed + " " + _windDirection);
-        
         }
 
         private IEnumerator UpdateWindCoroutine()

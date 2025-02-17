@@ -5,16 +5,17 @@ using UnityEngine;
 
 namespace Observers
 {
-    public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StateDTO>
+    public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StateDTO>, IObserver<StormDTO>
     {
         public WindState windState;
         public AnvilState anvilState;
+        public StormState stormState;
         
         private void OnEnable()
         {
             windState.AddObserver(this);
             anvilState.AddObserver(this);
-            
+            stormState.AddObserver(this);
             StateMachineManager.instance.AddObserver(this);
         }
 
@@ -22,6 +23,7 @@ namespace Observers
         {
             windState.RemoveObserver(this);
             anvilState.RemoveObserver(this);
+            stormState.RemoveObserver(this);
             StateMachineManager.instance.RemoveObserver(this);
         }
         
@@ -37,7 +39,12 @@ namespace Observers
 
         public void OnNotify(StateDTO dto)
         {
-            Debug.Log("received StateDTO: " + dto._state +" " + dto._isDefault);
+            Debug.Log("received StateDTO: " + dto._state + " " + dto._isDefault);
+        }
+        
+        public void OnNotify(StormDTO dto)
+        {
+            Debug.Log("Lightning has struck player");
         }
     }
 }

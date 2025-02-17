@@ -11,6 +11,7 @@ namespace StateMachine
         
         [SerializeField] DefaultState _defaultState;
         [SerializeField] WindState _windState;
+        [SerializeField] AnvilState _anvilState;
         
         
         private StateQueue _stateQueue;
@@ -19,6 +20,7 @@ namespace StateMachine
         {
             List<IBaseState> states = new List<IBaseState>();
             states.Add(_windState);
+            states.Add(_anvilState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;
@@ -27,6 +29,10 @@ namespace StateMachine
 
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                NextState();
+            }
             _currentState.UpdateState(this);
         }
 

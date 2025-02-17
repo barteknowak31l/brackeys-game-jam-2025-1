@@ -18,6 +18,7 @@ public class WindState : Observable, IBaseState
     [Space]
     [SerializeField] int _windDirection = 1; // 0 - left, 1 - right
     [SerializeField] private float _windChangeTimer = 7.0f;
+    [SerializeField] private float _windChangeTimerVariant2 = 4.0f;
 
     public void EnterState(StateMachineManager ctx)
     {
@@ -89,7 +90,7 @@ public class WindState : Observable, IBaseState
         while (true)
         {
             UpdateWind();
-            yield return new WaitForSeconds(_windChangeTimer);   
+            yield return new WaitForSeconds(_variant == Variant.First ? _windChangeTimer : _windChangeTimerVariant2);   
         }
     }
 }

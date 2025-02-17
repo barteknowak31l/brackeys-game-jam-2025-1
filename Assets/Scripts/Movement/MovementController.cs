@@ -41,6 +41,8 @@ public class MovementController : MonoBehaviour
     public RectTransform tiltArrow;
     public RectTransform tiltBar;
     public float maxArrowOffset = 50f;
+    private Coroutine tiltCoroutine;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -54,7 +56,7 @@ public class MovementController : MonoBehaviour
         Cursor.visible = false;
 
 
-        StartCoroutine(ChangeTiltDirection());
+        tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
     void Update()
@@ -156,8 +158,13 @@ public class MovementController : MonoBehaviour
     {
         playerInput.enabled = false;
         hasFallen = true;
-            float pushAmount = 0.008f;
 
+        if (tiltCoroutine != null)
+        {
+            StopCoroutine(tiltCoroutine);
+        }
+
+        float pushAmount = 0.008f;
         float rotateAmount = 0.1f; 
 
         Vector3 pushDirection = transform.right * (currentTilt > 0 ? -pushAmount : pushAmount);

@@ -42,7 +42,7 @@ namespace StateMachine
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;
-            NotifyObservers(createDTO());
+            NotifyObservers(createDTO(_currentState, true));
             _currentState.EnterState(this);
         }
 
@@ -60,21 +60,24 @@ namespace StateMachine
             if (_currentState != null) _currentState.ExitState(this);
             _currentState = _stateQueue.NextState();
             _currentState.EnterState(this);
-            NotifyObservers(createDTO());
+            NotifyObservers(createDTO(_currentState));
         }
 
         public void EndMechanicState()
         {
             if (_currentState != null) _currentState.ExitState(this);
             _currentState = _defaultState;
-            NotifyObservers(createDTO());
+            
+            NotifyObservers(createDTO(_stateQueue.Peek(), true));
             _currentState.EnterState(this);
         }
 
-        private StateDTO createDTO()
+        private StateDTO createDTO(IBaseState state, bool isDefault = false)
         {
-            return new StateDTO().State(_currentState.GetStateType()).Variant(_currentState.GetVariant());
-
+            return new StateDTO()
+                .State(state.GetStateType())
+                .Variant(state.GetVariant())
+                .IsDefault(isDefault);
         }
         
     }

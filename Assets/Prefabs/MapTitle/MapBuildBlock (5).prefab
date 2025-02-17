@@ -1410,6 +1410,7 @@ GameObject:
   - component: {fileID: 6962762159590326371}
   - component: {fileID: 7391261498280023027}
   - component: {fileID: 7700948326543420499}
+  - component: {fileID: 1103554774831475034}
   m_Layer: 0
   m_Name: billboard
   m_TagString: Untagged
@@ -1505,6 +1506,19 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &1103554774831475034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593584250328901571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be96cc580964c046b33b92ec98b469b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 2533679598076053202}
 --- !u!1 &5150388628955810236
 GameObject:
   m_ObjectHideFlags: 0

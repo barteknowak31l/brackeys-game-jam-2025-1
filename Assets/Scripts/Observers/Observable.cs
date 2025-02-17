@@ -9,7 +9,7 @@ namespace Observers
     {
         private List<IObserver<T>>  _observers ;
 
-        private void Awake()
+        public virtual void Awake()
         {
             _observers = new List<IObserver<T>>();
         }

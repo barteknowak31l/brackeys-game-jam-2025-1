@@ -7,6 +7,10 @@ namespace StateMachine.states
         void ExitState(StateMachineManager ctx);
         
         IBaseState SetVariant(Variant variant);
+
+        States GetStateType();
         
+        Variant GetVariant();
+
     }
 }

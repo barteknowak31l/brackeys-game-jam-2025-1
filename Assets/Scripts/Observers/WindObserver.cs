@@ -37,7 +37,7 @@ namespace Observers
 
         public void OnNotify(StateDTO dto)
         {
-            Debug.Log("received StateDTO: " + dto._state.ToString());
+            Debug.Log("received StateDTO: " + dto._state +" " + dto._isDefault);
         }
     }
 }

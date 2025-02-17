@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using StateMachine.states;
 using UnityEngine;
 
@@ -68,5 +69,11 @@ namespace StateMachine
             }
             return _queue.Dequeue().SetVariant(_variant);
         }
+
+        public IBaseState Peek()
+        {
+            return _queue.Peek();
+        }
+        
     }
 }

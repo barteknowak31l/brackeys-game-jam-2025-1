@@ -46,6 +46,16 @@ namespace StateMachine.states
             return this;
         }
 
+        public States GetStateType()
+        {
+            return States.Anvil;
+        }
+
+        public Variant GetVariant()
+        {
+            return _variant;
+        }
+
         private void SpawnAnvil()
         {
             // random position based on player pos

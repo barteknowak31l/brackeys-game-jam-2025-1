@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class MapDestroyer : MonoBehaviour
+{
+    [SerializeField]
+    GameObject mapTitle;
+    [SerializeField]
+    ObjectPooler objectPooler;
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            objectPooler.DespawnObject(mapTitle);
+        }
+    }
+}

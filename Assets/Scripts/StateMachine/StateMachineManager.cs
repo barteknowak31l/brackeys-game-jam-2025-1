@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
+using Observers;
 using StateMachine.states;
 using UnityEngine;
 
 namespace StateMachine
 {
-    public class StateMachineManager : MonoBehaviour
+    public class StateMachineManager : Observable<StateDTO>
     {
     
+        
         private IBaseState _currentState;
         
         [SerializeField] DefaultState _defaultState;
@@ -15,7 +18,22 @@ namespace StateMachine
         
         
         private StateQueue _stateQueue;
-    
+
+        public static StateMachineManager instance { get; private set; }
+
+        public override void Awake()
+        {
+            base.Awake();
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        
         void Start()
         {
             List<IBaseState> states = new List<IBaseState>();
@@ -24,6 +42,7 @@ namespace StateMachine
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;
+            NotifyObservers(createDTO());
             _currentState.EnterState(this);
         }
 
@@ -31,7 +50,7 @@ namespace StateMachine
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                NextState();
+                EndMechanicState();
             }
             _currentState.UpdateState(this);
         }
@@ -41,6 +60,22 @@ namespace StateMachine
             if (_currentState != null) _currentState.ExitState(this);
             _currentState = _stateQueue.NextState();
             _currentState.EnterState(this);
+            NotifyObservers(createDTO());
         }
+
+        public void EndMechanicState()
+        {
+            if (_currentState != null) _currentState.ExitState(this);
+            _currentState = _defaultState;
+            NotifyObservers(createDTO());
+            _currentState.EnterState(this);
+        }
+
+        private StateDTO createDTO()
+        {
+            return new StateDTO().State(_currentState.GetStateType()).Variant(_currentState.GetVariant());
+
+        }
+        
     }
 }

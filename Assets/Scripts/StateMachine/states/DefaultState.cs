@@ -1,11 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace StateMachine.states
 {
-    // stan poczatkowy
-    
-    
     public class DefaultState : MonoBehaviour, IBaseState
     {
         private StateMachineManager _ctx;
@@ -13,21 +11,18 @@ namespace StateMachine.states
         public void EnterState(StateMachineManager ctx)
         {
             Debug.Log("Entered DefaultState");
+            StartCoroutine(ChangeStateCoroutine());
+            _ctx = ctx;
         }
 
         public void UpdateState(StateMachineManager ctx)
         {
-            Debug.Log("Updated DefaultState");
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ctx.NextState();
-            }
         }
 
         public void ExitState(StateMachineManager ctx)
         {
             Debug.Log("Exited DefaultState");
+            StopAllCoroutines();
         }
 
         public IBaseState SetVariant(Variant variant)
@@ -35,9 +30,22 @@ namespace StateMachine.states
             return this;
         }
 
-        private void OnCollisionEnter(Collision other)
+        public States GetStateType()
         {
+            return States.Default;
+        }
+
+        public Variant GetVariant()
+        {
+            return Variant.First;
+        }
+
+        IEnumerator ChangeStateCoroutine()
+        {
+            yield return new WaitForSeconds(5.0f);
             _ctx.NextState();
         }
+        
+        
     }
 }

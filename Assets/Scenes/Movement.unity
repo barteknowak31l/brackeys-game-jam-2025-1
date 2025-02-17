@@ -818,6 +818,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1973496281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8597618637817263971, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+  m_PrefabInstance: {fileID: 4899436306955198371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979685805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1102,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1456025328}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: tiltSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: windState
       value: 
       objectReference: {fileID: 1598852519}
@@ -1104,6 +1113,10 @@ PrefabInstance:
       propertyPath: anvilState
       value: 
       objectReference: {fileID: 735099530}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: crouchCameraTransform
+      value: 
+      objectReference: {fileID: 1973496281}
     - target: {fileID: 4714648044854313803, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: m_Radius
       value: 0.6

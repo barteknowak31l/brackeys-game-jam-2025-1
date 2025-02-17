@@ -26,6 +26,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private InputAction lookAction;
     private InputAction sprintAction;
     private InputAction jumpAction;
+    private InputAction crouchAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -50,9 +51,19 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public ParticleSystem windRight;
     public WindState windState;
     public AnvilState anvilState;
+    private bool isCrouching;
+
+    private CapsuleCollider capsuleCollider;
+    private float originalColliderHeight;
+    private Vector3 originalColliderCenter;
+    private Vector3 originalCameraPosition;
+    private float crouchOffset = 0.5f;
 
     void Awake()
     {
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        originalColliderHeight = capsuleCollider.height;
+        originalCameraPosition = cameraTransform.localPosition;
         windState.AddObserver(this);
         anvilState.AddObserver(this);
         playerInput = GetComponent<PlayerInput>();
@@ -60,11 +71,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         lookAction = playerInput.actions["Look"];
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"];
+        crouchAction = playerInput.actions["Crouch"];
+        crouchAction.performed += _ => ToggleCrouch();
 
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        originalColliderCenter = capsuleCollider.center;
 
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
@@ -86,11 +100,44 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         UpdateTiltUI();
 
     }
+    void ToggleCrouch()
+    {
+        if (isCrouching)
+        {
+            isCrouching = false;
+            animator.SetBool("Crouch", false);
+        //    capsuleCollider.height = originalColliderHeight;
+            StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
+        }
+        else
+        {
+            isCrouching = true;
+            animator.SetBool("Crouch", true);
+          //  capsuleCollider.height = originalColliderHeight / 2f;
+            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3f, 0), 0.2f));
+        }
+    }
+    private IEnumerator CrouchCameraTransition(Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = cameraTransform.localPosition;
+
+        while (elapsedTime < duration)
+        {
+            cameraTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraTransform.localPosition = targetPosition;
+    }
 
     void HandleMovement()
     {
         if (hasFallen) return;
 
+      
+       
         moveInput = moveAction.ReadValue<Vector2>();
          isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
@@ -209,7 +256,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void OnJump()
     {
-        if (isGrounded)
+        if (isGrounded && !isCrouching)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
        //     animator.SetBool("IsJumping", true);
@@ -324,7 +371,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(AnvilDTO dto)
     {
-
+        Debug.Log("testt");
        InstantKill();
 
     }

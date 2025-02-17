@@ -57,6 +57,16 @@ namespace StateMachine.states
             return this;
         }
 
+        public States GetStateType()
+        {
+            return States.Wind;
+        }
+
+        public Variant GetVariant()
+        {
+            return _variant;
+        }
+
 
         private void UpdateWind()
         {

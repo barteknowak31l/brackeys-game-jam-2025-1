@@ -29,6 +29,10 @@ namespace StateMachine
 
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                NextState();
+            }
             _currentState.UpdateState(this);
         }
 

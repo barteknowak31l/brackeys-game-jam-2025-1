@@ -15,13 +15,15 @@ namespace StateMachine.states
         [SerializeField] private float _anvilSpawnPositionOffsetY;
         [SerializeField] private float _anvilDamage;
         [SerializeField] private float _anvilDamageVariant2;
+        [SerializeField] private float _pianoZOffset;
+
         [Space]
         [SerializeField] private GameObject _anvilPrefab;
         [SerializeField] private GameObject _pianoPrefab;
     
         private Transform _playerTransform;
         private Variant _variant;
-        
+
         public void EnterState(StateMachineManager ctx)
         {
             Debug.Log("Entered AnvilState variant: " + _variant.ToString());
@@ -50,8 +52,20 @@ namespace StateMachine.states
             Vector3 position = _playerTransform.position + _playerTransform.forward * Random.Range(1.0f, _anvilSpawnPositionOffsetXZ);
             // move position up
             position.y += _anvilSpawnPositionOffsetY;
+            
+            // correct position of piano
+            if (_variant == Variant.Second)
+            {
+                position.z += _pianoZOffset;
+            }
+            
             // spawn anvil object
-            var anvil = Instantiate(_anvilPrefab, position, Quaternion.identity).GetComponent<Anvil>();
+            var prefab = _variant == Variant.First ? _anvilPrefab : _pianoPrefab;
+            
+            var rotation = Quaternion.Euler(0, 90, 0);
+            
+            
+            var anvil = Instantiate(prefab, position, rotation).GetComponent<Anvil>();
             anvil.Setup(this);
         }
     

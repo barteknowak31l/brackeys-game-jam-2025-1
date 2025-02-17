@@ -36,13 +36,6 @@ namespace StateMachine.states
 
         public void UpdateState(StateMachineManager ctx)
         {
-            Debug.Log("Update Wind State");
-        
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ctx.NextState();
-            }
-        
         }
 
         public void ExitState(StateMachineManager ctx)

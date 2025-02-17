@@ -5,26 +5,26 @@ using UnityEngine;
 
 namespace Observers
 {
-    public abstract class Observable : MonoBehaviour
+    public abstract class Observable<T> : MonoBehaviour where T : DataTransferObject
     {
-        private List<IObserver> _observers;
+        private List<IObserver<T>>  _observers ;
 
         private void Awake()
         {
-            _observers = new List<IObserver>();
+            _observers = new List<IObserver<T>>();
         }
 
-        public void AddObserver(IObserver o)
+        public void AddObserver(IObserver<T> o)
         {
             _observers.Add(o);
         }
 
-        public void RemoveObserver(IObserver o)
+        public void RemoveObserver(IObserver<T> o)
         {
             _observers.Remove(o);
         }
 
-        public void NotifyObservers(DataTransferObject dto)
+        public void NotifyObservers(T dto)
         {
             foreach (var observer in _observers)
             {

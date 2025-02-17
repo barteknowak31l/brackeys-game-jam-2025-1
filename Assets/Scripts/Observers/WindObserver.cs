@@ -1,37 +1,36 @@
 using System;
 using Observers.dto;
+using StateMachine.states;
 using UnityEngine;
 
 namespace Observers
 {
-    public class WindObserver : MonoBehaviour, IObserver
+    public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>
     {
         public WindState windState;
+        public AnvilState anvilState;
 
 
         private void OnEnable()
         {
             windState.AddObserver(this);
+            anvilState.AddObserver(this);
         }
 
         private void OnDisable()
         {
             windState.RemoveObserver(this);
+            anvilState.RemoveObserver(this);
+        }
+        
+        public void OnNotify(WindDTO dto)
+        {
+            Debug.Log("received WindDTO: " +  + dto._speed + " " + dto._direction);
         }
 
-
-
-        public void OnNotify<T>(T dto) where T : DataTransferObject
+        public void OnNotify(AnvilDTO dto)
         {
-            if (dto is WindDTO windDTO)
-            {
-                Debug.Log("received WindDTO: " +  + windDTO._speed + " " + windDTO._direction);
-            }
-            else
-            {
-                Debug.LogError("received wrong DTO: " + dto.GetType().Name);
-            }
-
+            Debug.Log("received AnvilDTO: " + dto._damage);
         }
     }
 }

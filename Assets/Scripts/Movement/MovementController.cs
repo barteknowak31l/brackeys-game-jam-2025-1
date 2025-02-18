@@ -26,6 +26,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private InputAction lookAction;
     private InputAction sprintAction;
     private InputAction jumpAction;
+    private InputAction crouchAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -39,7 +40,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     private bool isWindActive = false;
     private bool isImpact = false;
-    private bool canTilt = false;
+    private bool canTilt = true;
     private bool hasFallen = false;
     private bool instantKill = false;
     public RectTransform tiltArrow;
@@ -50,9 +51,19 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public ParticleSystem windRight;
     public WindState windState;
     public AnvilState anvilState;
+    private bool isCrouching;
+
+    private Coroutine resetTiltCoroutine;
+    private CapsuleCollider capsuleCollider;
+    private float originalColliderHeight;
+    private Vector3 originalColliderCenter;
+    private Vector3 originalCameraPosition;
 
     void Awake()
     {
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        originalColliderHeight = capsuleCollider.height;
+        originalCameraPosition = cameraTransform.localPosition;
         windState.AddObserver(this);
         anvilState.AddObserver(this);
         playerInput = GetComponent<PlayerInput>();
@@ -60,18 +71,21 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         lookAction = playerInput.actions["Look"];
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"];
+        crouchAction = playerInput.actions["Crouch"];
+        crouchAction.performed += _ => ToggleCrouch();
 
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        originalColliderCenter = capsuleCollider.center;
 
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
     void Update()
     {
-       
+        Debug.Log(canTilt);
         if (Input.GetKeyDown(KeyCode.E))
         {
         //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
@@ -86,13 +100,53 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         UpdateTiltUI();
 
     }
+ 
+    void ToggleCrouch()
+    {
+        if (!isGrounded) return;
+        if (isCrouching)
+        {
+            isCrouching = false;
+            animator.SetBool("Crouch", false);
+            capsuleCollider.height = originalColliderHeight;
+            capsuleCollider.center = originalColliderCenter;
+            StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
+        }
+        else
+        {
+            isCrouching = true;
+            animator.SetBool("Crouch", true);
+            capsuleCollider.height = originalColliderHeight / 2f;
+
+            capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
+
+            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
+        }
+    }
+
+    private IEnumerator CrouchCameraTransition(Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = cameraTransform.localPosition;
+
+        while (elapsedTime < duration)
+        {
+            cameraTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraTransform.localPosition = targetPosition;
+    }
 
     void HandleMovement()
     {
         if (hasFallen) return;
 
+      
+       
         moveInput = moveAction.ReadValue<Vector2>();
-         isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0;
+         isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0 && !isCrouching;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         Vector3 move = transform.forward * moveInput.y;
@@ -209,7 +263,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void OnJump()
     {
-        if (isGrounded)
+        if (isGrounded && !isCrouching)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
        //     animator.SetBool("IsJumping", true);
@@ -252,6 +306,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
         {
+            if (resetTiltCoroutine != null)
+            {
+                StopCoroutine(resetTiltCoroutine);
+                resetTiltCoroutine = null;
+            }
             canTilt = true;
         }
     }
@@ -259,26 +318,34 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
         {
-            canTilt = false;
-
-            StartCoroutine(ResetTiltGradually());
+            if (resetTiltCoroutine != null)
+            {
+                StopCoroutine(resetTiltCoroutine);
+            }
+            resetTiltCoroutine = StartCoroutine(ResetTilt(1f));
         }
     }
-    IEnumerator ResetTiltGradually()
+
+    private IEnumerator ResetTilt(float duration)
     {
-        while (Mathf.Abs(currentTilt) > 0.1f) 
+        float startTilt = currentTilt;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
         {
-            currentTilt = Mathf.Lerp(currentTilt, 0f, Time.deltaTime * 2f); 
+            currentTilt = Mathf.Lerp(startTilt, 0f, elapsedTime / duration);
             Quaternion tiltRotation = Quaternion.Euler(0f, 0f, currentTilt);
             cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f) * tiltRotation;
 
-            yield return null; 
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        currentTilt = 0f; 
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        currentTilt = 0f;
+        canTilt = false;
     }
 
+  
     public void OnNotify(WindDTO dto)
     {
         if (dto._enabled)
@@ -324,7 +391,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(AnvilDTO dto)
     {
-
        InstantKill();
 
     }

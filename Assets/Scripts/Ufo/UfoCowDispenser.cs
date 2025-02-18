@@ -41,16 +41,16 @@ public class UfoCowDispenser : MonoBehaviour
     void CheckIfInFront()
     {
         Vector3 toObject = (transform.position - _playerTransform.position);
-        toObject.y = 0; // Ignorujemy wysokość
+        toObject.y = 0; 
         toObject.Normalize();
 
         Vector3 playerForward = _playerTransform.forward;
-        playerForward.y = 0; // Ignorujemy wysokość
+        playerForward.y = 0; 
         playerForward.Normalize();
 
         float dot = Vector3.Dot(playerForward, toObject);
 
-        if (dot > 0.99f) // Blisko 1 oznacza, że obiekt jest prawie idealnie przed graczem
+        if (dot > 0.99f) 
         {
             ReleaseCow();
         }
@@ -59,11 +59,11 @@ public class UfoCowDispenser : MonoBehaviour
     void CheckIfInBack()
     {
         Vector3 toObject = (transform.position - _playerTransform.position);
-        toObject.y = 0; // Ignorujemy wysokość
+        toObject.y = 0; 
         toObject.Normalize();
 
         Vector3 playerBackward = -_playerTransform.forward;
-        playerBackward.y = 0; // Ignorujemy wysokość
+        playerBackward.y = 0; 
         playerBackward.Normalize();
 
         float dot = Vector3.Dot(playerBackward, toObject);

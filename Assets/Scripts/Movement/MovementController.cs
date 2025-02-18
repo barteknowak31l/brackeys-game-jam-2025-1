@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -56,6 +56,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public WindState windState;
     public AnvilState anvilState;
     public StormState stormState;
+    public UfoState ufoState;
     private bool isCrouching;
 
     private Coroutine resetTiltCoroutine;
@@ -65,6 +66,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Vector3 originalCameraPosition;
     public GameObject body;
     public GameObject body2;
+
+    private Coroutine ufoLiftCoroutine;
+    private bool isBeingLifted = false;
+    private Vector3 liftStartPosition;
 
     void Awake()
     {
@@ -115,6 +120,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         windState.AddObserver(this);
         anvilState.AddObserver(this);
         stormState.AddObserver(this);
+        ufoState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -123,6 +129,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         windState.RemoveObserver(this);
         anvilState.RemoveObserver(this);
         stormState.RemoveObserver(this);
+        ufoState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -160,14 +167,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     private IEnumerator ResetKick()
     {
-        playerInput.enabled = false;
+        playerInput.actions["Jump"].Disable();
+        playerInput.actions["Crouch"].Disable(); 
+        playerInput.actions["Move"].Disable(); 
         body.SetActive(false);
         body2.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         body.SetActive(true);
         body2.SetActive(true);
 
-        playerInput.enabled = true;
+        playerInput.actions["Jump"].Enable();
+        playerInput.actions["Crouch"].Enable(); 
+        playerInput.actions["Move"].Enable(); 
         animator.SetBool("IsKicking", false);
 
     }
@@ -469,4 +480,62 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
 
     }
+
+
+
+    public void OnNotify(UfoDTO dto)
+    {
+        if (dto._cowHit)
+        {
+            InstantKill();
+        }
+
+        if (dto._playerInBeam)
+        {
+            if (!isBeingLifted)
+            {
+                isBeingLifted = true;
+                rb.isKinematic = true; 
+                playerInput.actions["Jump"].Disable(); 
+                playerInput.actions["Crouch"].Disable(); 
+                ufoLiftCoroutine = StartCoroutine(LiftPlayer());
+            }
+        }
+        else
+        {
+            if (isBeingLifted)
+            {
+                isBeingLifted = false;
+                if (ufoLiftCoroutine != null)
+                {
+                    StopCoroutine(ufoLiftCoroutine);
+                    ufoLiftCoroutine = null;
+                }
+                rb.isKinematic = false;
+                playerInput.actions["Jump"].Enable(); 
+                playerInput.actions["Crouch"].Enable(); 
+            }
+        }
+    }
+
+
+    private IEnumerator LiftPlayer()
+    {
+
+        while (isBeingLifted)
+        {
+            transform.position += new Vector3(0, 1f * Time.deltaTime, 0);
+
+            if (transform.position.y  >= 3f)
+            {
+                InstantKill();
+                yield break; 
+            }
+
+            yield return null;
+        }
+    }
+
+
+
 }

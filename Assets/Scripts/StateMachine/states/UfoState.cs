@@ -38,7 +38,8 @@ namespace StateMachine.states
         {
             Debug.Log("Enter UfoState");
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
-            _ufo = Instantiate(_ufoPrefab, _playerTransform.position + _ufoStartPositionOffset, Quaternion.identity).GetComponent<Ufo>();
+            Vector3 ufoPosition = new Vector3(_playerTransform.position.x, _ufoStartPositionOffset.y, _playerTransform.position.z);
+            _ufo = Instantiate(_ufoPrefab, ufoPosition, Quaternion.identity).GetComponent<Ufo>();
             _ufo.Setup(this);
 
 
@@ -89,12 +90,13 @@ namespace StateMachine.states
         
         private void FindNextUfoPosition()
         {
-            _startPosition = _playerTransform.position + _playerTransform.forward * _startPositionOffset;
+            Vector3 ufoPosition = new Vector3(_playerTransform.position.x, _ufoStartPositionOffset.y, _playerTransform.position.z);
+
+            _startPosition = ufoPosition + _playerTransform.forward * _startPositionOffset;
             _endPosition = _startPosition + _playerTransform.forward  * _stopPositionOffset;
             
             float rnd = Random.Range(0f, 1f);
             _targetPosition = Vector3.Lerp(_startPosition, _endPosition, rnd);
-            _targetPosition += _playerTransform.up * _ufoStartPositionOffset.y;
         }
 
         private void MoveUfoTowards()

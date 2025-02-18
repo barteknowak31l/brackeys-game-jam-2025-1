@@ -40,7 +40,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     private bool isWindActive = false;
     private bool isImpact = false;
-    private bool canTilt = false;
+    private bool canTilt = true;
     private bool hasFallen = false;
     private bool instantKill = false;
     public RectTransform tiltArrow;
@@ -53,11 +53,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public AnvilState anvilState;
     private bool isCrouching;
 
+    private Coroutine resetTiltCoroutine;
     private CapsuleCollider capsuleCollider;
     private float originalColliderHeight;
     private Vector3 originalColliderCenter;
     private Vector3 originalCameraPosition;
-    private float crouchOffset = 0.5f;
 
     void Awake()
     {
@@ -85,7 +85,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void Update()
     {
-       
+        Debug.Log(canTilt);
         if (Input.GetKeyDown(KeyCode.E))
         {
         //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
@@ -100,23 +100,30 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         UpdateTiltUI();
 
     }
+ 
     void ToggleCrouch()
     {
+        if (!isGrounded) return;
         if (isCrouching)
         {
             isCrouching = false;
             animator.SetBool("Crouch", false);
-        //    capsuleCollider.height = originalColliderHeight;
+            capsuleCollider.height = originalColliderHeight;
+            capsuleCollider.center = originalColliderCenter;
             StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
         }
         else
         {
             isCrouching = true;
             animator.SetBool("Crouch", true);
-          //  capsuleCollider.height = originalColliderHeight / 2f;
-            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3f, 0), 0.2f));
+            capsuleCollider.height = originalColliderHeight / 2f;
+
+            capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
+
+            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
         }
     }
+
     private IEnumerator CrouchCameraTransition(Vector3 targetPosition, float duration)
     {
         float elapsedTime = 0f;
@@ -139,7 +146,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
       
        
         moveInput = moveAction.ReadValue<Vector2>();
-         isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0;
+         isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0 && !isCrouching;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         Vector3 move = transform.forward * moveInput.y;
@@ -299,6 +306,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
         {
+            if (resetTiltCoroutine != null)
+            {
+                StopCoroutine(resetTiltCoroutine);
+                resetTiltCoroutine = null;
+            }
             canTilt = true;
         }
     }
@@ -306,26 +318,34 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
         {
-            canTilt = false;
-
-            StartCoroutine(ResetTiltGradually());
+            if (resetTiltCoroutine != null)
+            {
+                StopCoroutine(resetTiltCoroutine);
+            }
+            resetTiltCoroutine = StartCoroutine(ResetTilt(1f));
         }
     }
-    IEnumerator ResetTiltGradually()
+
+    private IEnumerator ResetTilt(float duration)
     {
-        while (Mathf.Abs(currentTilt) > 0.1f) 
+        float startTilt = currentTilt;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
         {
-            currentTilt = Mathf.Lerp(currentTilt, 0f, Time.deltaTime * 2f); 
+            currentTilt = Mathf.Lerp(startTilt, 0f, elapsedTime / duration);
             Quaternion tiltRotation = Quaternion.Euler(0f, 0f, currentTilt);
             cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f) * tiltRotation;
 
-            yield return null; 
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        currentTilt = 0f; 
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        currentTilt = 0f;
+        canTilt = false;
     }
 
+  
     public void OnNotify(WindDTO dto)
     {
         if (dto._enabled)
@@ -371,7 +391,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(AnvilDTO dto)
     {
-        Debug.Log("testt");
        InstantKill();
 
     }

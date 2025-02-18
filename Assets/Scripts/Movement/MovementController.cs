@@ -27,6 +27,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private InputAction sprintAction;
     private InputAction jumpAction;
     private InputAction crouchAction;
+    private InputAction kickAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -58,6 +59,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private float originalColliderHeight;
     private Vector3 originalColliderCenter;
     private Vector3 originalCameraPosition;
+    public GameObject body;
+    public GameObject body2;
 
     void Awake()
     {
@@ -72,7 +75,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"];
         crouchAction = playerInput.actions["Crouch"];
+        kickAction = playerInput.actions["Kick"];
         crouchAction.performed += _ => ToggleCrouch();
+        kickAction.performed += _ => Kick();
 
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,7 +90,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void Update()
     {
-        Debug.Log(canTilt);
         if (Input.GetKeyDown(KeyCode.E))
         {
         //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
@@ -123,7 +127,29 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
             StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
         }
     }
+    void Kick()
+    {
+            if (animator != null && isGrounded && !isCrouching)
+        {
+            animator.SetBool("IsKicking", true);
+            StartCoroutine(ResetKick());
 
+        }
+    }
+
+    private IEnumerator ResetKick()
+    {
+        playerInput.enabled = false;
+        body.SetActive(false);
+        body2.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+        body.SetActive(true);
+        body2.SetActive(true);
+
+        playerInput.enabled = true;
+        animator.SetBool("IsKicking", false);
+
+    }
     private IEnumerator CrouchCameraTransition(Vector3 targetPosition, float duration)
     {
         float elapsedTime = 0f;

@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96520edabf52d4358ea0c88dda18865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTag: Player
+  PlayerTag: Player
   _ufoPrefab: {fileID: 6273463545137389015, guid: 13f4d2dcb7ac13f4997bb707e8e32060, type: 3}
   _ufoSpeed: 3
   _startPositionOffset: 2
@@ -88,6 +88,11 @@ MonoBehaviour:
   _stationaryPhaseDuration: 6
   _stationaryPhaseDurationRandomness: 2
   _ufoStartPositionOffset: {x: -10, y: 15, z: -10}
+  _ufoCowDispenserPrefab: {fileID: 8385597279226301610, guid: 2e0d43bb4199ed7a994e56d0bace7050, type: 3}
+  _cowPrefab: {fileID: 1245252771508300791, guid: 1bf14207515cc28e7878a2fde09214d6, type: 3}
+  _ufoCowDispenserOffsetY: 10
+  orbitRadius: 4
+  orbitSpeed: 1
 --- !u!1 &5937852388575250116
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93960190483e7c7849e6a53854ac987b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateDuration: 5
 --- !u!1 &7424294297359587269
 GameObject:
   m_ObjectHideFlags: 0

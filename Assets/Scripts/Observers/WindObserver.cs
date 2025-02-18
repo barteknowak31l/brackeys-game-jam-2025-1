@@ -53,7 +53,7 @@ namespace Observers
 
         public void OnNotify(UfoDTO dto)
         {
-            Debug.Log($"UFO!!! player in beam: {dto._playerInBeam}");
+            Debug.Log($"UFO!!! player in beam: {dto._playerInBeam}, cow hit: {dto._cowHit}");
         }
     }
 }

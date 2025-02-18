@@ -1,22 +1,30 @@
 using Observers;
 using Observers.dto;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace StateMachine.states
 {
     public class UfoState : Observable<UfoDTO>, IBaseState
     {
         public string PlayerTag = "Player";
+        [Space]
+        [Header("Variant 1")] 
         [SerializeField] GameObject _ufoPrefab;
-
-        [Space] [Header("Variant 1")] [SerializeField]
-        private float _ufoSpeed = 3.0f;
+        [SerializeField] private float _ufoSpeed = 3.0f;
         [SerializeField] float _startPositionOffset;
         [SerializeField] float _stopPositionOffset;
         [SerializeField] private float _stationaryPhaseDuration;
         [SerializeField] private float _stationaryPhaseDurationRandomness;
-        
         [SerializeField] Vector3 _ufoStartPositionOffset;
+
+        [Space] [Header("Variant 2")] 
+        [SerializeField] private GameObject _ufoCowDispenserPrefab;
+        [SerializeField] private GameObject _cowPrefab;
+        [SerializeField] private float _ufoCowDispenserOffsetY;
+        public float orbitRadius = 20f; 
+        public float orbitSpeed = 0.5f;
         
         private Transform _playerTransform;
         private Vector3 _startPosition;
@@ -25,6 +33,7 @@ namespace StateMachine.states
         
         private Variant _variant;
         private Ufo _ufo;
+        private UfoCowDispenser _ufoCowDispenser;
         
         public void EnterState(StateMachineManager ctx)
         {
@@ -32,6 +41,16 @@ namespace StateMachine.states
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
             _ufo = Instantiate(_ufoPrefab, _playerTransform.position + _ufoStartPositionOffset, Quaternion.identity).GetComponent<Ufo>();
             _ufo.Setup(this);
+
+
+            if (_variant == Variant.First)
+            {
+                _ufoCowDispenser =
+                    Instantiate(_ufoCowDispenserPrefab, _playerTransform.position + _playerTransform.forward * -10.0f,
+                        Quaternion.identity).GetComponent<UfoCowDispenser>();
+                _ufoCowDispenser.Setup(this, _playerTransform, _ufoCowDispenserOffsetY, _cowPrefab);
+                
+            }
             
             EnterMovementPhase();
         }
@@ -44,6 +63,12 @@ namespace StateMachine.states
         {
             // ufo escape
             _ufo.EndPhase(_playerTransform, _ufoStartPositionOffset.y, _ufoSpeed * 5.0f);
+
+            if (_ufoCowDispenser != null)
+            {
+                _ufoCowDispenser.EndPhase();
+            }
+            
             Debug.Log("Exit UfoState");
         }
 
@@ -103,5 +128,13 @@ namespace StateMachine.states
                 .PlayerInBeam(false);
             NotifyObservers(dto);
         }
+
+        public void OnCowHit()
+        {
+            var dto = new UfoDTO()
+                .CowHit(true);
+            NotifyObservers(dto);
+        }
+        
     }
 }

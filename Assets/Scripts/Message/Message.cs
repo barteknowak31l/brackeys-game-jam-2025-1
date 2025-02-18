@@ -7,8 +7,20 @@ using UnityEngine;
 public class Message : MonoBehaviour, IObserver<StateDTO>
 {
     public TextMeshPro textMeshPro;
-    private string message;
+    public MessagesManager messagesManager;
+    public void SetMessage(string newMessage)
+    {
+        textMeshPro.text = newMessage;
+    }
 
+    public void OnNotify(StateDTO dto)
+    {
+        States state = dto._state;
+        Variant variant = dto._variant;
+
+        string newMessage = messagesManager.GetMessage(state, variant);
+        SetMessage(newMessage);
+    }
 
     private void OnEnable()
     {
@@ -19,15 +31,5 @@ public class Message : MonoBehaviour, IObserver<StateDTO>
     {
         StateMachineManager.instance.RemoveObserver(this);
     }
-    public void OnNotify(StateDTO dto)
-    {
-        States state = dto._state;
-        Variant variant = dto._variant;
-    }
-
-    public void SetMessage(string newMessage)
-    {
-        message = newMessage;
-        textMeshPro.text = message;
-    }
+  
 }

@@ -6,6 +6,7 @@ public class Ufo : MonoBehaviour
 {
     private UfoState _ctx;
     public CapsuleCollider Collider;
+    public GameObject UfoLaser; 
     
     public void Setup(UfoState ctx)
     {
@@ -14,6 +15,7 @@ public class Ufo : MonoBehaviour
 
     public void MovePhase(Vector3 targetPosition, float speed)
     {
+        UfoLaser.SetActive(false);
         Collider.enabled = false;
         _ctx.OnBeamExit();
         StartCoroutine(MoveToPosition(targetPosition, speed));
@@ -21,6 +23,7 @@ public class Ufo : MonoBehaviour
 
     public void StationaryPhase(float duration)
     {
+        UfoLaser.SetActive(true);
         Collider.enabled = true;
         StartCoroutine(StationaryPhaseCoroutine(duration));
     }

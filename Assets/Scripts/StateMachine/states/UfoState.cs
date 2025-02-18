@@ -1,6 +1,5 @@
 using Observers;
 using Observers.dto;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -135,6 +134,5 @@ namespace StateMachine.states
                 .CowHit(true);
             NotifyObservers(dto);
         }
-        
     }
 }

@@ -87,7 +87,7 @@ MonoBehaviour:
   _stopPositionOffset: 10
   _stationaryPhaseDuration: 6
   _stationaryPhaseDurationRandomness: 2
-  _ufoStartPositionOffset: {x: -10, y: 15, z: -10}
+  _ufoStartPositionOffset: {x: -10, y: 13, z: -10}
   _ufoCowDispenserPrefab: {fileID: 8385597279226301610, guid: 2e0d43bb4199ed7a994e56d0bace7050, type: 3}
   _cowPrefab: {fileID: 1245252771508300791, guid: 1bf14207515cc28e7878a2fde09214d6, type: 3}
   _ufoCowDispenserOffsetY: 10

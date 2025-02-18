@@ -16,6 +16,7 @@ namespace StateMachine
         [SerializeField] WindState _windState;
         [SerializeField] AnvilState _anvilState;
         [SerializeField] StormState _stormState;
+        [SerializeField] UfoState _ufoState;
         
         
         private StateQueue _stateQueue;
@@ -41,6 +42,7 @@ namespace StateMachine
             states.Add(_windState);
             states.Add(_anvilState);
             states.Add(_stormState);
+            states.Add(_ufoState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;

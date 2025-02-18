@@ -6,6 +6,7 @@ namespace StateMachine.states
 {
     public class DefaultState : MonoBehaviour, IBaseState
     {
+        [SerializeField] float _stateDuration = 5.0f;
         private StateMachineManager _ctx;
 
         public void EnterState(StateMachineManager ctx)
@@ -42,7 +43,7 @@ namespace StateMachine.states
 
         IEnumerator ChangeStateCoroutine()
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(_stateDuration);
             _ctx.NextState();
         }
         

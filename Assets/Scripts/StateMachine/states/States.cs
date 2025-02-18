@@ -6,5 +6,6 @@ namespace StateMachine.states
         Wind,
         Anvil,
         Storm,
+        Ufo
     }
 }

@@ -1,12 +1,14 @@
 using Observers;
 using Observers.dto;
+using StateMachine;
 using StateMachine.states;
 using System.Collections;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -50,8 +52,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine tiltCoroutine;
     public ParticleSystem windLeft;
     public ParticleSystem windRight;
+    public ParticleSystem rain;
     public WindState windState;
     public AnvilState anvilState;
+    public StormState stormState;
     private bool isCrouching;
 
     private Coroutine resetTiltCoroutine;
@@ -67,8 +71,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         capsuleCollider = GetComponent<CapsuleCollider>();
         originalColliderHeight = capsuleCollider.height;
         originalCameraPosition = cameraTransform.localPosition;
-        windState.AddObserver(this);
-        anvilState.AddObserver(this);
+
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
@@ -88,15 +91,17 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-        //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
+            //    StartCoroutine(ImpactTilt(2.5f, -1f)); 
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-       //     InstantKill(); 
+            //     InstantKill(); 
         }
         HandleMovement();
         HandleMouseLook();
@@ -104,7 +109,23 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         UpdateTiltUI();
 
     }
- 
+
+    void OnEnable()
+    {
+        windState.AddObserver(this);
+        anvilState.AddObserver(this);
+        stormState.AddObserver(this);
+        StateMachineManager.instance.AddObserver(this);
+    }
+
+    void OnDisable()
+    {
+        windState.RemoveObserver(this);
+        anvilState.RemoveObserver(this);
+        stormState.RemoveObserver(this);
+        StateMachineManager.instance.RemoveObserver(this);
+    }
+
     void ToggleCrouch()
     {
         if (!isGrounded) return;
@@ -129,7 +150,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
     void Kick()
     {
-            if (animator != null && isGrounded && !isCrouching)
+        if (animator != null && isGrounded && !isCrouching)
         {
             animator.SetBool("IsKicking", true);
             StartCoroutine(ResetKick());
@@ -169,10 +190,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (hasFallen) return;
 
-      
-       
+
+
         moveInput = moveAction.ReadValue<Vector2>();
-         isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0 && !isCrouching;
+        isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0 && !isCrouching;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         Vector3 move = transform.forward * moveInput.y;
@@ -229,9 +250,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         }
         currentTilt = Mathf.Clamp(currentTilt, -maxTiltAngle, maxTiltAngle);
-   
-            Quaternion tiltRotation = Quaternion.Euler(0f, 0f, currentTilt);
-            cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f) * tiltRotation;
+
+        Quaternion tiltRotation = Quaternion.Euler(0f, 0f, currentTilt);
+        cameraTransform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f) * tiltRotation;
 
         if (Mathf.Abs(currentTilt) >= maxTiltAngle)
         {
@@ -255,13 +276,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
 
         float pushAmount = 0.008f;
-        float rotateAmount = 0.1f; 
+        float rotateAmount = 0.1f;
 
         Vector3 pushDirection = transform.right * (currentTilt > 0 ? -pushAmount : pushAmount);
         Vector3 newRotation = transform.eulerAngles + new Vector3(0f, 0f, currentTilt > 0 ? rotateAmount : -rotateAmount);
 
-        transform.position += pushDirection; 
-        transform.rotation = Quaternion.Euler(newRotation); 
+        transform.position += pushDirection;
+        transform.rotation = Quaternion.Euler(newRotation);
 
 
     }
@@ -271,7 +292,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(2f, 4f));
-            if (!isWindActive) 
+            if (!isWindActive)
             {
                 targetTiltDirection = Random.Range(0, 2) * 2 - 1;
             }
@@ -283,7 +304,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
         {
             isGrounded = true;
-       //     animator.SetBool("IsJumping", false);
+            //     animator.SetBool("IsJumping", false);
         }
     }
 
@@ -292,7 +313,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         if (isGrounded && !isCrouching)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-       //     animator.SetBool("IsJumping", true);
+            //     animator.SetBool("IsJumping", true);
             isGrounded = false;
         }
     }
@@ -303,15 +324,15 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         if (tiltArrow == null || tiltBar == null) return;
 
-        float normalizedTilt = currentTilt / maxTiltAngle; 
-        float arrowX = -normalizedTilt * maxArrowOffset; 
+        float normalizedTilt = currentTilt / maxTiltAngle;
+        float arrowX = -normalizedTilt * maxArrowOffset;
 
         tiltArrow.anchoredPosition = new Vector2(arrowX, tiltArrow.anchoredPosition.y);
     }
     IEnumerator ImpactTilt(float impactTiltSpeed, float direction)
     {
         if (isImpact) yield break;
-        isImpact = true; 
+        isImpact = true;
 
         float originalTiltSpeed = tiltSpeed;
         tiltSpeed *= impactTiltSpeed;
@@ -320,12 +341,12 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         yield return new WaitForSeconds(2f);
 
         tiltSpeed = originalTiltSpeed;
-        isImpact = false; 
+        isImpact = false;
     }
     void InstantKill()
     {
         instantKill = true;
-        tiltSpeed *= 15f; 
+        tiltSpeed *= 15f;
     }
 
     private void OnTriggerExit(Collider other)
@@ -371,14 +392,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         canTilt = false;
     }
 
-  
+
     public void OnNotify(WindDTO dto)
     {
         if (dto._enabled)
         {
-            isWindActive = true; 
+            isWindActive = true;
             tiltMultiplier = 2f;
-            targetTiltDirection = (dto._direction == 0) ? 1f : -1f; 
+            targetTiltDirection = (dto._direction == 0) ? 1f : -1f;
 
             if (tiltCoroutine != null)
             {
@@ -401,7 +422,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
         else
         {
-            isWindActive = false; 
+            isWindActive = false;
             windLeft.Stop();
             windLeft.Clear();
             windRight.Stop();
@@ -417,8 +438,35 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(AnvilDTO dto)
     {
-       InstantKill();
+        InstantKill();
 
     }
 
+    public void OnNotify(StormDTO dto)
+    {
+
+        InstantKill();
+
+
+    }
+
+    public void OnNotify(StateDTO dto)
+    {
+        if (dto._state == States.Storm && dto._variant == StateMachine.Variant.Second)
+        {
+
+            tiltMultiplier = 2f;
+            rain.Play();
+
+
+        }
+        else
+        {
+            tiltMultiplier = 1f;
+            rain.Stop();
+            rain.Clear();
+
+        }
+
+    }
 }

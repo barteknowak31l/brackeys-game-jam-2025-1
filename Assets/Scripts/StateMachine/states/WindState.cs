@@ -42,7 +42,7 @@ namespace StateMachine.states
         {
             StopAllCoroutines();
             WindDTO dto = new WindDTO()
-                .Enabled(true)
+                .Enabled(false)
                 .Direction(_windDirection)
                 .Speed(_windSpeed);
             NotifyObservers(dto);
@@ -74,7 +74,7 @@ namespace StateMachine.states
             _windSpeed = windBase + Random.Range(-_windOffset, _windOffset);
             if (_variant == Variant.Second)
             {
-                _windDirection = Random.Range(0, 1);
+                _windDirection = Random.Range(0, 2);
             }
         
             WindDTO dto = new WindDTO()

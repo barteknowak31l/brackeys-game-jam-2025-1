@@ -432,7 +432,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4836880426463935938, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 567876687}
   m_SourcePrefab: {fileID: 100100000, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
 --- !u!1001 &168902368
 PrefabInstance:
@@ -1319,6 +1322,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1482294602451547339, guid: 18073c8b5a439d74bae1b33467e701e3, type: 3}
   m_PrefabInstance: {fileID: 918672541}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &567876680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4836880426463935938, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+  m_PrefabInstance: {fileID: 145688705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &567876686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5218508351471380344, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+  m_PrefabInstance: {fileID: 145688705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &567876687
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567876680}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 50, y: 10, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &627808283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1502,7 @@ MonoBehaviour:
   _defaultState: {fileID: 627808285}
   _windState: {fileID: 361947277}
   _anvilState: {fileID: 1424040628}
+  _stormState: {fileID: 0}
 --- !u!4 &691189363
 Transform:
   m_ObjectHideFlags: 0
@@ -1985,7 +2020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2992275d614ef04b890fa1437eda56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 567876686}
   offset: 5
 --- !u!65 &1225158052
 BoxCollider:

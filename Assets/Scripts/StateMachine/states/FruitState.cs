@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Lightning;
 using Observers;
 using Observers.dto;
 using UnityEngine;
@@ -34,9 +35,10 @@ namespace StateMachine.states
             {
                 var pos = playerPos 
                           + _playerTransform.forward * _bananaOffsetBase * (i+1) 
-                          + _playerTransform.forward * Random.Range(-_bananaOffsetRandomness, _bananaOffsetRandomness);
+                          + _playerTransform.forward * Random.Range(0, _bananaOffsetRandomness);
                 var rot = Quaternion.Euler(0, _bananaRotationY, 0);
                 GameObject banana = Instantiate(_bananaPrefab, pos, rot);
+                banana.GetComponent<Banana>().Setup(this);
                 _instantiatedBanana.Add(banana);
             }
         }
@@ -47,9 +49,9 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
-            foreach (var lightning in _instantiatedBanana)
+            foreach (var banana in _instantiatedBanana)
             {
-                Destroy(lightning);   
+                Destroy(banana);   
             }
         }
 
@@ -61,7 +63,7 @@ namespace StateMachine.states
 
         public States GetStateType()
         {
-            return States.Storm;
+            return States.Fruit;
         }
 
         public Variant GetVariant()
@@ -69,9 +71,10 @@ namespace StateMachine.states
             return _variant;
         }
         
-        public void OnLightningHitPlayer()
+        public void OnFruitHitPlayer()
         {
             NotifyObservers(new FruitDTO());
+            Debug.Log("Hit)");
         }
         
         

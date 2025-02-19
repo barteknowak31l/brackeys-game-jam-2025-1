@@ -21,6 +21,7 @@ namespace StateMachine
         [SerializeField] FruitState _fruitState;
         [SerializeField] BeaverState _beaverState;
         [SerializeField] PlayerDeathState _playerDeathState;
+        [SerializeField] SharkState _sharkState;
         
 
         private StateQueue _stateQueue;
@@ -50,6 +51,7 @@ namespace StateMachine
             states.Add(_birdState);
             states.Add(_fruitState);
             states.Add(_beaverState);
+            states.Add(_sharkState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;

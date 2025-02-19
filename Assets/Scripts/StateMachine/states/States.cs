@@ -8,6 +8,7 @@ namespace StateMachine.states
         Storm,
         Ufo,
         Fruit,
+        Beaver,
         PlayerDeath,
         Bird
     }

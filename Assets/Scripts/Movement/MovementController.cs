@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -59,6 +59,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public StormState stormState;
     public UfoState ufoState;
     public FruitState fruitState;
+    public BeaverState beaverState;
     private bool isCrouching;
 
     private Coroutine resetTiltCoroutine;
@@ -125,6 +126,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         stormState.AddObserver(this);
         ufoState.AddObserver(this);
         fruitState.AddObserver(this);
+        beaverState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -135,6 +137,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         stormState.RemoveObserver(this);
         ufoState.RemoveObserver(this);
         fruitState.RemoveObserver(this);
+        beaverState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -175,6 +178,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         playerInput.actions["Jump"].Disable();
         playerInput.actions["Crouch"].Disable(); 
         playerInput.actions["Move"].Disable(); 
+        playerInput.actions["Kick"].Disable(); 
         body.SetActive(false);
         body2.SetActive(false);
         yield return new WaitForSeconds(1.5f);
@@ -184,6 +188,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         playerInput.actions["Jump"].Enable();
         playerInput.actions["Crouch"].Enable(); 
         playerInput.actions["Move"].Enable(); 
+        playerInput.actions["Kick"].Enable(); 
         animator.SetBool("IsKicking", false);
 
     }
@@ -543,6 +548,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(FruitDTO dto)
     {
-        //throw new System.NotImplementedException();
+
+        InstantKill();
+
+
+    }
+
+    public void OnNotify(BeaverDTO dto)
+    {
+
+        InstantKill();
+
+
+
     }
 }

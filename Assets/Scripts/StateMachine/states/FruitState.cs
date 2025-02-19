@@ -40,6 +40,7 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
+
                 _instantiatedBanana = new List<GameObject>();
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 

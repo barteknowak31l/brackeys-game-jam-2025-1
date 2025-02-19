@@ -19,6 +19,7 @@ namespace StateMachine
         [SerializeField] UfoState _ufoState;
         [SerializeField] BirdState _birdState;
         [SerializeField] FruitState _fruitState;
+        [SerializeField] BeaverState _beaverState;
         [SerializeField] PlayerDeathState _playerDeathState;
         
 
@@ -48,6 +49,7 @@ namespace StateMachine
             states.Add(_ufoState);
             states.Add(_birdState);
             states.Add(_fruitState);
+            states.Add(_beaverState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;

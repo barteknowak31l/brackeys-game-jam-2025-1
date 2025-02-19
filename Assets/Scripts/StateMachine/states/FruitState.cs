@@ -40,8 +40,6 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            if (_variant == Variant.Second)
-            {
                 _instantiatedBanana = new List<GameObject>();
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
@@ -57,8 +55,7 @@ namespace StateMachine.states
                     banana.GetComponent<Banana>().Setup(this);
                     _instantiatedBanana.Add(banana);
                 }
-            }
-            else
+            if (_variant == Variant.Second)
             {
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
                 Vector3 shipPosition = new Vector3(_playerTransform.position.x, _shipStartPositionOffset.y, _shipStartPositionOffset.z);
@@ -77,6 +74,10 @@ namespace StateMachine.states
             foreach (var banana in _instantiatedBanana)
             {
                 Destroy(banana);   
+            }
+            if (_variant == Variant.Second)
+            {
+                _ship.EndPhase(_playerTransform, _shipStartPositionOffset.y, _shipSpeed * 5.0f);
             }
         }
 

@@ -14,4 +14,11 @@ public class CannonBall : MonoBehaviour
     {
         Destroy(gameObject, lifeTime); 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _state.OnFruitHitPlayer();
+        }
+    }
 }

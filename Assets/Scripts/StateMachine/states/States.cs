@@ -9,7 +9,6 @@ namespace StateMachine.states
         Ufo,
         Fruit,
         PlayerDeath,
-        Bird,
-        Fruit
+        Bird
     }
 }

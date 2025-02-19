@@ -10,6 +10,8 @@ namespace AudioManager
         [SerializeField] private AudioSO SO;
         private static AudioManager instance = null;
         private AudioSource audioSource;
+        
+        private AudioClips currentSound;
 
         private void Awake()
         {
@@ -37,8 +39,24 @@ namespace AudioManager
             {
                 instance.audioSource.outputAudioMixerGroup = soundGroup.mixer;
                 instance.audioSource.PlayOneShot(randomClip, volume * soundGroup.volume);
+                instance.currentSound = sound;
             }
         }
+
+  
+        public static void StopSound(AudioClips sound, AudioSource source = null)
+        {
+            if(source)
+            {
+                source.Stop();
+            }
+            else
+            {
+                if(instance.currentSound == sound)
+                    instance.audioSource.Stop();
+            }
+        }
+        
     }
 
     [Serializable]

@@ -537,6 +537,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(FruitDTO dto)
     {
-        throw new System.NotImplementedException();
+
+        InstantKill();
+
+
     }
 }

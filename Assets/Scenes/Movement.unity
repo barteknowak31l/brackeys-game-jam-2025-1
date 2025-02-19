@@ -444,6 +444,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072706741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 54969843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cd2257afa244a438cf92b1196a3d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1311386355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 345166285664417093, guid: 92dcd3c16cf22f54497af24caf65a783, type: 3}
@@ -686,6 +697,10 @@ PrefabInstance:
       propertyPath: anvilState
       value: 
       objectReference: {fileID: 54969845}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: fruitState
+      value: 
+      objectReference: {fileID: 1072706741}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: stormState
       value: 

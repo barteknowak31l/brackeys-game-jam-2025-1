@@ -34,8 +34,59 @@ Transform:
   - {fileID: 6269248739832374284}
   - {fileID: 435383167791011811}
   - {fileID: 6323631076224827493}
+  - {fileID: 7316376569861360214}
   m_Father: {fileID: 4800769069750617156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2594237857714019213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7316376569861360214}
+  - component: {fileID: 4812904069164970109}
+  m_Layer: 0
+  m_Name: FruitState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7316376569861360214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594237857714019213}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4846109104091899049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4812904069164970109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594237857714019213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cd2257afa244a438cf92b1196a3d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTag: Player
+  _bananaCount: 5
+  _bananaOffsetBase: 5
+  _bananaOffsetRandomness: 2
+  _bananaRotationY: 90
+  _bananaPrefab: {fileID: 231848645503575042, guid: 3cb5c4b356f83a340939e4b367384596, type: 3}
 --- !u!1 &5929680457555085909
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +194,7 @@ MonoBehaviour:
   _anvilState: {fileID: 5477037608941483338}
   _stormState: {fileID: 9170069364485191352}
   _ufoState: {fileID: 7894020682871508659}
+  _fruitState: {fileID: 4812904069164970109}
 --- !u!1 &6193220898229624120
 GameObject:
   m_ObjectHideFlags: 0

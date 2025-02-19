@@ -43,7 +43,7 @@ namespace StateMachine.states
             _ufo.Setup(this);
 
 
-            if (_variant == Variant.Second)
+            if (_variant == Variant.First)
             {
                 _ufoCowDispenser =
                     Instantiate(_ufoCowDispenserPrefab, _playerTransform.position + _playerTransform.forward * -10.0f,

@@ -8,6 +8,7 @@ namespace StateMachine.states
     public class AnvilState : Observable<AnvilDTO>, IBaseState
     {
         public string _playerTag;    
+        [SerializeField] private float _firstAnvilSpawnDelay = 1.0f;
         [SerializeField] private float _anvilSpawnTimeBase;
         [SerializeField] private float _anvilSpawnTimeOffset;
         [SerializeField] private float _anvilSpawnPositionOffsetXZ;
@@ -28,6 +29,7 @@ namespace StateMachine.states
             Debug.Log("Entered AnvilState variant: " + _variant.ToString());
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
             StartCoroutine(SpawnAnvilCoroutine());
+            Invoke("SpawnAnvil", _firstAnvilSpawnDelay);
         }
 
         public void UpdateState(StateMachineManager ctx)

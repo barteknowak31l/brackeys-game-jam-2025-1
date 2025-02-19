@@ -1,4 +1,5 @@
 using System;
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Anvil : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, _destroyDelay);
+        AudioManager.AudioManager.PlaySound(AudioClips.AnvilFall);
     }
 
     public void Setup(AnvilState ctx)
@@ -27,5 +29,11 @@ public class Anvil : MonoBehaviour
         }
     
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.AudioManager.StopSound(AudioClips.AnvilFall);
+        AudioManager.AudioManager.PlaySound(AudioClips.AnvilHit);
     }
 }

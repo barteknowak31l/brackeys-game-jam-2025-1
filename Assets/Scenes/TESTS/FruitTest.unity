@@ -251,6 +251,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 409155760}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: ufoState
+      value: 
+      objectReference: {fileID: 2088993917}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: tiltArrow
       value: 
       objectReference: {fileID: 1772549719}
@@ -266,6 +270,14 @@ PrefabInstance:
       propertyPath: anvilState
       value: 
       objectReference: {fileID: 1871038989}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: fruitState
+      value: 
+      objectReference: {fileID: 1230981333}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: stormState
+      value: 
+      objectReference: {fileID: 9070628}
     - target: {fileID: 4836880426463935938, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: m_Name
       value: Player (1)
@@ -559,6 +571,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &875014175 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4846109104091899049, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 2548358740501910444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &903726182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4836880426463935938, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
@@ -603,8 +620,14 @@ MonoBehaviour:
   maxArrowOffset: 50
   windLeft: {fileID: 0}
   windRight: {fileID: 0}
+  rain: {fileID: 0}
   windState: {fileID: 0}
   anvilState: {fileID: 0}
+  stormState: {fileID: 0}
+  ufoState: {fileID: 0}
+  fruitState: {fileID: 0}
+  body: {fileID: 0}
+  body2: {fileID: 0}
 --- !u!114 &903726186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +845,56 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1230981331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1230981332}
+  - component: {fileID: 1230981333}
+  m_Layer: 0
+  m_Name: FruitState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1230981332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230981331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 875014175}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1230981333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230981331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cd2257afa244a438cf92b1196a3d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTag: Player
+  _bananaCount: 7
+  _bananaOffsetBase: 5
+  _bananaOffsetRandomness: 3
+  _bananaRotationY: 90
+  _bananaPrefab: {fileID: 231848645503575042, guid: 3cb5c4b356f83a340939e4b367384596, type: 3}
 --- !u!1 &1594059717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7084071354685950582, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _fruitState
+      value: 
+      objectReference: {fileID: 1230981333}
     - target: {fileID: 7894020682871508659, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: orbitRadius
       value: 4.5
@@ -1302,7 +1379,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4846109104091899049, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1230981332}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
 --- !u!1001 &3292248161777992899

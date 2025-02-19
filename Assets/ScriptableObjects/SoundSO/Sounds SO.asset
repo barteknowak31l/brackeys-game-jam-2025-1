@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6caba9d9e18cd2381bb8e6e1f537e0, type: 3}
+  m_Name: Sounds SO
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: AnvilHit
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 4577ba26b2ed9d4aab54891784639500, type: 3}
+  - name: AnvilFall
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 23c419574ee2f3c77910c005cae7ebd8, type: 3}
+  - name: BirdSound
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: b6a2b63815db7b7c9bf60ddde927ca7f, type: 3}
+  - name: Wind
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 54e19f68e5774e0449e0efd923d1297c, type: 3}
+  - name: SharkJump
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 18c2311cfa3ba3cdb876127202a1ebd2, type: 3}
+  - name: SharkFall
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 2762e4d2fbb49675c8f4e9903e4f23d9, type: 3}
+  - name: Rain
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 8e86670dc0ebac06e89a0276920cfa29, type: 3}
+  - name: Thunder
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 6ea27055ea1ea2009a39072795cf60df, type: 3}
+  - name: UfoShip
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 5f341b2794b0c77f88cac47c3d1e979b, type: 3}
+  - name: Cow
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 0c0f179334953335a877130e2b6f3192, type: 3}
+  - name: Kick
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: a09194ebb39cdf8219398019c8dacd49, type: 3}
+  - name: PianoHit
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: cbbcdf1f15132f4c89a9af6a628a8ba4, type: 3}
+  - name: PlayerFallIntoWater
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 3778071c6698056c19f3db77eaf92c7b, type: 3}

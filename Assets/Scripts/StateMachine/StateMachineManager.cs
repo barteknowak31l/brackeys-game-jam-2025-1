@@ -18,6 +18,7 @@ namespace StateMachine
         [SerializeField] StormState _stormState;
         [SerializeField] UfoState _ufoState;
         [SerializeField] BirdState _birdState;
+        [SerializeField] FruitState _fruitState;
         
         
         private StateQueue _stateQueue;
@@ -45,6 +46,7 @@ namespace StateMachine
             states.Add(_stormState);
             states.Add(_ufoState);
             states.Add(_birdState);
+            states.Add(_fruitState);
             
             _stateQueue = new StateQueue(states);
             _currentState = _defaultState;

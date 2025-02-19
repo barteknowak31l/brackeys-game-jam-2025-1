@@ -18,8 +18,9 @@ namespace StateMachine
         [SerializeField] StormState _stormState;
         [SerializeField] UfoState _ufoState;
         [SerializeField] FruitState _fruitState;
+        [SerializeField] PlayerDeathState _playerDeathState;
         
-        
+
         private StateQueue _stateQueue;
 
         public static StateMachineManager instance { get; private set; }
@@ -76,6 +77,14 @@ namespace StateMachine
             
             NotifyObservers(createDTO(_stateQueue.Peek(), true));
             _currentState.EnterState(this);
+        }
+        
+        public void PlayerDeathState()
+        {
+            if (_currentState != null) _currentState.ExitState(this);
+            _currentState = _playerDeathState;
+            _currentState.EnterState(this);
+            NotifyObservers(createDTO(_currentState));
         }
 
         private StateDTO createDTO(IBaseState state, bool isDefault = false)

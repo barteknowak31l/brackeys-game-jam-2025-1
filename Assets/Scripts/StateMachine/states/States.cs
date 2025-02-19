@@ -7,6 +7,7 @@ namespace StateMachine.states
         Anvil,
         Storm,
         Ufo,
-        Fruit
+        Fruit,
+        PlayerDeath
     }
 }

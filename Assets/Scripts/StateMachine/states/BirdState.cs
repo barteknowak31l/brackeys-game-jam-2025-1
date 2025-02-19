@@ -26,7 +26,7 @@ public class BirdState : Observable<BirdDTO>, IBaseState
     {
         //var dto = new BirdDTO().Damage(10);
         //NotifyObservers(dto);
-        Debug.Log("ptaku atakuje");
+        Debug.Log("Wariant ptaka - " + _variant.ToString());
         _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
         StartCoroutine(SpawnBirdCoroutine());
     }
@@ -65,17 +65,27 @@ public class BirdState : Observable<BirdDTO>, IBaseState
         float side = Random.Range(0,2) == 0 ? -1f : 1f;
         position += _playerTransform.right * side * _birdSideOffset;
 
-        var rotation = Quaternion.Euler(0, 90, 0);
-
-        //var prefab = _variant == Variant.First ? _littleBirdPrefab : _bigBirdPrefab;  jak beda dwa
-        var prefab = _littleBirdPrefab;
+        var prefab = _variant == Variant.First ? _littleBirdPrefab : _bigBirdPrefab;
+        var rotation = Quaternion.Euler(0, 0, 0);
+        if (side == -1f)
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            rotation = Quaternion.Euler(0, 180, 0);
+        }
+            
+        
         var bird = Instantiate(prefab, position, rotation).GetComponent<Bird>();
         bird.Setup(this);
     }
 
-    private void OnBirdHitPlayer()
+    public void OnBirdHitPlayer()
     {
         var damage = _variant == Variant.First ? _birdDamage : _birdDamageVariant2;
+        BirdDTO birdDTO = new BirdDTO().Damage(damage);
+        NotifyObservers(birdDTO);
     }
 
     IEnumerator SpawnBirdCoroutine()

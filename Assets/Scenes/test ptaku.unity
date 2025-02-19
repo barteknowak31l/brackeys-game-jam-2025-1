@@ -171,6 +171,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: StateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _playerTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _bigBirdPrefab
+      value: 
+      objectReference: {fileID: 974958407120205530, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdSideOffset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _littleBirdPrefab
+      value: 
+      objectReference: {fileID: 275038033600180627, guid: cd42a13abc5db0f40a6888a1592c88f4, type: 3}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdSpawnDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdSpawnTimeBase
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdDamageVariant2
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _birdSpawnTimeOffset
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -706,63 +742,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1001 &3029512831306345341
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 17.104599
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.923
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.8961725
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462354866417817491, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271402307270053161, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
-      propertyPath: m_Name
-      value: Bird_Asset
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 267e8687fc84a5548a9eef699fc038c3, type: 3}
 --- !u!1001 &4899436306955198371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1007,4 +986,3 @@ SceneRoots:
   - {fileID: 6421143269153462584}
   - {fileID: 54969843}
   - {fileID: 441137682}
-  - {fileID: 3029512831306345341}

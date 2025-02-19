@@ -95,7 +95,7 @@ namespace StateMachine.states
 
         public States GetStateType()
         {
-            return States.Fruit;
+            return States.Beaver;
         }
 
         public Variant GetVariant()

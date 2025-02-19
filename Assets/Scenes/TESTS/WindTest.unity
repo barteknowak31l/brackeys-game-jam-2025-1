@@ -603,8 +603,12 @@ MonoBehaviour:
   maxArrowOffset: 50
   windLeft: {fileID: 0}
   windRight: {fileID: 0}
+  rain: {fileID: 0}
   windState: {fileID: 0}
   anvilState: {fileID: 0}
+  stormState: {fileID: 0}
+  ufoState: {fileID: 0}
+  fruitState: {fileID: 0}
   body: {fileID: 0}
   body2: {fileID: 0}
 --- !u!114 &903726186
@@ -1021,7 +1025,7 @@ Transform:
   m_GameObject: {fileID: 1797695032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.168621, y: 1.3731906, z: -6.9115515}
+  m_LocalPosition: {x: 29.9, y: 1.3731906, z: -2.756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1042,7 +1046,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

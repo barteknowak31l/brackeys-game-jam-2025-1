@@ -2,10 +2,18 @@ namespace AudioManager
 {
     public enum AudioClips
     {
-        Sound1,
-        Sound2,
-        Sound3,
-        Sound4,
-
+        AnvilHit,
+        AnvilFall,
+        BirdSound,
+        Wind,
+        SharkJump,
+        SharkFall,
+        Rain,
+        Thunder,
+        UfoShip,
+        Cow,
+        Kick,
+        PianoHit,
+        PlayerFallIntoWater,
     }
 }

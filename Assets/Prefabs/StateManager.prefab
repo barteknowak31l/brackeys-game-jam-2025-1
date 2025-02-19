@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &721532190286698839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8763922206775253213}
+  - component: {fileID: 7644304328137147912}
+  m_Layer: 0
+  m_Name: BirdState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8763922206775253213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721532190286698839}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.740118, y: -0.5674874, z: 5.749645}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4846109104091899049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7644304328137147912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721532190286698839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee101feb200ae49a581a14ac659fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTag: 
+  _birdSpawnDistance: 0
+  _birdSideOffset: 0
+  _birdSpawnTimeBase: 0
+  _birdSpawnTimeOffset: 0
+  _birdDamage: 0
+  _birdDamageVariant2: 0
+  _littleBirdPrefab: {fileID: 0}
+  _bigBirdPrefab: {fileID: 0}
 --- !u!1 &1126042355279510810
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,7 +88,7 @@ Transform:
   - {fileID: 435383167791011811}
   - {fileID: 6323631076224827493}
   - {fileID: 7316376569861360214}
-  - {fileID: 7030617012120952636}
+  - {fileID: 8763922206775253213}
   m_Father: {fileID: 4800769069750617156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2594237857714019213
@@ -88,50 +141,14 @@ MonoBehaviour:
   _bananaOffsetRandomness: 2
   _bananaRotationX: 0
   _bananaPrefab: {fileID: 6023229418488684101, guid: 36eb003109614a64ba8ebfb76d689406, type: 3}
---- !u!1 &3643453216715881304
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7030617012120952636}
-  - component: {fileID: 988695366349022060}
-  m_Layer: 0
-  m_Name: PlayerDeathState
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7030617012120952636
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3643453216715881304}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52856255, y: -1.1928556, z: -0.40798616}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4846109104091899049}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &988695366349022060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3643453216715881304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73682115dc5e8d4688e3933fbefb834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _shipSpeed: 1
+  _startPositionOffset: 0
+  _stopPositionOffset: 0
+  _stationaryPhaseDuration: 0
+  _stationaryPhaseDurationRandomness: 0
+  _shipStartPositionOffset: {x: 0, y: 0, z: 0}
+  _shipPrefab: {fileID: 0}
+  _ship: {fileID: 0}
 --- !u!1 &5929680457555085909
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +256,7 @@ MonoBehaviour:
   _anvilState: {fileID: 5477037608941483338}
   _stormState: {fileID: 9170069364485191352}
   _ufoState: {fileID: 7894020682871508659}
+  _birdState: {fileID: 7644304328137147912}
   _fruitState: {fileID: 4812904069164970109}
   _playerDeathState: {fileID: 988695366349022060}
 --- !u!1 &6193220898229624120

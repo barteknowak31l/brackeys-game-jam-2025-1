@@ -6,8 +6,6 @@ using UnityEngine;
 public class Anvil : MonoBehaviour
 {
     [SerializeField] private float _destroyDelay;
-    private string _playerTag;
-    private string _logTag;
     private AnvilState _ctx;
 
     private void Start()

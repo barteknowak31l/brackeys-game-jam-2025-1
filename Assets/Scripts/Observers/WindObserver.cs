@@ -9,8 +9,6 @@ namespace Observers
 
     public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StateDTO>, IObserver<PlayerDeathDTO>, IObserver<StormDTO>,
     IObserver<UfoDTO>, IObserver<BirdDTO>
-    public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StateDTO>, IObserver<StormDTO>
-    , IObserver<UfoDTO>, IObserver<BirdDTO>
     {
         public WindState windState;
         public AnvilState anvilState;
@@ -68,6 +66,7 @@ namespace Observers
 
         public void OnNotify(PlayerDeathDTO dto)
         {
+        }
            
         public void OnNotify(BirdDTO dto)
         {

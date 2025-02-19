@@ -258,6 +258,7 @@ MonoBehaviour:
   _ufoState: {fileID: 7894020682871508659}
   _birdState: {fileID: 7644304328137147912}
   _fruitState: {fileID: 4812904069164970109}
+  _playerDeathState: {fileID: 988695366349022060}
 --- !u!1 &6193220898229624120
 GameObject:
   m_ObjectHideFlags: 0

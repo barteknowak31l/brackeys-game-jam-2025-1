@@ -45,6 +45,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isImpact = false;
     private bool canTilt = true;
     private bool hasFallen = false;
+    private bool isFalling = false;
     private bool instantKill = false;
     public RectTransform tiltArrow;
     public RectTransform tiltBar;
@@ -119,6 +120,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void OnEnable()
     {
+        isFalling = false;
         windState.AddObserver(this);
         anvilState.AddObserver(this);
         stormState.AddObserver(this);
@@ -288,6 +290,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         playerInput.enabled = false;
         hasFallen = true;
+        if(!isFalling)
+        {
+            StateMachineManager.instance.PlayerDeathState();
+            isFalling = true;
+        }
 
         if (tiltCoroutine != null)
         {
@@ -302,7 +309,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         transform.position += pushDirection;
         transform.rotation = Quaternion.Euler(newRotation);
-
 
     }
 
@@ -552,6 +558,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
 
         InstantKill();
+
 
 
     }

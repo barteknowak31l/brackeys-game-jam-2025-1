@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ee101feb200ae49a581a14ac659fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerTag: 
+  _birdSpawnDistance: 0
+  _birdSideOffset: 0
+  _birdSpawnTimeBase: 0
+  _birdSpawnTimeOffset: 0
+  _birdDamage: 0
+  _birdDamageVariant2: 0
+  _littleBirdPrefab: {fileID: 0}
+  _bigBirdPrefab: {fileID: 0}
 --- !u!1 &1126042355279510810
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +88,7 @@ Transform:
   - {fileID: 435383167791011811}
   - {fileID: 6323631076224827493}
   - {fileID: 7316376569861360214}
+  - {fileID: 8763922206775253213}
   m_Father: {fileID: 4800769069750617156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2594237857714019213
@@ -131,6 +141,14 @@ MonoBehaviour:
   _bananaOffsetRandomness: 2
   _bananaRotationX: 0
   _bananaPrefab: {fileID: 6023229418488684101, guid: 36eb003109614a64ba8ebfb76d689406, type: 3}
+  _shipSpeed: 1
+  _startPositionOffset: 0
+  _stopPositionOffset: 0
+  _stationaryPhaseDuration: 0
+  _stationaryPhaseDurationRandomness: 0
+  _shipStartPositionOffset: {x: 0, y: 0, z: 0}
+  _shipPrefab: {fileID: 0}
+  _ship: {fileID: 0}
 --- !u!1 &5929680457555085909
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +256,7 @@ MonoBehaviour:
   _anvilState: {fileID: 5477037608941483338}
   _stormState: {fileID: 9170069364485191352}
   _ufoState: {fileID: 7894020682871508659}
+  _birdState: {fileID: 7644304328137147912}
   _fruitState: {fileID: 4812904069164970109}
 --- !u!1 &6193220898229624120
 GameObject:
@@ -284,6 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
+  _firstAnvilSpawnDelay: 1
   _anvilSpawnTimeBase: 6
   _anvilSpawnTimeOffset: 2
   _anvilSpawnPositionOffsetXZ: 10

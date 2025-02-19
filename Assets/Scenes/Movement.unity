@@ -304,6 +304,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _ship
+      value: 
+      objectReference: {fileID: 2464080612223138036, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
+    - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _shipPrefab
+      value: 
+      objectReference: {fileID: 157793829894124985, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
     - target: {fileID: 5937852388575250116, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_Name
       value: StateManager
@@ -393,9 +401,10 @@ MonoBehaviour:
   _playerTag: Player
   beaverPrefab: {fileID: 1893391983549471899, guid: e4fe427c480ebab429951fabd8699ed7, type: 3}
   pigPrefab: {fileID: 3854740789552345405, guid: 22bf94059a597ef358669c1991e960f5, type: 3}
-  portalPrefab: {fileID: 8868051199737580578, guid: 46405870ddeb0221a8e50875bf39bf36, type: 3}
+  portalPrefab: {fileID: 5569337670587186830, guid: c870f8a6cd3c5e644b77d4f38a5ae0a6, type: 3}
   _beaverSpawnDistance: 10
-  _pigSpawnDistance: 10
+  _portalSpawnDistance: 20
+  pigAmount: 4
 --- !u!4 &123748426
 Transform:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Beaver : MonoBehaviour
     private bool _playerInRange = false;
     private bool _isMoving = false;
     private BeaverState _ctx;
+    public float timeToKill = 15f;
 
     public void Start()
     {
@@ -67,7 +68,7 @@ public class Beaver : MonoBehaviour
     }
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(timeToKill);
 
         if (!_isMoving) 
         {

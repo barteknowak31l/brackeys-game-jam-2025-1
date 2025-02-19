@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lightning;
 using Observers;
 using Observers.dto;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,15 +18,16 @@ namespace StateMachine.states
         public GameObject pigPrefab;
         public GameObject portalPrefab;
         [SerializeField] private float _beaverSpawnDistance = 10.0f;
-        [SerializeField] private float _pigSpawnDistance = 10.0f;
+        [SerializeField] private float _portalSpawnDistance = 15.0f;
         private Transform _playerTransform;
-   
+        private GameObject _portal;
+        public int pigAmount = 0;
         public void EnterState(StateMachineManager ctx)
         {
 
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
-            if (_variant == Variant.Second)
+            if (_variant == Variant.First)
             {
                 if (beaverPrefab != null && _playerTransform != null)
                 {
@@ -40,10 +42,8 @@ namespace StateMachine.states
             {
                 if (portalPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _pigSpawnDistance-1f, _playerTransform.position.y, _playerTransform.position.z);
-                    var portal = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
-                    portal.transform.Rotate(-90, 90, 0);
-
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance , 0f, _playerTransform.position.z);
+                    _portal = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
 
 
                 }
@@ -61,11 +61,11 @@ namespace StateMachine.states
             yield return new WaitForSeconds(2f);
 
             int pigCount = 0;
-            while (pigCount < 3) 
+            while (pigCount < pigAmount) 
             {
                 if (pigPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _pigSpawnDistance, _playerTransform.position.y, _playerTransform.position.z);
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance, -0.214f, _playerTransform.position.z);
                     var pig = Instantiate(pigPrefab, spawnPosition, Quaternion.identity).GetComponent<Pig>();
                     pig.Setup(this);
                 }
@@ -79,7 +79,11 @@ namespace StateMachine.states
         public void ExitState(StateMachineManager ctx)
         {
 
-          
+          if(_variant== Variant.Second)
+            {
+                Destroy(_portal);
+
+            }
 
         }
 
@@ -107,11 +111,11 @@ namespace StateMachine.states
 
         public void EndTime()
         {
-            if (_variant == Variant.First)
-            {
+           
                 BeaverDTO beaverDTO = new BeaverDTO().EndTime(true);
                 NotifyObservers(beaverDTO);
-            }
+            
+            
         }
 
 

@@ -5,9 +5,10 @@ public class Pig : MonoBehaviour
 {
     public float speed;
     private BeaverState _ctx;
-
+    private int _pigDestroyTime = 20;
     void Start()
     {
+        Destroy(gameObject, _pigDestroyTime);
         transform.Rotate(0, 270, 0);
     }
     void Update()
@@ -26,5 +27,8 @@ public class Pig : MonoBehaviour
         }
 
         Destroy(gameObject);
+        
     }
+
+    
 }

@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -57,6 +57,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public AnvilState anvilState;
     public StormState stormState;
     public UfoState ufoState;
+    public FruitState fruitState;
     private bool isCrouching;
 
     private Coroutine resetTiltCoroutine;
@@ -121,6 +122,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         anvilState.AddObserver(this);
         stormState.AddObserver(this);
         ufoState.AddObserver(this);
+        fruitState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -130,6 +132,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         anvilState.RemoveObserver(this);
         stormState.RemoveObserver(this);
         ufoState.RemoveObserver(this);
+        fruitState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -450,15 +453,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public void OnNotify(AnvilDTO dto)
     {
         InstantKill();
-
     }
 
     public void OnNotify(StormDTO dto)
     {
-
         InstantKill();
-
-
     }
 
     public void OnNotify(StateDTO dto)
@@ -536,6 +535,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
     }
 
-
-
+    public void OnNotify(FruitDTO dto)
+    {
+        throw new System.NotImplementedException();
+    }
 }

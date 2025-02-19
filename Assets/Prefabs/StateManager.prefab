@@ -85,8 +85,8 @@ MonoBehaviour:
   _bananaCount: 5
   _bananaOffsetBase: 5
   _bananaOffsetRandomness: 2
-  _bananaRotationY: 90
-  _bananaPrefab: {fileID: 231848645503575042, guid: 3cb5c4b356f83a340939e4b367384596, type: 3}
+  _bananaRotationX: 0
+  _bananaPrefab: {fileID: 6023229418488684101, guid: 36eb003109614a64ba8ebfb76d689406, type: 3}
 --- !u!1 &5929680457555085909
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ namespace StateMachine.states
         [SerializeField] int _bananaCount = 5;
         [SerializeField] float _bananaOffsetBase = 5.0f;
         [SerializeField] float _bananaOffsetRandomness = 2.0f;
-        [SerializeField] float _bananaRotationY = 90.0f;
+        [SerializeField] float _bananaRotationX = 0;
         
         
         [Space]
@@ -26,20 +26,27 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            _instantiatedBanana = new List<GameObject>();
-            _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
-
-            Vector3 playerPos = _playerTransform.position;
-            // wylosuj x pozycji i utworz tam particle, dodaj je do listy
-            for (int i = 0; i < _bananaCount; i++)
+            if (_variant == Variant.First)
             {
-                var pos = playerPos 
-                          + _playerTransform.forward * _bananaOffsetBase * (i+1) 
-                          + _playerTransform.forward * Random.Range(0, _bananaOffsetRandomness);
-                var rot = Quaternion.Euler(0, _bananaRotationY, 0);
-                GameObject banana = Instantiate(_bananaPrefab, pos, rot);
-                banana.GetComponent<Banana>().Setup(this);
-                _instantiatedBanana.Add(banana);
+                _instantiatedBanana = new List<GameObject>();
+                _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
+
+                Vector3 playerPos = _playerTransform.position;
+                // wylosuj x pozycji i utworz tam particle, dodaj je do listy
+                for (int i = 0; i < _bananaCount; i++)
+                {
+                    var pos = playerPos
+                              + _playerTransform.forward * _bananaOffsetBase * (i + 1)
+                              + _playerTransform.forward * Random.Range(0, _bananaOffsetRandomness);
+                    var rot = Quaternion.Euler(_bananaRotationX, 0, 0);
+                    GameObject banana = Instantiate(_bananaPrefab, pos, rot);
+                    banana.GetComponent<Banana>().Setup(this);
+                    _instantiatedBanana.Add(banana);
+                }
+            }
+            else
+            {
+
             }
         }
 

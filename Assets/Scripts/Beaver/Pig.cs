@@ -1,16 +1,30 @@
+using StateMachine.states;
 using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float speed;
+    private BeaverState _ctx;
+
     void Start()
     {
-        
+        transform.Rotate(0, 270, 0);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position += transform.forward * Time.deltaTime * speed;
+    }
+    public void Setup(BeaverState ctx)
+    {
+        _ctx = ctx;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(_ctx._playerTag))
+        {
+            _ctx.EndTime();
+        }
+
+        Destroy(gameObject);
     }
 }

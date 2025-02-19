@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 700596703922504234}
   - component: {fileID: 160305025997398997}
   m_Layer: 0
-  m_Name: Sphere.002
+  m_Name: Kokos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

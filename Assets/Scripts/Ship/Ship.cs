@@ -78,11 +78,20 @@ public class Ship : MonoBehaviour
     void Shoot()
     {
         var rot = Quaternion.Euler(_rotation, 0, 0);
-        GameObject bullet = Instantiate(_fruits[Random.Range(0, _fruits.Count)], _fireFruitPoints[Random.Range(0,_fireFruitPoints.Count)].position, rot);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-
+        CannonBall cannonBall = Instantiate(_fruits[Random.Range(0, _fruits.Count)], _fireFruitPoints[Random.Range(0, _fireFruitPoints.Count)].position, rot).GetComponent<CannonBall>();
+        cannonBall.Setup(_state);
+        Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
         
+
+
         Vector3 shootDirection = Quaternion.AngleAxis(_angle, transform.right) * transform.forward;
         rb.linearVelocity = shootDirection * _fireForce;
+    }
+    public void EndPhase(Transform playerTransform, float offsetY, float speed)
+    {
+        StopAllCoroutines();
+        Vector3 end = playerTransform.position + -playerTransform.forward * 10.0f + playerTransform.right * 10.0f + playerTransform.up * offsetY;
+        MovePhase(end, speed);
+        Destroy(gameObject, 5.0f);
     }
 }

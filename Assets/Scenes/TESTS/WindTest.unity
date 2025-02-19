@@ -2097,6 +2097,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 903726188}
   m_SourcePrefab: {fileID: 100100000, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+--- !u!1001 &6329388472062936953
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3106546
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5783856
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489888702527335520, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974958407120205530, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+      propertyPath: m_Name
+      value: MetalBird
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
 --- !u!1001 &7598927265456057286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2230,3 +2287,4 @@ SceneRoots:
   - {fileID: 7598927265456057286}
   - {fileID: 1737665654}
   - {fileID: 8711207799566864294}
+  - {fileID: 6329388472062936953}

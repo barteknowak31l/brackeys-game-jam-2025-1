@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -61,6 +61,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public UfoState ufoState;
     public FruitState fruitState;
     public BeaverState beaverState;
+    public SharkState sharkState;
     private bool isCrouching;
 
     private Coroutine resetTiltCoroutine;
@@ -134,6 +135,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         ufoState.AddObserver(this);
         fruitState.AddObserver(this);
         beaverState.AddObserver(this);
+        sharkState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -145,6 +147,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         ufoState.RemoveObserver(this);
         fruitState.RemoveObserver(this);
         beaverState.RemoveObserver(this);
+        sharkState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -586,6 +589,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
 
     public void OnNotify(FruitDTO dto)
+    {
+
+        InstantKill();
+
+
+    }  
+    public void OnNotify(SharkDTO dto)
     {
 
         InstantKill();

@@ -22,12 +22,13 @@ namespace StateMachine.states
         private Transform _playerTransform;
         private GameObject _portal;
         public int pigAmount = 0;
+
         public void EnterState(StateMachineManager ctx)
         {
 
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
-            if (_variant == Variant.First)
+            if (_variant == Variant.Second)
             {
                 if (beaverPrefab != null && _playerTransform != null)
                 {
@@ -79,11 +80,16 @@ namespace StateMachine.states
         public void ExitState(StateMachineManager ctx)
         {
 
-          if(_variant== Variant.Second)
+          if(_variant== Variant.First)
             {
                 StopCoroutine(SpawnPigs());
+                Animator portalAnimator = _portal.GetComponent<Animator>();
+                if (portalAnimator != null)
+                {
+                    portalAnimator.SetTrigger("Destroy");
+                }
 
-                Destroy(_portal);
+                 Destroy(_portal,2f);
 
             }
 

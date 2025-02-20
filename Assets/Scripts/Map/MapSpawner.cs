@@ -23,7 +23,7 @@ public class MapSpawner : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Spawner")&& !isSpawned)
+        if (collider.CompareTag("Spawner"))
         {
             objectPooler.SpawnObject(transform);
             isSpawned = true;

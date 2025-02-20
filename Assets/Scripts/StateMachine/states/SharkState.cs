@@ -65,7 +65,7 @@ namespace StateMachine.states
             } 
             
             // sharknados
-            if (_variant == Variant.First)
+            if (_variant == Variant.Second)
             {
                 for (int i = 0; i < _numberOfSharknados; i++)
                 {

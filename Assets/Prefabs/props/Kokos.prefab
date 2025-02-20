@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1191688315004218713}
   - component: {fileID: 700596703922504234}
   - component: {fileID: 160305025997398997}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Kokos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

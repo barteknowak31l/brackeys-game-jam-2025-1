@@ -164,6 +164,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         tiltSpeed = 0.5f;
         rain.Stop();
         rain.Clear();
+        
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     

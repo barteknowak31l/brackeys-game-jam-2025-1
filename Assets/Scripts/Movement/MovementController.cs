@@ -291,7 +291,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         randomTiltChange -= Time.deltaTime;
         if (randomTiltChange <= 0f)
         {
-            tiltSpeedMultiplier = Random.Range(0.7f, 1.5f);
+            tiltSpeedMultiplier = Random.Range(0.8f, 1.8f);
           //  Debug.Log(tiltSpeedMultiplier);
             randomTiltChange = Random.Range(3f, 6f);
         }

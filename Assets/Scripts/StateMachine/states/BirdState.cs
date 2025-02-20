@@ -4,6 +4,7 @@ using StateMachine.states;
 using System.Collections;
 using UnityEngine;
 
+
 public class BirdState : Observable<BirdDTO>, IBaseState
 {
 

@@ -33,7 +33,7 @@ namespace StateMachine.states
             {
                 if (beaverPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _beaverSpawnDistance, _playerTransform.position.y, _playerTransform.position.z);
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _beaverSpawnDistance, 0.605f, _playerTransform.position.z);
                     var beaver = Instantiate(beaverPrefab, spawnPosition, Quaternion.identity).GetComponent<Beaver>();
 
                     beaver.Setup(this);

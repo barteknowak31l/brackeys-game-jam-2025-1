@@ -78,8 +78,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
 
+
     public float randomTiltChangeMin = 0.8f;
     public float randomTiltChangeMax = 1.8f;
+    public float sprintTiltMultiplier = 2f;
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
@@ -309,7 +311,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         if (isSprinting)
         {
 
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * 1.5f * Time.deltaTime * 10f;
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * sprintTiltMultiplier * Time.deltaTime * 10f;
 
         }
         else

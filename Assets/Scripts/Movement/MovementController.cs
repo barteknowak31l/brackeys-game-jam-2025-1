@@ -77,8 +77,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine ufoLiftCoroutine;
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
-    
-    
+
+    public float randomTiltChangeMin = 0.8f;
+    public float randomTiltChangeMax = 1.8f;
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
@@ -291,7 +292,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         randomTiltChange -= Time.deltaTime;
         if (randomTiltChange <= 0f)
         {
-            tiltSpeedMultiplier = Random.Range(0.8f, 1.8f);
+            tiltSpeedMultiplier = Random.Range(randomTiltChangeMin, randomTiltChangeMax);
           //  Debug.Log(tiltSpeedMultiplier);
             randomTiltChange = Random.Range(3f, 6f);
         }

@@ -1090,6 +1090,10 @@ PrefabInstance:
       propertyPath: _ufoLiftThreshold
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: randomTiltChangeMax
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4714648044854313803, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: m_Height
       value: 2.0500002

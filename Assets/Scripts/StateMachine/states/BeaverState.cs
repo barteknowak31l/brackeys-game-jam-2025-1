@@ -67,7 +67,9 @@ namespace StateMachine.states
             {
                 if (pigPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance, 0.605f, _playerTransform.position.z);
+                    Vector3 portalPosition = _portal.transform.position;
+
+                    Vector3 spawnPosition = new Vector3(portalPosition.x + 1.0f, portalPosition.y, portalPosition.z);
                     var pig = Instantiate(pigPrefab, spawnPosition, Quaternion.identity).GetComponent<Pig>();
                     pig.Setup(this);
                 }

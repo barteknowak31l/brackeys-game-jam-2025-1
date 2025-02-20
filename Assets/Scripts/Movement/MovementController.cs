@@ -73,7 +73,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine ufoLiftCoroutine;
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
-
+    
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -141,6 +141,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         StateMachineManager.instance.RemoveObserver(this);
     }
 
+    
+    void ResetPlayer()
+    {
+        isFalling = false;
+        hasFallen = false;
+        instantKill = false;
+        currentTilt = 0f;
+        playerInput.enabled = true;
+        tiltCoroutine = StartCoroutine(ChangeTiltDirection());
+    }
+
+    
     void ToggleCrouch()
     {
         if (!isGrounded) return;
@@ -473,22 +485,33 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(StateDTO dto)
     {
-        if (dto._state == States.Storm && dto._variant == StateMachine.Variant.Second)
+
+
+
+        switch (dto._state)
         {
-
-            tiltMultiplier = 2f;
-            rain.Play();
-
-
+            case States.Storm:
+            {
+                if (dto._variant == StateMachine.Variant.Second)
+                {
+                    tiltMultiplier = 2f;
+                    rain.Play();
+                }
+                else
+                {
+                    tiltMultiplier = 1f;
+                    rain.Stop();
+                    rain.Clear();
+                }
+                break;
+            }
+            case States.StartState:
+            {
+                ResetPlayer();
+                break;
+            }
         }
-        else
-        {
-            tiltMultiplier = 1f;
-            rain.Stop();
-            rain.Clear();
-
-        }
-
+        
     }
 
 

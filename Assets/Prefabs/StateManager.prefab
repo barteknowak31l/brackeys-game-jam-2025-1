@@ -197,12 +197,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTag: Player
+  _numberOfSharkSpawners: 5
+  _sharkDuration: 2
+  _sharkDurationRandomness: 0.7
+  _sharkSpawnDelay: 5
+  _sharkSpawnDelayRandomness: 2
+  _sharkHeight: 5
   _numberOfSharknados: 5
   _sharknadoSpeed: 2
   _sharknadoSpeedRandomness: 0.7
   _sideOffset: 5
   _frontOffsetBase: 5
   _frontOffsetBaseRandomness: 2
+  _sharkSpawnerPrefab: {fileID: 8605858652484952148, guid: 823ba8109624f8fa1b3ff20ae50c6d89, type: 3}
+  _sharkPrefab: {fileID: 6879365706572093800, guid: 1ada156bf5bda7837a6f14ca21f4b32c, type: 3}
   _sharknadoPrefab: {fileID: 7791993261431097802, guid: 936ba80276cb6c8618341c2df11d0f9e, type: 3}
 --- !u!1 &5929680457555085909
 GameObject:

@@ -571,6 +571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2461138407361223933}
   - component: {fileID: 7454705861567771012}
+  - component: {fileID: 1508889168686956751}
   m_Layer: 0
   m_Name: BoxColider
   m_TagString: Untagged
@@ -587,7 +588,7 @@ Transform:
   m_GameObject: {fileID: 2429973042151940779}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.69493556, z: -0, w: 0.71907204}
-  m_LocalPosition: {x: -29.085, y: 1.15, z: 10.095}
+  m_LocalPosition: {x: -35, y: 1.15, z: 10.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -614,6 +615,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.33467, y: 2.2497206, z: 0}
   m_Center: {x: 0.16733506, y: 0.6248603, z: 0.00000001014224}
+--- !u!114 &1508889168686956751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429973042151940779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218fa34191214cb42a1ae06f65770633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateMachineBehaviour: {fileID: 0}
 --- !u!1 &2835560664945014205
 GameObject:
   m_ObjectHideFlags: 0

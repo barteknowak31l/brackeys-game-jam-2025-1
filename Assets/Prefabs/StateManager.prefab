@@ -52,7 +52,7 @@ MonoBehaviour:
   _birdDamage: 1
   _birdDamageVariant2: 2
   _littleBirdPrefab: {fileID: 275038033600180627, guid: cd42a13abc5db0f40a6888a1592c88f4, type: 3}
-  _bigBirdPrefab: {fileID: 974958407120205530, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+  _bigBirdPrefab: {fileID: 1385667145152164623, guid: 0211e5310979f3c40a712d771586f722, type: 3}
 --- !u!1 &866901730166817725
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
+  _playerObject: {fileID: 0}
   _spawnPoint: {fileID: 0}
 --- !u!1 &2594237857714019213
 GameObject:

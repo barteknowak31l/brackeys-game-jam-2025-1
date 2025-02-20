@@ -1922,7 +1922,6 @@ GameObject:
   - component: {fileID: 7147916781872760092}
   - component: {fileID: 1097783657099272590}
   - component: {fileID: 1037965103835815862}
-  - component: {fileID: 6400180722720273712}
   - component: {fileID: 2188792290155988392}
   m_Layer: 0
   m_Name: billboard
@@ -2003,22 +2002,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!111 &6400180722720273712
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8056797223550578629}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!114 &2188792290155988392
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>, IObserver<BirdDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -62,6 +62,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public FruitState fruitState;
     public BeaverState beaverState;
     public SharkState sharkState;
+    public BirdState birdState;
     private bool isCrouching;
     private float randomTiltChange = 0f;
     private float tiltSpeedMultiplier = 1f;
@@ -78,8 +79,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
 
+
     public float randomTiltChangeMin = 0.8f;
     public float randomTiltChangeMax = 1.8f;
+    public float sprintTiltMultiplier = 2f;
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
@@ -139,6 +142,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         fruitState.AddObserver(this);
         beaverState.AddObserver(this);
         sharkState.AddObserver(this);
+        birdState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -151,6 +155,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         fruitState.RemoveObserver(this);
         beaverState.RemoveObserver(this);
         sharkState.RemoveObserver(this);
+        birdState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -309,7 +314,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         if (isSprinting)
         {
 
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * 1.5f * Time.deltaTime * 10f;
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * sprintTiltMultiplier * Time.deltaTime * 10f;
 
         }
         else
@@ -635,6 +640,19 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         if (dto._endTime)
         {
             InstantKill();
+        }
+
+    }
+
+    public void OnNotify(BirdDTO dto)
+    {
+        if (dto._damage == 2)
+        {
+            InstantKill();
+        }
+        else
+        {
+            StartCoroutine(ImpactTilt(2,3));
         }
 
     }

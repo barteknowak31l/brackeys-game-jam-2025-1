@@ -7,11 +7,9 @@ namespace StateMachine.states
 {
     public class PlayerDeathState : Observable<PlayerDeathDTO>, IBaseState
     {
-        [SerializeField] private float _resetDelay = 3.0f;
         public void EnterState(StateMachineManager ctx)
         {
             Debug.Log("Gracz nie zyje");
-            StartCoroutine(ChangeToStartState());
         }
 
         public void ExitState(StateMachineManager ctx)
@@ -40,12 +38,7 @@ namespace StateMachine.states
                 StateMachineManager.instance.StartState();
             }
         }
-
-        IEnumerator ChangeToStartState()
-        {
-            yield return new WaitForSeconds(_resetDelay);
-            StateMachineManager.instance.StartState();
-        }
+        
         
         
     }

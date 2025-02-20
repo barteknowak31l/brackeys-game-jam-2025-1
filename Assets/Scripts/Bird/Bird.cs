@@ -28,8 +28,9 @@ public class Bird : MonoBehaviour
         if (other.gameObject.CompareTag(_ctx._playerTag))
         {
             _ctx.OnBirdHitPlayer();
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        
     }
 }

@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>
+public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -61,7 +61,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public UfoState ufoState;
     public FruitState fruitState;
     public BeaverState beaverState;
+    public SharkState sharkState;
     private bool isCrouching;
+    private float randomTiltChange = 0f;
+    private float tiltSpeedMultiplier = 1f;
 
     private Coroutine resetTiltCoroutine;
     private CapsuleCollider capsuleCollider;
@@ -74,8 +77,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine ufoLiftCoroutine;
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
-    
-    
+
+    public float randomTiltChangeMin = 0.8f;
+    public float randomTiltChangeMax = 1.8f;
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
@@ -134,6 +138,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         ufoState.AddObserver(this);
         fruitState.AddObserver(this);
         beaverState.AddObserver(this);
+        sharkState.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -145,6 +150,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         ufoState.RemoveObserver(this);
         fruitState.RemoveObserver(this);
         beaverState.RemoveObserver(this);
+        sharkState.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -161,6 +167,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         tiltSpeed = 0.5f;
         rain.Stop();
         rain.Clear();
+        
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     
@@ -279,6 +288,15 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     void HandleTilting()
     {
         if (!canTilt) return;
+
+        randomTiltChange -= Time.deltaTime;
+        if (randomTiltChange <= 0f)
+        {
+            tiltSpeedMultiplier = Random.Range(randomTiltChangeMin, randomTiltChangeMax);
+          //  Debug.Log(tiltSpeedMultiplier);
+            randomTiltChange = Random.Range(3f, 6f);
+        }
+
         if (Input.GetKey(KeyCode.A) && !instantKill)
         {
             currentTilt += tiltSpeed * Time.deltaTime * 50f;
@@ -290,12 +308,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         if (isSprinting)
         {
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * 1.5f * Time.deltaTime * 10f;
+
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * 1.5f * Time.deltaTime * 10f;
 
         }
         else
         {
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * Time.deltaTime * 10f;
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * Time.deltaTime * 10f;
+
 
         }
         currentTilt = Mathf.Clamp(currentTilt, -maxTiltAngle, maxTiltAngle);
@@ -586,6 +606,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
 
     public void OnNotify(FruitDTO dto)
+    {
+
+        InstantKill();
+
+
+    }  
+    public void OnNotify(SharkDTO dto)
     {
 
         InstantKill();

@@ -118,6 +118,14 @@ namespace StateMachine.states
             
         }
 
+        public void OnPlayerCollisionChange(bool playerInCollider)
+        {
+            BeaverDTO beaverDto = new BeaverDTO().PlayerInCollider(playerInCollider);
+            NotifyObservers(beaverDto);
+        }
+        
+        
+
 
     }
 }

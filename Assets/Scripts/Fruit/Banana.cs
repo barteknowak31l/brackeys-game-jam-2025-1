@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioManager;
 using StateMachine.states;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,10 +10,14 @@ public class Banana : MonoBehaviour
     public Vector3 startScale = Vector3.zero;
     public Vector3 targetScale = Vector3.one;
     public float duration = 2f;       
+    
+    private AudioSource _audioSource;
     private void Start()
     {
         transform.localScale = startScale;
         StartCoroutine(ScaleOverTime(duration));
+        _audioSource =  gameObject.AddComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
     }
 
     IEnumerator ScaleOverTime(float time)
@@ -37,6 +42,7 @@ public class Banana : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _fruitState.OnFruitHitPlayer();
+            AudioManager.AudioManager.PlaySound(AudioClips.BananaSlip, _audioSource, 1.0f);
         }
     }
 }

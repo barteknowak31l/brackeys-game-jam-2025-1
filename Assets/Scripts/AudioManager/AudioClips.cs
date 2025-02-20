@@ -25,5 +25,7 @@ namespace AudioManager
         SharkHit,
         FruitHit,
         BeaverKickScream,
+        SprintSteps,
+        WalkingSteps,
     }
 }

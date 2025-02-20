@@ -292,6 +292,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 303032764}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: sharkState
+      value: 
+      objectReference: {fileID: 710244328}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: stormState
       value: 
       objectReference: {fileID: 9070628}

@@ -1,8 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/props/Shark.controller.meta
 guid: c6191a4f89abeba43a1cbd27d69b3ba1
 NativeFormatImporter:
+========
+guid: 791c2e9f79cf74143b188de76bab032f
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> origin/Mapmake:Assets/Prefabs/MapTitle/MainTitle.meta
   externalObjects: {}
-  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

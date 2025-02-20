@@ -21,6 +21,7 @@ public class Beaver : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             _playerInRange = true;
+            _ctx.OnPlayerCollisionChange(true);
         }
     }
 
@@ -29,6 +30,7 @@ public class Beaver : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playerInRange = false;
+            _ctx.OnPlayerCollisionChange(false);
         }
     }
 

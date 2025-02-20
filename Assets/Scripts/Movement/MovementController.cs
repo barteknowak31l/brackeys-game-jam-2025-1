@@ -75,6 +75,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
     
+    
+    [Header("Ufo stuff")]
+    [SerializeField] private float _ufoLiftSpeed = 3.0f;
+    [SerializeField] private float _ufoLiftThreshold = 5.0f;
+    
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -564,9 +569,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         while (isBeingLifted)
         {
-            transform.position += new Vector3(0, 1f * Time.deltaTime, 0);
+            transform.position += new Vector3(0, _ufoLiftSpeed * Time.deltaTime, 0);
 
-            if (transform.position.y  >= 3f)
+            if (transform.position.y  >= _ufoLiftThreshold)
             {
                 InstantKill();
                 yield break; 

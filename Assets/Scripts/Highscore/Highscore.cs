@@ -6,15 +6,22 @@ using UnityEngine;
 public class Highscore : MonoBehaviour, IObserver<StateDTO>
 {
    public Transform player;
-    int highscore;
+   public int highscore;
+   public int lastDistance;
+   int maxDistance=0;
    int distance;
     private void Update()
     {
         distance = Mathf.RoundToInt(player.position.x - transform.position.x);
+        if (distance > maxDistance)
+        {
+            maxDistance = distance;
+        }
     }
     private void Awake()
     {
       highscore = PlayerPrefs.GetInt("Highscore", 0);
+      lastDistance = PlayerPrefs.GetInt("LastDistance", 0);
     }
 
     public void OnNotify(StateDTO dto)
@@ -23,6 +30,10 @@ public class Highscore : MonoBehaviour, IObserver<StateDTO>
         if (state == States.PlayerDeath)
         {
             CheckHighscore();
+        }
+        else if (state == States.StartState)
+        {
+            maxDistance = 0;
         }
     }
     private void OnEnable()
@@ -35,16 +46,15 @@ public class Highscore : MonoBehaviour, IObserver<StateDTO>
         StateMachineManager.instance.RemoveObserver(this);
     }
 
-
     private void CheckHighscore()
     {
-        distance = Mathf.RoundToInt(player.position.x - transform.position.x);
-        if (distance > highscore)
+        lastDistance = maxDistance;
+        PlayerPrefs.SetInt("LastDistance", lastDistance);
+        if (maxDistance > highscore)
         {
-            highscore = distance;
+            highscore = maxDistance;
             PlayerPrefs.SetInt("Highscore", highscore);
-            Debug.Log($"Nowy rekord wynosi {highscore}");
-            PlayerPrefs.Save();
         }
+        PlayerPrefs.Save();
     }
 }

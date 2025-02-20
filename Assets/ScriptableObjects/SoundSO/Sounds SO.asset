@@ -37,7 +37,7 @@ MonoBehaviour:
     volume: 1
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
     sounds:
-    - {fileID: 8300000, guid: 18c2311cfa3ba3cdb876127202a1ebd2, type: 3}
+    - {fileID: 8300000, guid: d4b3e9140f096c45e97af217d990c145, type: 3}
   - name: SharkFall
     volume: 1
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
@@ -55,7 +55,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6ea27055ea1ea2009a39072795cf60df, type: 3}
   - name: UfoShip
     volume: 1
-    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    mixer: {fileID: 24300002, guid: 4a0047f92629c6dfa8e1a655c49c655e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 5f341b2794b0c77f88cac47c3d1e979b, type: 3}
   - name: Cow
@@ -78,3 +78,52 @@ MonoBehaviour:
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
     sounds:
     - {fileID: 8300000, guid: 3778071c6698056c19f3db77eaf92c7b, type: 3}
+  - name: Cannon
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 42a41e8aeacb8b06db4393e30e20b3b7, type: 3}
+  - name: BeaverCut
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: b31e87ad8fe5316beb22383229617d12, type: 3}
+  - name: Beaver
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: abc2d6edb0b4bffcabb9b06caa4a8431, type: 3}
+  - name: Pig
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds: []
+  - name: UfoKidnapping
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 454276b9f130ef2cea12d9dffe97dc9b, type: 3}
+  - name: BananaSlip
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 5ae1051aca7f13791869a75c8e4709db, type: 3}
+  - name: Sharknado
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 20ff801049ce15c39bc659ef3331141b, type: 3}
+  - name: SharkHit
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 8e1997bde7714cbadbd129b3d7e42909, type: 3}
+  - name: FruitHit
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: b3a1525a6a19bd4ec80dde7636cd966c, type: 3}
+  - name: BeaverKickScream
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 10a9642ae046a553ba8a8f80dd8322b4, type: 3}

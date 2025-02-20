@@ -1,3 +1,4 @@
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -6,10 +7,26 @@ public class Pig : MonoBehaviour
     public float speed;
     private BeaverState _ctx;
     private int _pigDestroyTime = 20;
+    
+    private AudioSource _audioSourceSteps;
+    private AudioSource _audioSourceScream;
+    
     void Start()
     {
         Destroy(gameObject, _pigDestroyTime);
         transform.Rotate(0, 270, 0);
+        
+        _audioSourceSteps = gameObject.AddComponent<AudioSource>();
+        _audioSourceScream = gameObject.AddComponent<AudioSource>();
+        
+        _audioSourceSteps.playOnAwake = false;
+        _audioSourceSteps.loop = true;
+        _audioSourceScream.playOnAwake = false;
+        _audioSourceScream.loop = true;
+        
+        AudioManager.AudioManager.PlaySound(AudioClips.Pig, _audioSourceScream, 1.0f);
+        AudioManager.AudioManager.PlaySound(AudioClips.SprintSteps, _audioSourceSteps, 1.0f);
+        
     }
     void Update()
     {
@@ -25,9 +42,7 @@ public class Pig : MonoBehaviour
         {
             _ctx.EndTime();
         }
-
         Destroy(gameObject);
-        
     }
 
     

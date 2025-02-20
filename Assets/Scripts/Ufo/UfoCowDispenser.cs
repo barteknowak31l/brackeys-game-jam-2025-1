@@ -1,3 +1,4 @@
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public class UfoCowDispenser : MonoBehaviour
     public Cow _cow;
     public Transform _cowSpawnPoint;
     
+    private AudioSource _audioSource;
+    
+    
     public void Setup(UfoState ctx, Transform playerTransform, float offsetY, GameObject cowPrefab)
     {
         _ctx = ctx;
@@ -24,6 +28,7 @@ public class UfoCowDispenser : MonoBehaviour
         _cowPrefab = cowPrefab;
         _cow = null;
         SpawnCow();
+        StartSound();
     }
     void Update()
     {
@@ -99,5 +104,12 @@ public class UfoCowDispenser : MonoBehaviour
             _cow.UseGravity();
             _cow = null;   
         }
+    }
+    
+    private void StartSound()
+    {
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.loop = true;
+        AudioManager.AudioManager.PlaySound(AudioClips.UfoShip, _audioSource, 1.0f);
     }
 }

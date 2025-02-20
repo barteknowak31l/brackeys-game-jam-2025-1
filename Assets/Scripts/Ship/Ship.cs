@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AudioManager;
 using NUnit.Framework;
 using StateMachine.states;
 using UnityEngine;
@@ -15,10 +16,14 @@ public class Ship : MonoBehaviour
     [SerializeField] private List<Transform> _fireFruitPoints;
 
     [SerializeField] private FruitState _state;
+    
+    private AudioSource _audioSource;
 
     public void Setup(FruitState state)
     {
         _state = state;
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
 
     }
 
@@ -82,7 +87,7 @@ public class Ship : MonoBehaviour
         cannonBall.Setup(_state);
         Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
         
-
+        AudioManager.AudioManager.PlaySound(AudioClips.Cannon, _audioSource, 1.0f);
 
         Vector3 shootDirection = Quaternion.AngleAxis(_angle, transform.right) * transform.forward;
         rb.linearVelocity = shootDirection * _fireForce;

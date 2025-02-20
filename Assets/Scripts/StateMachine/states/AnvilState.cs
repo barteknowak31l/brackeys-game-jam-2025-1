@@ -77,7 +77,7 @@ namespace StateMachine.states
             
             
             var anvil = Instantiate(prefab, position, rotation).GetComponent<Anvil>();
-            anvil.Setup(this);
+            anvil.Setup(this, _variant);
         }
     
 

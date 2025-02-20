@@ -157,6 +157,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         currentTilt = 0f;
         playerInput.enabled = true;
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
+        tiltMultiplier = 0.5f;
     }
 
     

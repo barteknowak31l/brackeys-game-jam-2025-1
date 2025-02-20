@@ -63,6 +63,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public BeaverState beaverState;
     public SharkState sharkState;
     private bool isCrouching;
+    private float randomTiltChange = 0f;
+    private float tiltSpeedMultiplier = 1f;
 
     private Coroutine resetTiltCoroutine;
     private CapsuleCollider capsuleCollider;
@@ -285,6 +287,15 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     void HandleTilting()
     {
         if (!canTilt) return;
+
+        randomTiltChange -= Time.deltaTime;
+        if (randomTiltChange <= 0f)
+        {
+            tiltSpeedMultiplier = Random.Range(0.7f, 1.5f);
+          //  Debug.Log(tiltSpeedMultiplier);
+            randomTiltChange = Random.Range(3f, 6f);
+        }
+
         if (Input.GetKey(KeyCode.A) && !instantKill)
         {
             currentTilt += tiltSpeed * Time.deltaTime * 50f;
@@ -296,12 +307,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         if (isSprinting)
         {
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * 1.5f * Time.deltaTime * 10f;
+
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * 1.5f * Time.deltaTime * 10f;
 
         }
         else
         {
-            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * Time.deltaTime * 10f;
+            currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * Time.deltaTime * 10f;
+
 
         }
         currentTilt = Mathf.Clamp(currentTilt, -maxTiltAngle, maxTiltAngle);

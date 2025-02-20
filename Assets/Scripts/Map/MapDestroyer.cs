@@ -9,7 +9,7 @@ public class MapDestroyer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Spawner"))
         {
             objectPooler.DespawnObject(mapTitle);
         }

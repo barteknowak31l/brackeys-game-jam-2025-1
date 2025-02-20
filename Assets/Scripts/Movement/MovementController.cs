@@ -157,6 +157,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         currentTilt = 0f;
         playerInput.enabled = true;
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
+        tiltMultiplier = 1f;
+        tiltSpeed = 0.5f;
+        rain.Stop();
+        rain.Clear();
     }
 
     
@@ -504,7 +508,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         {
             case States.Storm:
             {
-                if (dto._variant == StateMachine.Variant.Second)
+                if (dto._variant == Variant.Second)
                 {
                     tiltMultiplier = 2f;
                     rain.Play();

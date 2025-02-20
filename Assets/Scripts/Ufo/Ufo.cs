@@ -42,7 +42,6 @@ public class Ufo : MonoBehaviour
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
-            Debug.Log("UFO moving");
         }
         
         transform.position = targetPosition;

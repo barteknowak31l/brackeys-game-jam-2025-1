@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapBuildBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 4431086714421724525, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 7262031219520484537, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
       propertyPath: objectPooler
       value: 
@@ -251,6 +255,10 @@ PrefabInstance:
       propertyPath: messagesManager
       value: 
       objectReference: {fileID: 1629121080}
+    - target: {fileID: 1508889168686956751, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 6112508987023148651, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
       propertyPath: objectPooler
       value: 
@@ -464,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapBuildBlock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4431086714421724525, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 7262031219520484537, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
       propertyPath: objectPooler
       value: 
@@ -626,6 +638,10 @@ PrefabInstance:
       propertyPath: messagesManager
       value: 
       objectReference: {fileID: 1629121080}
+    - target: {fileID: 1508889168686956751, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 6112508987023148651, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
       propertyPath: objectPooler
       value: 
@@ -774,6 +790,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+--- !u!114 &1035387439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7084071354685950582, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 1035387438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980ee1530496a8fbb81f14c4e113ceff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1066984216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -830,6 +857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapBuildBlock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4431086714421724525, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 7262031219520484537, guid: e81db526c91cdf2448fa75d281e254d7, type: 3}
       propertyPath: objectPooler
       value: 
@@ -1385,6 +1416,10 @@ PrefabInstance:
       propertyPath: messagesManager
       value: 
       objectReference: {fileID: 1629121080}
+    - target: {fileID: 1508889168686956751, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
+      propertyPath: _stateMachineBehaviour
+      value: 
+      objectReference: {fileID: 1035387439}
     - target: {fileID: 6112508987023148651, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
       propertyPath: objectPooler
       value: 

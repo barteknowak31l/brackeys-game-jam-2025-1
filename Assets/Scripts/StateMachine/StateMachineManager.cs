@@ -23,7 +23,8 @@ namespace StateMachine
         [SerializeField] PlayerDeathState _playerDeathState;
         [SerializeField] SharkState _sharkState;
         [SerializeField] StartState _startState;
-        
+
+        private List<IBaseState> states;
 
         [SerializeField] private StateQueue _stateQueue;
 
@@ -56,6 +57,16 @@ namespace StateMachine
             {
                 EndMechanicState();
             }
+            
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                ForceNextState(Variant.First);
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                ForceNextState(Variant.Second);
+            }
+            
             _currentState.UpdateState(this);
         }
 
@@ -103,7 +114,7 @@ namespace StateMachine
 
         private void InitQueue()
         {
-            List<IBaseState> states = new List<IBaseState>();
+            states = new List<IBaseState>();
             states.Add(_windState);
             states.Add(_anvilState);
             states.Add(_stormState);
@@ -113,6 +124,17 @@ namespace StateMachine
             states.Add(_beaverState);
             states.Add(_sharkState);
             _stateQueue = new StateQueue(states);
+        }
+    
+        private int iterator = 0;
+        private void ForceNextState(Variant variant)
+        {
+            _currentState.ExitState(this);
+            iterator += 1;
+            if(iterator >= states.Count) iterator = 0;
+            _currentState = states[iterator];
+            _currentState.SetVariant(variant);
+            _currentState.EnterState(this);
         }
         
     }

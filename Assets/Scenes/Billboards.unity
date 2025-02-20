@@ -400,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: sharkState
       value: 
-      objectReference: {fileID: 415102605}
+      objectReference: {fileID: 2074153316}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: stormState
       value: 
@@ -1644,6 +1644,18 @@ PrefabInstance:
     - target: {fileID: 5937852388575250116, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_Name
       value: StateManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511034392659084962, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511034392659084962, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511034392659084962, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.225
       objectReference: {fileID: 0}
     - target: {fileID: 7084071354685950582, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _playerDeathState
@@ -3838,6 +3850,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072879518}
   m_CullTransparentMesh: 1
+--- !u!114 &2074153316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 808668997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6640b21b24f9bc6eab92c58f605a5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2143309084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7894020682871508659, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}

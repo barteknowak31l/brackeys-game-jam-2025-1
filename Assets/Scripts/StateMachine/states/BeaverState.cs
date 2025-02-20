@@ -81,6 +81,8 @@ namespace StateMachine.states
 
           if(_variant== Variant.Second)
             {
+                StopCoroutine(SpawnPigs());
+
                 Destroy(_portal);
 
             }

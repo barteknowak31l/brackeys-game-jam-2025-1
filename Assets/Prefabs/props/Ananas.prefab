@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5256647574034457591}
   - component: {fileID: 6474943000292742657}
   - component: {fileID: 156459265171967676}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ananas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

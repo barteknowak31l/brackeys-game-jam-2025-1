@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6976131274267434886}
   - component: {fileID: 1741483315997802514}
   - component: {fileID: 140611271821523619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 299287300501954732}
   - component: {fileID: 4606239330100772899}
   - component: {fileID: 3733377780995176602}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9740,7 +9740,7 @@ GameObject:
   - component: {fileID: 5360990760122433530}
   - component: {fileID: 6226956476759780494}
   - component: {fileID: 544047174078199649}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14726,6 +14726,10 @@ PrefabInstance:
     - target: {fileID: 4469331078496549843, guid: 59a40409339beae4da0eb3b08c656323, type: 3}
       propertyPath: m_Name
       value: low_poly_cloud_v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469331078496549843, guid: 59a40409339beae4da0eb3b08c656323, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

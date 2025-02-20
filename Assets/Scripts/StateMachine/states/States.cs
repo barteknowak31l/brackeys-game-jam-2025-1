@@ -11,6 +11,7 @@ namespace StateMachine.states
         Beaver,
         PlayerDeath,
         Bird,
-        SharkState
+        SharkState,
+        StartState
     }
 }

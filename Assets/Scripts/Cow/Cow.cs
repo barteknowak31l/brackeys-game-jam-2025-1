@@ -1,4 +1,5 @@
 using System;
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class Cow : MonoBehaviour
         _rb.useGravity = true;
         _rb.linearVelocity = Vector3.zero;
         transform.parent = null;
+        AudioManager.AudioManager.PlaySound(AudioClips.Cow);
+
     }
 
     private void OnTriggerEnter(Collider other)

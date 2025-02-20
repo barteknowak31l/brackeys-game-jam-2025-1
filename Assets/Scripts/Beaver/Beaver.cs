@@ -1,6 +1,7 @@
 using StateMachine.states;
 using System;
 using System.Collections;
+using AudioManager;
 using UnityEngine;
 
 public class Beaver : MonoBehaviour
@@ -11,9 +12,19 @@ public class Beaver : MonoBehaviour
     private BeaverState _ctx;
     public float timeToKill = 15f;
 
+    private AudioSource _audioSource;
+    private AudioSource _audioSource2;
+    
     public void Start()
     {
         StartCoroutine(Timer());
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource2 = gameObject.AddComponent<AudioSource>();
+        _audioSource.loop = true;
+        _audioSource2.loop = true;
+        AudioManager.AudioManager.PlaySound(AudioClips.Beaver, _audioSource, 1.0f);
+        AudioManager.AudioManager.PlaySound(AudioClips.BeaverCut, _audioSource2, 1.0f);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,6 +57,15 @@ public class Beaver : MonoBehaviour
 
     private IEnumerator MoveRightAndDestroy()
     {
+        
+        AudioManager.AudioManager.StopSound(AudioClips.Beaver, _audioSource);
+        AudioManager.AudioManager.StopSound(AudioClips.BeaverCut, _audioSource2);
+
+        _audioSource.loop = false;
+        _audioSource2.loop = false;
+        AudioManager.AudioManager.PlaySound(AudioClips.Kick, _audioSource, 1.0f);
+        AudioManager.AudioManager.PlaySound(AudioClips.BeaverKickScream, _audioSource, 1.0f);
+        
         yield return new WaitForSeconds(0.5f); 
 
         Vector3 startPosition = transform.position;

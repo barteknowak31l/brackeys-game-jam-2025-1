@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AudioManager;
 using Observers;
 using Observers.dto;
 using UnityEngine;
@@ -21,6 +22,15 @@ namespace StateMachine.states
         private Transform _playerTransform;
         
         private Variant _variant;
+        
+        private AudioSource _audioSource;
+
+        void Start()
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.playOnAwake = false;
+            _audioSource.loop = true;
+        }
 
         
         public void EnterState(StateMachineManager ctx)
@@ -40,6 +50,12 @@ namespace StateMachine.states
                 lightning.GetComponent<Lightning.Lightning>().Setup(this);
                 _instantiatedLightnings.Add(lightning);
             }
+
+            if (_variant == Variant.Second)
+            {
+                StartRainSound();
+            }
+            
         }
 
         public void UpdateState(StateMachineManager ctx)
@@ -48,6 +64,7 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
+            StopRainSound();
             foreach (var lightning in _instantiatedLightnings)
             {
                 Destroy(lightning);   
@@ -73,6 +90,17 @@ namespace StateMachine.states
         public void OnLightningHitPlayer()
         {
             NotifyObservers(new StormDTO());
+        }
+
+
+        private void StartRainSound()
+        {
+            AudioManager.AudioManager.PlaySound(AudioClips.Rain, _audioSource, 1.0f);
+        }
+
+        private void StopRainSound()
+        {
+            AudioManager.AudioManager.StopSound(AudioClips.Rain, _audioSource);
         }
         
         

@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -8,18 +9,22 @@ public class Ufo : MonoBehaviour
     public CapsuleCollider Collider;
     public GameObject UfoLaser; 
     
+    private AudioSource _audioSource;
+    private AudioSource _audioSourceKidnap;
+    
     public void Setup(UfoState ctx)
     {
         _ctx = ctx;
+        StartSound();
     }
 
-    public void MovePhase(Vector3 targetPosition, float speed)
+    public void MovePhase(Vector3 targetPosition, float speed, bool continuePhases = true)
     {
         UfoLaser.SetActive(false);
         Collider.enabled = false;
         _ctx.OnBeamExit();
-        StartCoroutine(MoveToPosition(targetPosition, speed));
-        Debug.Log($"moving to position {targetPosition}");
+        StartCoroutine(MoveToPosition(targetPosition, speed, continuePhases));
+        AudioManager.AudioManager.StopSound(AudioClips.UfoKidnapping, _audioSourceKidnap);
     }
 
     public void StationaryPhase(float duration)
@@ -27,9 +32,10 @@ public class Ufo : MonoBehaviour
         UfoLaser.SetActive(true);
         Collider.enabled = true;
         StartCoroutine(StationaryPhaseCoroutine(duration));
+        AudioManager.AudioManager.PlaySound(AudioClips.UfoKidnapping, _audioSourceKidnap, 1.0f);
     }
     
-    IEnumerator MoveToPosition(Vector3 targetPosition, float speed)
+    IEnumerator MoveToPosition(Vector3 targetPosition, float speed, bool continuePhases = true)
     {
         Vector3 startPosition = transform.position;
         float distance = Vector3.Distance(startPosition, targetPosition); 
@@ -45,7 +51,9 @@ public class Ufo : MonoBehaviour
         }
         
         transform.position = targetPosition;
-        FinishMovement();
+       
+        if (continuePhases)
+            FinishMovement();
     }
 
     IEnumerator StationaryPhaseCoroutine(float duration)
@@ -71,8 +79,9 @@ public class Ufo : MonoBehaviour
     {
         StopAllCoroutines();
         Vector3 end = playerTransform.position + -playerTransform.forward * 10.0f + playerTransform.right * 10.0f + playerTransform.up * offsetY;
-        MovePhase(end, speed);
+        MovePhase(end, speed, false);
         Destroy(gameObject, 5.0f);
+        AudioManager.AudioManager.StopSound(AudioClips.UfoKidnapping);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,6 +99,17 @@ public class Ufo : MonoBehaviour
             _ctx.OnBeamExit();
         }
     }
+
+    private void StartSound()
+    {
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.loop = true;
+        AudioManager.AudioManager.PlaySound(AudioClips.UfoShip, _audioSource, 1.0f);
+        
+        _audioSourceKidnap = gameObject.AddComponent<AudioSource>();
+        _audioSourceKidnap.loop = true;
+    }
+    
     
     
 }

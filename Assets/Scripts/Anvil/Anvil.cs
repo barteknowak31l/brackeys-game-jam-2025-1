@@ -1,5 +1,6 @@
 using System;
 using AudioManager;
+using StateMachine;
 using StateMachine.states;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Anvil : MonoBehaviour
 {
     [SerializeField] private float _destroyDelay;
     private AnvilState _ctx;
+    private Variant _variant;
 
     private void Start()
     {
@@ -14,9 +16,10 @@ public class Anvil : MonoBehaviour
         AudioManager.AudioManager.PlaySound(AudioClips.AnvilFall);
     }
 
-    public void Setup(AnvilState ctx)
+    public void Setup(AnvilState ctx, Variant variant)
     {
         _ctx = ctx;
+        _variant = variant;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +35,14 @@ public class Anvil : MonoBehaviour
     private void OnDestroy()
     {
         AudioManager.AudioManager.StopSound(AudioClips.AnvilFall);
-        AudioManager.AudioManager.PlaySound(AudioClips.AnvilHit);
+
+        if (_variant == Variant.First)
+        {
+            AudioManager.AudioManager.PlaySound(AudioClips.AnvilHit);
+        }
+        else
+        {
+            AudioManager.AudioManager.PlaySound(AudioClips.PianoHit);
+        }
     }
 }

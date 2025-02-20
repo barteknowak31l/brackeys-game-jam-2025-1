@@ -67,6 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ac04bb106331a419130065e08ef811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  targetScale: {x: 1, y: 1, z: 1}
+  duration: 2
 --- !u!1001 &3222704110888055583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,7 +133,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f5791751cca75bf4898f6b9d18a8a4dc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c856dda681aa8e4781a3383fad0c148, type: 2}
+      objectReference: {fileID: 2100000, guid: e54e02cf24a9b8a4ca31ba167c0f7717, type: 2}
     - target: {fileID: 919132149155446097, guid: f5791751cca75bf4898f6b9d18a8a4dc, type: 3}
       propertyPath: m_Name
       value: BananaRender

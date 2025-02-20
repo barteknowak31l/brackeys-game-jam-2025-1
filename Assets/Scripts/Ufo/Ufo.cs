@@ -19,6 +19,7 @@ public class Ufo : MonoBehaviour
         Collider.enabled = false;
         _ctx.OnBeamExit();
         StartCoroutine(MoveToPosition(targetPosition, speed));
+        Debug.Log($"moving to position {targetPosition}");
     }
 
     public void StationaryPhase(float duration)

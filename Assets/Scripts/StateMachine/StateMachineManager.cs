@@ -21,9 +21,11 @@ namespace StateMachine
         [SerializeField] FruitState _fruitState;
         [SerializeField] BeaverState _beaverState;
         [SerializeField] PlayerDeathState _playerDeathState;
+        [SerializeField] SharkState _sharkState;
+        [SerializeField] StartState _startState;
         
 
-        private StateQueue _stateQueue;
+        [SerializeField] private StateQueue _stateQueue;
 
         public static StateMachineManager instance { get; private set; }
 
@@ -42,18 +44,9 @@ namespace StateMachine
         
         void Start()
         {
-            List<IBaseState> states = new List<IBaseState>();
-            states.Add(_windState);
-            states.Add(_anvilState);
-            states.Add(_stormState);
-            states.Add(_ufoState);
-            states.Add(_birdState);
-            states.Add(_fruitState);
-            states.Add(_beaverState);
-            
-            _stateQueue = new StateQueue(states);
-            _currentState = _defaultState;
-            NotifyObservers(createDTO(_currentState, true));
+            InitQueue();
+            _currentState = _startState;
+            NotifyObservers(createDTO(_currentState));
             _currentState.EnterState(this);
         }
 
@@ -90,13 +83,36 @@ namespace StateMachine
             _currentState.EnterState(this);
             NotifyObservers(createDTO(_currentState));
         }
-
+        
+        public void StartState()
+        {
+            InitQueue();
+            if (_currentState != null) _currentState.ExitState(this);
+            _currentState = _startState;
+            _currentState.EnterState(this);
+            NotifyObservers(createDTO(_currentState));
+        }
+        
         private StateDTO createDTO(IBaseState state, bool isDefault = false)
         {
             return new StateDTO()
                 .State(state.GetStateType())
                 .Variant(state.GetVariant())
                 .IsDefault(isDefault);
+        }
+
+        private void InitQueue()
+        {
+            List<IBaseState> states = new List<IBaseState>();
+            states.Add(_windState);
+            states.Add(_anvilState);
+            states.Add(_stormState);
+            states.Add(_ufoState);
+            states.Add(_birdState);
+            states.Add(_fruitState);
+            states.Add(_beaverState);
+            states.Add(_sharkState);
+            _stateQueue = new StateQueue(states);
         }
         
     }

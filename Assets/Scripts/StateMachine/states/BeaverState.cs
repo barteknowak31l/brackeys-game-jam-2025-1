@@ -97,7 +97,7 @@ namespace StateMachine.states
 
         public States GetStateType()
         {
-            return States.Fruit;
+            return States.Beaver;
         }
 
         public Variant GetVariant()
@@ -119,6 +119,14 @@ namespace StateMachine.states
             
             
         }
+
+        public void OnPlayerCollisionChange(bool playerInCollider)
+        {
+            BeaverDTO beaverDto = new BeaverDTO().PlayerInCollider(playerInCollider);
+            NotifyObservers(beaverDto);
+        }
+        
+        
 
 
     }

@@ -8,7 +8,7 @@ namespace Observers
 {
 
     public class WindObserver : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StateDTO>, IObserver<PlayerDeathDTO>, IObserver<StormDTO>,
-    IObserver<UfoDTO>, IObserver<BirdDTO>
+    IObserver<UfoDTO>, IObserver<BirdDTO>, IObserver<SharkDTO>
     {
         public WindState windState;
         public AnvilState anvilState;
@@ -16,6 +16,7 @@ namespace Observers
         public UfoState ufoState;
         public PlayerDeathState playerDeathState;
         public BirdState birdState;
+        public SharkState sharkState;
         
         private void OnEnable()
         {
@@ -25,6 +26,7 @@ namespace Observers
             ufoState.AddObserver(this);
             playerDeathState.AddObserver(this);
             birdState.AddObserver(this);
+            sharkState.AddObserver(this);
             StateMachineManager.instance.AddObserver(this);
         }
 
@@ -36,6 +38,7 @@ namespace Observers
             ufoState.RemoveObserver(this);
             playerDeathState.RemoveObserver(this);
             birdState.RemoveObserver(this);
+            sharkState.RemoveObserver(this);
             StateMachineManager.instance.RemoveObserver(this);
         }
         
@@ -71,6 +74,11 @@ namespace Observers
         public void OnNotify(BirdDTO dto)
         {
             Debug.Log(dto._damage + "Bird!!!");
+        }
+
+        public void OnNotify(SharkDTO dto)
+        {
+            Debug.unityLogger.Log("Got SharkDTO");
         }
     }
 }

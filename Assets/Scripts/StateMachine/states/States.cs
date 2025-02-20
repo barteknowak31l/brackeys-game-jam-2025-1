@@ -10,6 +10,8 @@ namespace StateMachine.states
         Fruit,
         Beaver,
         PlayerDeath,
-        Bird
+        Bird,
+        SharkState,
+        StartState
     }
 }

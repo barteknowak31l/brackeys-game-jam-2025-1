@@ -24,12 +24,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public LayerMask groundLayer;
 
     private PlayerInput playerInput;
-    private InputAction moveAction;
     private InputAction lookAction;
     private InputAction sprintAction;
     private InputAction jumpAction;
     private InputAction crouchAction;
     private InputAction kickAction;
+    private InputAction moveForwardAction;
+    private InputAction moveBackwardAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -73,7 +74,12 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine ufoLiftCoroutine;
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
-
+    
+    
+    [Header("Ufo stuff")]
+    [SerializeField] private float _ufoLiftSpeed = 3.0f;
+    [SerializeField] private float _ufoLiftThreshold = 5.0f;
+    
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -81,7 +87,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         originalCameraPosition = cameraTransform.localPosition;
 
         playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
+        moveForwardAction = playerInput.actions["MoveForward"];
+        moveBackwardAction = playerInput.actions["MoveBackward"];
         lookAction = playerInput.actions["Look"];
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"];
@@ -141,6 +148,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         StateMachineManager.instance.RemoveObserver(this);
     }
 
+    
+    void ResetPlayer()
+    {
+        isFalling = false;
+        hasFallen = false;
+        instantKill = false;
+        currentTilt = 0f;
+        playerInput.enabled = true;
+        tiltCoroutine = StartCoroutine(ChangeTiltDirection());
+    }
+
+    
     void ToggleCrouch()
     {
         if (!isGrounded) return;
@@ -178,6 +197,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         playerInput.actions["Jump"].Disable();
         playerInput.actions["Crouch"].Disable(); 
         playerInput.actions["Move"].Disable(); 
+        playerInput.actions["MoveForward"].Disable(); 
+        playerInput.actions["MoveBackward"].Disable(); 
         playerInput.actions["Kick"].Disable(); 
         body.SetActive(false);
         body2.SetActive(false);
@@ -188,6 +209,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         playerInput.actions["Jump"].Enable();
         playerInput.actions["Crouch"].Enable(); 
         playerInput.actions["Move"].Enable(); 
+        playerInput.actions["MoveForward"].Enable(); 
+        playerInput.actions["MoveBackward"].Enable(); 
         playerInput.actions["Kick"].Enable(); 
         animator.SetBool("IsKicking", false);
 
@@ -211,20 +234,21 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         if (hasFallen) return;
 
-
-
-        moveInput = moveAction.ReadValue<Vector2>();
-        isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput.y > 0 && !isCrouching;
+        float moveForward = moveForwardAction.ReadValue<float>();
+        float moveBackward = moveBackwardAction.ReadValue<float>() * -1; // -1 to move backward; 
+        float moveInput = moveForward + moveBackward;
+        
+        isSprinting = sprintAction.ReadValue<float>() > 0 && moveInput > 0 && !isCrouching;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
-        Vector3 move = transform.forward * moveInput.y;
+        Vector3 move = transform.forward * moveInput;
         transform.position += move * currentSpeed * Time.deltaTime;
 
-        if (moveInput.y > 0)
+        if (moveInput > 0)
         {
             inputY = 1;
         }
-        else if ((moveInput.y < 0))
+        else if ((moveInput < 0))
         {
             inputY = -1;
         }
@@ -473,22 +497,33 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(StateDTO dto)
     {
-        if (dto._state == States.Storm && dto._variant == StateMachine.Variant.Second)
+
+
+
+        switch (dto._state)
         {
-
-            tiltMultiplier = 2f;
-            rain.Play();
-
-
+            case States.Storm:
+            {
+                if (dto._variant == StateMachine.Variant.Second)
+                {
+                    tiltMultiplier = 2f;
+                    rain.Play();
+                }
+                else
+                {
+                    tiltMultiplier = 1f;
+                    rain.Stop();
+                    rain.Clear();
+                }
+                break;
+            }
+            case States.StartState:
+            {
+                ResetPlayer();
+                break;
+            }
         }
-        else
-        {
-            tiltMultiplier = 1f;
-            rain.Stop();
-            rain.Clear();
-
-        }
-
+        
     }
 
 
@@ -534,9 +569,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
         while (isBeingLifted)
         {
-            transform.position += new Vector3(0, 1f * Time.deltaTime, 0);
+            transform.position += new Vector3(0, _ufoLiftSpeed * Time.deltaTime, 0);
 
-            if (transform.position.y  >= 3f)
+            if (transform.position.y  >= _ufoLiftThreshold)
             {
                 InstantKill();
                 yield break; 
@@ -556,10 +591,20 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(BeaverDTO dto)
     {
+        if (dto._playerInCollider)
+        {
+            moveForwardAction.Disable();
+        }
+        else
+        {
+            moveForwardAction.Enable();
 
-        InstantKill();
+        }
 
-
+        if (dto._endTime)
+        {
+            InstantKill();
+        }
 
     }
 }

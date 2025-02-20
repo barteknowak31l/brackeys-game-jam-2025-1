@@ -22,13 +22,14 @@ namespace StateMachine.states
         private Transform _playerTransform;
         private GameObject _portal;
         public int pigAmount = 0;
+        private Coroutine _spawnPigsCoroutine;
 
         public void EnterState(StateMachineManager ctx)
         {
 
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
-            if (_variant == Variant.Second)
+            if (_variant == Variant.First)
             {
                 if (beaverPrefab != null && _playerTransform != null)
                 {
@@ -43,13 +44,13 @@ namespace StateMachine.states
             {
                 if (portalPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance , 0f, _playerTransform.position.z);
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance , 0.405f, _playerTransform.position.z);
                     _portal = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
 
 
                 }
 
-                StartCoroutine(SpawnPigs());
+                _spawnPigsCoroutine = StartCoroutine(SpawnPigs());
 
 
             }
@@ -66,7 +67,7 @@ namespace StateMachine.states
             {
                 if (pigPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance, -0.214f, _playerTransform.position.z);
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance, 0.605f, _playerTransform.position.z);
                     var pig = Instantiate(pigPrefab, spawnPosition, Quaternion.identity).GetComponent<Pig>();
                     pig.Setup(this);
                 }
@@ -79,17 +80,20 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
-
-          if(_variant== Variant.First)
+          if(_variant== Variant.Second)
             {
-                StopCoroutine(SpawnPigs());
-                Animator portalAnimator = _portal.GetComponent<Animator>();
+                if (_spawnPigsCoroutine != null)
+                {
+                    StopCoroutine(_spawnPigsCoroutine);
+                    _spawnPigsCoroutine = null; 
+                }
+                Animator portalAnimator = _portal.GetComponentInChildren<Animator>();
                 if (portalAnimator != null)
                 {
                     portalAnimator.SetTrigger("Destroy");
                 }
 
-                 Destroy(_portal,2f);
+                 Destroy(_portal,1f);
 
             }
 

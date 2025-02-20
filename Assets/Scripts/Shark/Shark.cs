@@ -31,7 +31,7 @@ namespace Shark
                 if (elapsedTime > 0)
                 {
                     Vector3 nextPos = Parabola(start, end, height, t + Time.deltaTime / time);
-                    // transform.forward = (nextPos - currentPos).normalized;
+                    transform.forward = (nextPos - currentPos).normalized;
                 }
 
                 elapsedTime += Time.deltaTime;
@@ -55,7 +55,6 @@ namespace Shark
             {
                 _ctx.OnSharkHitPlayer();
             }
-            Destroy(gameObject);
         }
     }
 }

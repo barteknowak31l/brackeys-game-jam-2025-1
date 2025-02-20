@@ -18,6 +18,7 @@ namespace StateMachine.states
         [SerializeField] private float _sharkSpawnDelay = 5f;
         [SerializeField] private float _sharkSpawnDelayRandomness = 2f;
         [SerializeField] private float _sharkHeight = 5f;
+        [SerializeField] private float _sharkYOffset = -2.0f;
       
         
         [Header("Variant2")]
@@ -59,12 +60,12 @@ namespace StateMachine.states
                 var delay =  _sharkSpawnDelay + Random.Range(-_sharkSpawnDelayRandomness, _sharkSpawnDelayRandomness); 
                 var rot = Quaternion.Euler(0, 90.0f, 0);
                 GameObject sharkSpawner = Instantiate(_sharkSpawnerPrefab, pos, rot);
-                sharkSpawner.GetComponent<SharkSpawner>().Setup(this, delay, _sideOffset, _sharkPrefab, _sharkHeight, duration);
+                sharkSpawner.GetComponent<SharkSpawner>().Setup(this, delay, _sideOffset, _sharkPrefab, _sharkHeight, duration, _sharkYOffset);
                 _instantiatedSharkSpawners.Add(sharkSpawner);
             } 
             
             // sharknados
-            if (_variant == Variant.Second)
+            if (_variant == Variant.First)
             {
                 for (int i = 0; i < _numberOfSharknados; i++)
                 {

@@ -465,7 +465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HALO
+  m_text: Highscores
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46df0abffefb87a47ba09269d85aef4c, type: 2}
   m_sharedMaterial: {fileID: 3434057391704476924, guid: 46df0abffefb87a47ba09269d85aef4c, type: 2}
@@ -1631,7 +1631,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HALO
+  m_text: 'W/S - walk
+
+    A/D - balance tilt
+
+    Shift - sprint
+
+    Space - jump
+
+    C
+    - crouch
+
+    V - kick
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46df0abffefb87a47ba09269d85aef4c, type: 2}
   m_sharedMaterial: {fileID: 3434057391704476924, guid: 46df0abffefb87a47ba09269d85aef4c, type: 2}
@@ -1658,8 +1671,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2100,7 +2113,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: billboard (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5716681864270162303, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -4216859302048453862, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
@@ -2707,14 +2721,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: billboard (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5716681864270162303, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -4216859302048453862, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4416000307071512139}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3345873802544243311}
   m_SourcePrefab: {fileID: 100100000, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
+--- !u!1 &1170338705456843065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}
+  m_PrefabInstance: {fileID: 7141598281001996336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3345873802544243311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170338705456843065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc31da329cfc804b9b8d959249e04fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 8141211422849641925}
+  highscoreData: {fileID: 0}
 --- !u!4 &2767102443504515882 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 20fd816a83c48484c8fee8a7ae243377, type: 3}

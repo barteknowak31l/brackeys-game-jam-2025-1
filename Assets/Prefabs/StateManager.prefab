@@ -44,15 +44,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ee101feb200ae49a581a14ac659fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTag: 
-  _birdSpawnDistance: 0
-  _birdSideOffset: 0
-  _birdSpawnTimeBase: 0
-  _birdSpawnTimeOffset: 0
-  _birdDamage: 0
-  _birdDamageVariant2: 0
-  _littleBirdPrefab: {fileID: 0}
-  _bigBirdPrefab: {fileID: 0}
+  _playerTag: Player
+  _birdSpawnDistance: 5
+  _birdSideOffset: 5
+  _birdSpawnTimeBase: 5
+  _birdSpawnTimeOffset: 2
+  _birdDamage: 1
+  _birdDamageVariant2: 2
+  _littleBirdPrefab: {fileID: 275038033600180627, guid: cd42a13abc5db0f40a6888a1592c88f4, type: 3}
+  _bigBirdPrefab: {fileID: 974958407120205530, guid: b3aa93be58ad2dc2299c7a806b8498ab, type: 3}
+--- !u!1 &866901730166817725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7731074026002837084}
+  - component: {fileID: 2158536418599122583}
+  m_Layer: 0
+  m_Name: SharkState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7731074026002837084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866901730166817725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4846109104091899049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2158536418599122583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866901730166817725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6640b21b24f9bc6eab92c58f605a5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTag: Player
+  _numberOfSharkSpawners: 5
+  _sharkDuration: 2
+  _sharkDurationRandomness: 0.7
+  _sharkSpawnDelay: 5
+  _sharkSpawnDelayRandomness: 2
+  _sharkHeight: 5
+  _sharkYOffset: -2
+  _numberOfSharknados: 5
+  _sharknadoSpeed: 2
+  _sharknadoSpeedRandomness: 0.7
+  _sideOffset: 7
+  _frontOffsetBase: 6
+  _frontOffsetBaseRandomness: 4
+  _sharkSpawnerPrefab: {fileID: 8605858652484952148, guid: 823ba8109624f8fa1b3ff20ae50c6d89, type: 3}
+  _sharkPrefab: {fileID: 7429858741289453057, guid: 89e72d60ae03bd74ca5b87d4a7435c99, type: 3}
+  _sharknadoPrefab: {fileID: 7791993261431097802, guid: 936ba80276cb6c8618341c2df11d0f9e, type: 3}
 --- !u!1 &1126042355279510810
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +151,8 @@ Transform:
   - {fileID: 6323631076224827493}
   - {fileID: 7316376569861360214}
   - {fileID: 8763922206775253213}
+  - {fileID: 7731074026002837084}
+  - {fileID: 343391625033618608}
   m_Father: {fileID: 4800769069750617156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2594237857714019213
@@ -150,6 +213,50 @@ MonoBehaviour:
   _shipStartPositionOffset: {x: -10, y: -4, z: -15}
   _shipPrefab: {fileID: 157793829894124985, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
   _ship: {fileID: 2464080612223138036, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
+--- !u!1 &4162882145564319112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343391625033618608}
+  - component: {fileID: 1236165134829931654}
+  m_Layer: 0
+  m_Name: PlayerDeathState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &343391625033618608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162882145564319112}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4846109104091899049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1236165134829931654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162882145564319112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73682115dc5e8d4688e3933fbefb834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5929680457555085909
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +367,8 @@ MonoBehaviour:
   _birdState: {fileID: 7644304328137147912}
   _fruitState: {fileID: 4812904069164970109}
   _beaverState: {fileID: 1771219503634535438}
-  _playerDeathState: {fileID: 0}
+  _playerDeathState: {fileID: 1236165134829931654}
+  _sharkState: {fileID: 2158536418599122583}
 --- !u!1 &6193220898229624120
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,12 +15,12 @@ namespace Shark
         private float _height;
         private float _duration;
 
-        public void Setup(SharkState ctx, float spawnDelay, float sideOffset, GameObject shark, float height, float duration)
+        public void Setup(SharkState ctx, float spawnDelay, float sideOffset, GameObject shark, float height, float duration, float Yoffset)
         {
             _ctx = ctx;
             _spawnDelay = spawnDelay;
-            _leftSide =  transform.position - transform.right * sideOffset;
-            _rightSide =  transform.position + transform.right * sideOffset;
+            _leftSide =  transform.position - transform.right * sideOffset + transform.up * Yoffset;
+            _rightSide =  transform.position + transform.right * sideOffset + transform.up * Yoffset;
 
             _shark = shark;
             _duration = duration;

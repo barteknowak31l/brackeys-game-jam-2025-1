@@ -4,6 +4,8 @@ using System.Collections;
 using AudioManager;
 using UnityEngine;
 
+[RequireComponent(typeof(RotateObject))]
+[RequireComponent(typeof(ParticleSystem))]
 public class Beaver : MonoBehaviour
 {
 
@@ -15,6 +17,15 @@ public class Beaver : MonoBehaviour
     private AudioSource _audioSource;
     private AudioSource _audioSource2;
     
+    private RotateObject _rotateObject;
+
+    public float beaverKickRange = 5.0f;
+    public float beaverKickDuration = 5.0f;
+    private Animator _animator;
+    private ParticleSystem _particleSystem;
+
+
+
     public void Start()
     {
         StartCoroutine(Timer());
@@ -24,6 +35,10 @@ public class Beaver : MonoBehaviour
         _audioSource2.loop = true;
         AudioManager.AudioManager.PlaySound(AudioClips.Beaver, _audioSource, 1.0f);
         AudioManager.AudioManager.PlaySound(AudioClips.BeaverCut, _audioSource2, 1.0f);
+        
+        _rotateObject = GetComponent<RotateObject>();
+        _animator = GetComponent<Animator>();
+        _particleSystem = GetComponent<ParticleSystem>();
         
     }
 
@@ -52,11 +67,13 @@ public class Beaver : MonoBehaviour
             _isMoving = true;
             StopCoroutine(Timer());
             StartCoroutine(MoveRightAndDestroy());
+
         }
     }
 
     private IEnumerator MoveRightAndDestroy()
     {
+        
         
         AudioManager.AudioManager.StopSound(AudioClips.Beaver, _audioSource);
         AudioManager.AudioManager.StopSound(AudioClips.BeaverCut, _audioSource2);
@@ -67,22 +84,26 @@ public class Beaver : MonoBehaviour
         AudioManager.AudioManager.PlaySound(AudioClips.BeaverKickScream, _audioSource, 1.0f);
         
         yield return new WaitForSeconds(0.5f); 
+        _animator.Play("Swim");
+        _rotateObject.startRotation = true;
+        _particleSystem.Stop();
+
 
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + new Vector3(0, 0, 0.8f);
+        Vector3 targetPosition = startPosition + new Vector3(0, 0, beaverKickRange);
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < 0.8f)
+        while (elapsedTime < beaverKickDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / 0.8f);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / beaverKickDuration);
             elapsedTime += Time.deltaTime;
             yield return null; 
         }
         yield return new WaitForSeconds(5f);
 
-        transform.position = targetPosition; 
-        Destroy(gameObject); 
+        transform.position = targetPosition;
+        DestroyBeaver();
     }
     public void Setup(BeaverState ctx)
     {

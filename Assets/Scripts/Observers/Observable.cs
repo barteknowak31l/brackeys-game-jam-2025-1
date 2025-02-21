@@ -16,12 +16,26 @@ namespace Observers
 
         public void AddObserver(IObserver<T> o)
         {
-            _observers.Add(o);
+            try
+            {
+                _observers.Add(o);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
 
         public void RemoveObserver(IObserver<T> o)
         {
-            _observers.Remove(o);
+            try
+            {
+                _observers.Remove(o);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
 
         public void NotifyObservers(T dto)

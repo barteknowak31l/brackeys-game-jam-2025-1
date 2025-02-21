@@ -45,6 +45,9 @@ namespace StateMachine.states
     
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered SharkState variant: " + _variant.ToString());
+
+            
             _instantiatedSharknados = new List<GameObject>();
             _instantiatedSharkSpawners = new List<GameObject>();
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;

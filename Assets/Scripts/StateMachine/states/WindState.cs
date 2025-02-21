@@ -26,6 +26,8 @@ namespace StateMachine.states
 
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Enter Wind State variant:" + _variant.ToString());
+
             _audioSource = GetComponent<AudioSource>();
             
             AudioManager.AudioManager.PlaySound(AudioClips.Wind, _audioSource, 1.0f);
@@ -37,10 +39,6 @@ namespace StateMachine.states
                 .Direction(_windDirection)
                 .Speed(_windSpeed);
             NotifyObservers(dto);
-        
-        
-            Debug.Log("Enter Wind State variant:" + _variant.ToString());
-        
         }
 
         public void UpdateState(StateMachineManager ctx)

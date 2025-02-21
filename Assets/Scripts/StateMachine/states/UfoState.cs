@@ -36,7 +36,8 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Enter UfoState");
+            Debug.Log("Entered UfoState variant: " + _variant.ToString());
+
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
             Vector3 ufoPosition = new Vector3(_playerTransform.position.x, _ufoStartPositionOffset.y, _playerTransform.position.z);
             _ufo = Instantiate(_ufoPrefab, ufoPosition, Quaternion.identity).GetComponent<Ufo>();

@@ -7,6 +7,8 @@ public class MessagesManager : MonoBehaviour
 {
     private Dictionary<DictKey, string> billboardMessages = new Dictionary<DictKey, string>()
     {
+        { new DictKey(States.StartState, Variant.First), "" },
+        { new DictKey(States.StartState, Variant.Second), "" },
         { new DictKey(States.Wind, Variant.First), "The wind is picking up..." },
         { new DictKey(States.Wind, Variant.Second), "The wind is picking up" },
         { new DictKey(States.Anvil, Variant.First), "Look up!" },

@@ -34,9 +34,6 @@ namespace Log
             _rotateObject.startRotation = false;
             transform.rotation = _startRotation;   
             transform.localPosition = _startPosition;
-            
-            Debug.Log("OnEnable kloda");
-
         }
 
         private void OnDisable()

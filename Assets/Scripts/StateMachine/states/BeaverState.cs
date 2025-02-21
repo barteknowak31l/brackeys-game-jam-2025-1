@@ -31,23 +31,11 @@ namespace StateMachine.states
 
         private List<Pig> _pigs;
 
-
-        // public static BeaverState Instance { get; private set; }
-        //
-        // private void Awake()
-        // {
-        //     if (Instance == null)
-        //     {
-        //         Instance = this;
-        //     }
-        //     else
-        //     {
-        //         Destroy(gameObject);
-        //     }
-        // }
         
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered BeaverState variant: " + _variant.ToString());
+
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
             if (_variant == Variant.First)

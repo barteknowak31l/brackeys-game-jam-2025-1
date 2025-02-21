@@ -26,9 +26,8 @@ namespace StateMachine.states
 
         public void EnterState(StateMachineManager ctx)
         {
-            //var dto = new BirdDTO().Damage(10);
-            //NotifyObservers(dto);
-            Debug.Log("Wariant ptaka - " + _variant.ToString());
+            Debug.Log("Entered BirdState variant: " + _variant.ToString());
+
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
             StartCoroutine(SpawnBirdCoroutine());
         }

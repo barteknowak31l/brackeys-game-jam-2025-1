@@ -1,12 +1,13 @@
 using StateMachine.states;
-using System;
 using System.Collections;
 using AudioManager;
 using UnityEngine;
+using StateMachine;
+
 
 [RequireComponent(typeof(RotateObject))]
 [RequireComponent(typeof(ParticleSystem))]
-public class Beaver : MonoBehaviour
+public class Beaver : MonoBehaviour, Observers.IObserver<StateDTO>
 {
 
     private bool _playerInRange = false;
@@ -59,7 +60,14 @@ public class Beaver : MonoBehaviour
             _ctx.OnPlayerCollisionChange(false);
         }
     }
-
+    private void OnEnable()
+    {
+        StateMachineManager.instance.AddObserver(this);
+    }
+    private void OnDisable()
+    {
+        StateMachineManager.instance.RemoveObserver(this);
+    }
     private void Update()
     {
         if (_playerInRange && Input.GetKeyDown(KeyCode.V) && !_isMoving)
@@ -100,7 +108,7 @@ public class Beaver : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null; 
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
         transform.position = targetPosition;
         DestroyBeaver();
@@ -121,8 +129,13 @@ public class Beaver : MonoBehaviour
     }
     public void DestroyBeaver()
     {
-        Destroy(gameObject, 1);
+        Destroy(gameObject,1);
     }
 
-   
+    public void OnNotify(StateDTO dto)
+    {
+        States state = dto._state;
+        if (state != States.Beaver)
+            DestroyBeaver();
+    }
 }

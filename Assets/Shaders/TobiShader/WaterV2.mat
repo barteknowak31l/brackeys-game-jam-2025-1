@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Foam_Texture:
-        m_Texture: {fileID: 2800000, guid: f2cd0b5165c4d8147b6a4c229a3228ab, type: 3}
+        m_Texture: {fileID: 2800000, guid: eeab54420b0b8fd58a01886a092674f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_63809531e0c441de8aae07cb1cc7da8b_Out_0_Texture2D:
@@ -58,7 +58,7 @@ Material:
     - _QueueOffset: 0
     - _Size: 2
     m_Colors:
-    - _Dark_Foam_Color: {r: 0.08553116, g: 0, b: 0.5376241, a: 1}
+    - _Dark_Foam_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Light_Foam_Color: {r: 0.55266356, g: 0.55266356, b: 0.55266356, a: 1}
     - _Water_Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

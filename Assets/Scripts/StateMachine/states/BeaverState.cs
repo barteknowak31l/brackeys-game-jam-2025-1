@@ -88,7 +88,7 @@ namespace StateMachine.states
             int pigCount = 0;
             while (pigCount < pigAmount)
             {
-                float pigSpawnDelay = _pigSpawnBaseTime * Random.Range(0.0f, _pigSpawnTimeRandomness);
+                float pigSpawnDelay = _pigSpawnBaseTime + Random.Range(0.0f, _pigSpawnTimeRandomness);
                 
                 if (pigPrefab != null && _playerTransform != null)
                 {

@@ -270,7 +270,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -287,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3bc06c8cebd6669ac435c801098bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyDelay: 3
 --- !u!4 &3042242553975976262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3f44cef5acd81aa0bb8e3c838a2aa7ab, type: 3}

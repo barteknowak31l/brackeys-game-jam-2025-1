@@ -2,7 +2,6 @@ using Observers;
 using StateMachine;
 using StateMachine.states;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 
 public class WallFollower : MonoBehaviour, IObserver<StateDTO>

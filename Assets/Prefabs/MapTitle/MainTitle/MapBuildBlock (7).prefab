@@ -2469,7 +2469,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPooler: {fileID: 0}
   transform: {fileID: 0}
-  isSpawned: 0
 --- !u!65 &8644590777147816830
 BoxCollider:
   m_ObjectHideFlags: 0

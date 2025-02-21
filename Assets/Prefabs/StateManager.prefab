@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980ee1530496a8fbb81f14c4e113ceff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDebugMode: 1
+  IsDebugMode: 0
   _defaultState: {fileID: 5079638188790003363}
   _windState: {fileID: 1887961440605467601}
   _anvilState: {fileID: 5477037608941483338}
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   beaverPrefab: {fileID: 1893391983549471899, guid: e4fe427c480ebab429951fabd8699ed7, type: 3}
-  _beaverSpawnDistance: 45
+  _beaverSpawnDistance: 35
   pigPrefab: {fileID: 3854740789552345405, guid: 22bf94059a597ef358669c1991e960f5, type: 3}
   portalPrefab: {fileID: 5569337670587186830, guid: c870f8a6cd3c5e644b77d4f38a5ae0a6, type: 3}
   pigAmount: 50

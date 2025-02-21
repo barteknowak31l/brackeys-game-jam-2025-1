@@ -656,4 +656,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
 
     }
+    public void OnWallEnter()
+    {
+        moveBackwardAction.Disable();
+    }
+    public void OnWallExit()
+    {
+        moveBackwardAction.Enable();
+    }
 }
+

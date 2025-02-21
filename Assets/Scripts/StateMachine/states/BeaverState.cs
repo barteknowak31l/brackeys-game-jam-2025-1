@@ -25,6 +25,21 @@ namespace StateMachine.states
         private Coroutine _spawnPigsCoroutine;
         private Beaver beaver;
 
+
+        // public static BeaverState Instance { get; private set; }
+        //
+        // private void Awake()
+        // {
+        //     if (Instance == null)
+        //     {
+        //         Instance = this;
+        //     }
+        //     else
+        //     {
+        //         Destroy(gameObject);
+        //     }
+        // }
+        
         public void EnterState(StateMachineManager ctx)
         {
 

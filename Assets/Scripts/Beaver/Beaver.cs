@@ -23,7 +23,9 @@ public class Beaver : MonoBehaviour
     public float beaverKickDuration = 5.0f;
     private Animator _animator;
     private ParticleSystem _particleSystem;
-    
+
+
+
     public void Start()
     {
         StartCoroutine(Timer());
@@ -113,7 +115,7 @@ public class Beaver : MonoBehaviour
         if (!_isMoving) 
         {
             _ctx.EndTime();
-            DestroyBeaver();
+            // DestroyBeaver();
         }
     }
     public void DestroyBeaver()

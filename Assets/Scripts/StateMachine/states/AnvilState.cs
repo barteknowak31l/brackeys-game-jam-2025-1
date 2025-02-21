@@ -1,6 +1,7 @@
 using System.Collections;
 using Observers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace StateMachine.states
@@ -8,6 +9,9 @@ namespace StateMachine.states
     public class AnvilState : Observable<AnvilDTO>, IBaseState
     {
         public string _playerTag;    
+        
+        [Header("Anvil")]
+        
         [SerializeField] private float _firstAnvilSpawnDelay = 1.0f;
         [SerializeField] private float _anvilSpawnTimeBase;
         [SerializeField] private float _anvilSpawnTimeOffset;
@@ -15,8 +19,14 @@ namespace StateMachine.states
         [SerializeField] private float _anvilSpawnPositionOffsetY;
         [SerializeField] private float _anvilDamage;
         [SerializeField] private float _anvilDamageVariant2;
-        [SerializeField] private float _pianoZOffset;
 
+        [Header("Piano")]
+        [SerializeField] private float _pianoZOffset;
+        
+        [Header("Common")]
+        [SerializeField] private float _fallSpeed;
+        [SerializeField] private float _fallDistance;
+        
         [Space]
         [SerializeField] private GameObject _anvilPrefab;
         [SerializeField] private GameObject _pianoPrefab;
@@ -77,7 +87,7 @@ namespace StateMachine.states
             
             
             var anvil = Instantiate(prefab, position, rotation).GetComponent<Anvil>();
-            anvil.Setup(this);
+            anvil.Setup(this, _variant, _fallSpeed, _fallDistance);
         }
     
 

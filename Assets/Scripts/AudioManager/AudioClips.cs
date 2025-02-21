@@ -15,5 +15,17 @@ namespace AudioManager
         Kick,
         PianoHit,
         PlayerFallIntoWater,
+        Cannon,
+        BeaverCut,
+        Beaver,
+        Pig,
+        UfoKidnapping,
+        BananaSlip,
+        Sharknado,
+        SharkHit,
+        FruitHit,
+        BeaverKickScream,
+        SprintSteps,
+        WalkingSteps,
     }
 }

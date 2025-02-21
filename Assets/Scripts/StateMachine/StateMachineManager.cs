@@ -12,6 +12,8 @@ namespace StateMachine
         
         private IBaseState _currentState;
         
+        public bool IsDebugMode;
+        
         [SerializeField] DefaultState _defaultState;
         [SerializeField] WindState _windState;
         [SerializeField] AnvilState _anvilState;
@@ -130,11 +132,17 @@ namespace StateMachine
         private void ForceNextState(Variant variant)
         {
             _currentState.ExitState(this);
+            _currentState = _defaultState;
+            _currentState.EnterState(this);
+            NotifyObservers(createDTO(_currentState));
+            _currentState.ExitState(this);
             iterator += 1;
             if(iterator >= states.Count) iterator = 0;
             _currentState = states[iterator];
             _currentState.SetVariant(variant);
             _currentState.EnterState(this);
+            NotifyObservers(createDTO(_currentState));
+
         }
         
     }

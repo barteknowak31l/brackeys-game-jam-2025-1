@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AudioManager;
 using Observers;
 using Observers.dto;
 using Shark;
@@ -67,6 +68,7 @@ namespace StateMachine.states
             // sharknados
             if (_variant == Variant.Second)
             {
+                StartSharknadoSound();   
                 for (int i = 0; i < _numberOfSharknados; i++)
                 {
                     var pos = playerPos 
@@ -87,10 +89,15 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
-            foreach (var sharknado in _instantiatedSharknados)
+            if (_variant == Variant.Second)
             {
-                sharknado.GetComponent<Sharknado.Sharknado>().PrepareToDestroy();
+                StopSharknadoSound();
+                foreach (var sharknado in _instantiatedSharknados)
+                {
+                    sharknado.GetComponent<Sharknado.Sharknado>().PrepareToDestroy();
+                }
             }
+            
             foreach (var sharkSpawner in _instantiatedSharkSpawners)
             {
                 Destroy(sharkSpawner);
@@ -123,6 +130,16 @@ namespace StateMachine.states
         }
 
 
+        private void StartSharknadoSound()
+        {
+            AudioManager.AudioManager.PlaySound(AudioClips.Sharknado);
+        }
+
+        private void StopSharknadoSound()
+        {
+            AudioManager.AudioManager.StopSound(AudioClips.Sharknado);
+        }
+        
     }
     
 }

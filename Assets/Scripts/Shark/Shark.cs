@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioManager;
 using StateMachine.states;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace Shark
 {
     public class Shark : MonoBehaviour
     {
-     private SharkState _ctx;
+        private AudioSource _audioSource;
+        private SharkState _ctx;
         
         public void Setup(SharkState ctx, Vector3 startPoint, Vector3 endPoint, float height, float duration, bool spawnLeft)
         {
@@ -18,6 +20,11 @@ namespace Shark
             }
             
             StartCoroutine(MoveAlongParabola(startPoint, endPoint, height, duration));
+
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioManager.PlaySound(AudioClips.SharkJump, _audioSource, 1.0f);
+
+
         }
         private IEnumerator MoveAlongParabola(Vector3 start, Vector3 end, float height, float time)
         {
@@ -53,6 +60,7 @@ namespace Shark
         {
             if (other.CompareTag("Player"))
             {
+                AudioManager.AudioManager.PlaySound(AudioClips.SharkHit, _audioSource, 1.0f);
                 _ctx.OnSharkHitPlayer();
             }
         }

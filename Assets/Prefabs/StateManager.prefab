@@ -98,15 +98,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTag: Player
-  _numberOfSharkSpawners: 5
+  _numberOfSharkSpawners: 7
   _sharkDuration: 2
   _sharkDurationRandomness: 0.7
   _sharkSpawnDelay: 5
   _sharkSpawnDelayRandomness: 2
-  _sharkHeight: 5
-  _sharkYOffset: -2
+  _sharkHeight: 7
+  _sharkYOffset: -5
   _numberOfSharknados: 5
-  _sharknadoSpeed: 2
+  _sharknadoSpeed: 1.5
   _sharknadoSpeedRandomness: 0.7
   _sideOffset: 7
   _frontOffsetBase: 6
@@ -249,8 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   _bananaCount: 7
-  _bananaOffsetBase: 5
-  _bananaOffsetRandomness: 3
+  _bananaOffsetBase: 4
+  _bananaOffsetRandomness: 2
   _bananaRotationX: 0
   _bananaPrefab: {fileID: 6023229418488684101, guid: 36eb003109614a64ba8ebfb76d689406, type: 3}
   _shipSpeed: 3
@@ -258,7 +258,7 @@ MonoBehaviour:
   _stopPositionOffset: 10
   _stationaryPhaseDuration: 5
   _stationaryPhaseDurationRandomness: 2
-  _shipStartPositionOffset: {x: -10, y: -4, z: -15}
+  _shipStartPositionOffset: {x: -10, y: -3, z: -4.5}
   _shipPrefab: {fileID: 157793829894124985, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
   _ship: {fileID: 2464080612223138036, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
 --- !u!1 &4162882145564319112
@@ -351,9 +351,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTag: Player
   _ufoPrefab: {fileID: 6273463545137389015, guid: 13f4d2dcb7ac13f4997bb707e8e32060, type: 3}
-  _ufoSpeed: 3
-  _startPositionOffset: 2
-  _stopPositionOffset: 10
+  _ufoSpeed: 6
+  _startPositionOffset: 5
+  _stopPositionOffset: 15
   _stationaryPhaseDuration: 6
   _stationaryPhaseDurationRandomness: 2
   _ufoStartPositionOffset: {x: -10, y: 13, z: -10}
@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980ee1530496a8fbb81f14c4e113ceff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDebugMode: 0
   _defaultState: {fileID: 5079638188790003363}
   _windState: {fileID: 1887961440605467601}
   _anvilState: {fileID: 5477037608941483338}
@@ -463,14 +464,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  _firstAnvilSpawnDelay: 1
-  _anvilSpawnTimeBase: 6
-  _anvilSpawnTimeOffset: 2
+  _firstAnvilSpawnDelay: 0.5
+  _anvilSpawnTimeBase: 3
+  _anvilSpawnTimeOffset: 1.5
   _anvilSpawnPositionOffsetXZ: 10
   _anvilSpawnPositionOffsetY: 30
   _anvilDamage: 1
   _anvilDamageVariant2: 2
   _pianoZOffset: 0
+  _fallSpeed: 3
+  _fallDistance: 7
   _anvilPrefab: {fileID: 2410525137869794300, guid: 7602b65f517565b9db1822288e7f1f9e, type: 3}
   _pianoPrefab: {fileID: 6019068984755545214, guid: 6e8f3fd4ef8ffe10ea3ae5dd3dbcd5ff, type: 3}
 --- !u!1 &6287924663733848714
@@ -518,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  _lightningCount: 5
+  _lightningCount: 6
   _lightningOffsetBase: 5
   _lightningOffsetRandomness: 2
   _lightningRotationY: 90
@@ -578,6 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3144286820473090949}
   - component: {fileID: 1887961440605467601}
+  - component: {fileID: 7850232403101920060}
   m_Layer: 0
   m_Name: WindState
   m_TagString: Untagged
@@ -619,6 +623,103 @@ MonoBehaviour:
   _windDirection: 1
   _windChangeTimer: 7
   _windChangeTimerVariant2: 4
+--- !u!82 &7850232403101920060
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424294297359587269}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9114110203441935493
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,8 +766,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   beaverPrefab: {fileID: 1893391983549471899, guid: e4fe427c480ebab429951fabd8699ed7, type: 3}
+  _beaverSpawnDistance: 35
   pigPrefab: {fileID: 3854740789552345405, guid: 22bf94059a597ef358669c1991e960f5, type: 3}
   portalPrefab: {fileID: 5569337670587186830, guid: c870f8a6cd3c5e644b77d4f38a5ae0a6, type: 3}
-  _beaverSpawnDistance: 10
-  _portalSpawnDistance: 20
-  pigAmount: 4
+  pigAmount: 50
+  _pigSpawnDistance: 15
+  _portalSpawnDistance: 55
+  _pigSpawnBaseTime: 3
+  _pigSpawnTimeRandomness: 2

@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioManager;
 using Observers;
 using Observers.dto;
 using UnityEngine;
@@ -6,6 +7,8 @@ using Random = UnityEngine.Random;
 
 namespace StateMachine.states
 {
+    
+    [RequireComponent(typeof(AudioSource))] 
     public class WindState : Observable<WindDTO>, IBaseState
     {
         [SerializeField] private Variant _variant;
@@ -18,9 +21,15 @@ namespace StateMachine.states
         [SerializeField] int _windDirection = 1; // 0 - left, 1 - right
         [SerializeField] private float _windChangeTimer = 7.0f;
         [SerializeField] private float _windChangeTimerVariant2 = 4.0f;
+        
+        private AudioSource _audioSource;
 
         public void EnterState(StateMachineManager ctx)
         {
+            _audioSource = GetComponent<AudioSource>();
+            
+            AudioManager.AudioManager.PlaySound(AudioClips.Wind, _audioSource, 1.0f);
+            
             StartCoroutine(UpdateWindCoroutine());
         
             WindDTO dto = new WindDTO()
@@ -40,6 +49,8 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
+            AudioManager.AudioManager.StopSound(AudioClips.Wind, _audioSource);
+
             StopAllCoroutines();
             WindDTO dto = new WindDTO()
                 .Enabled(false)

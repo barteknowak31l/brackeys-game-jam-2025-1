@@ -893,7 +893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _shipStartPositionOffset.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _shipStartPositionOffset.z

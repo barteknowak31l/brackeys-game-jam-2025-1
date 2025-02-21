@@ -11,8 +11,6 @@ public class Bird : MonoBehaviour
     public Vector3 direction = Vector3.back;
     
     private AudioSource _audioSource;
-    
-    
     private void Start()
     {
         Destroy(gameObject, _destroyDelay);

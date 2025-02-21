@@ -36,8 +36,7 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Entered UfoState variant: " + _variant.ToString());
-
+            Debug.Log("Enter UfoState");
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
             Vector3 ufoPosition = new Vector3(_playerTransform.position.x, _ufoStartPositionOffset.y, _playerTransform.position.z);
             _ufo = Instantiate(_ufoPrefab, ufoPosition, Quaternion.identity).GetComponent<Ufo>();
@@ -47,7 +46,7 @@ namespace StateMachine.states
             if (_variant == Variant.Second)
             {
                 _ufoCowDispenser =
-                    Instantiate(_ufoCowDispenserPrefab, ufoPosition + _playerTransform.forward * -10.0f,
+                    Instantiate(_ufoCowDispenserPrefab, _playerTransform.position + _playerTransform.forward * -10.0f,
                         Quaternion.identity).GetComponent<UfoCowDispenser>();
                 _ufoCowDispenser.Setup(this, _playerTransform, _ufoCowDispenserOffsetY, _cowPrefab);
                 

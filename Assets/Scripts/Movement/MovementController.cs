@@ -86,6 +86,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
+
+
+    [SerializeField] private ParticleSystem _explosionParticleSystem;
     
     void Awake()
     {
@@ -549,6 +552,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
             case States.StartState:
             {
                 ResetPlayer();
+                
                 break;
             }
 
@@ -556,6 +560,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
             {
                 rain.Stop();
                 rain.Clear();
+                StopExplosion();
                 break;
             }
             
@@ -655,6 +660,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(BirdDTO dto)
     {
+        if (dto._variant == Variant.Second)
+        {
+            StartExplosion();
+        }
+        
         if (dto._damage == 2)
         {
             InstantKill();
@@ -673,5 +683,17 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         moveBackwardAction.Enable();
     }
+
+    private void StartExplosion()
+    {
+        _explosionParticleSystem.Play();
+    }
+
+    private void StopExplosion()
+    {
+        _explosionParticleSystem.Stop();
+    }
+    
+    
 }
 

@@ -86,7 +86,8 @@ namespace StateMachine.states
         public void OnBirdHitPlayer()
         {
             var damage = _variant == Variant.First ? _birdDamage : _birdDamageVariant2;
-            BirdDTO birdDTO = new BirdDTO().Damage(damage);
+            BirdDTO birdDTO = new BirdDTO().Damage(damage)
+                .Variant(_variant);
             NotifyObservers(birdDTO);
         }
 

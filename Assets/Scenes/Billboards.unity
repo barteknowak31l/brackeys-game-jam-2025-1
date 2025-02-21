@@ -378,6 +378,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2143309084}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: birdState
+      value: 
+      objectReference: {fileID: 465845428}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: tiltArrow
       value: 
       objectReference: {fileID: 1573974541}
@@ -400,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: sharkState
       value: 
-      objectReference: {fileID: 2074153316}
+      objectReference: {fileID: 415102605}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: stormState
       value: 
@@ -1404,6 +1408,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 503837912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -165}
+--- !u!114 &465845428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 808668997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee101feb200ae49a581a14ac659fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &503837912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1482294602451547339, guid: 18073c8b5a439d74bae1b33467e701e3, type: 3}
@@ -2233,6 +2248,10 @@ PrefabInstance:
     - target: {fileID: 7629967845267230353, guid: 6bd6f6d412a017749b1407f39c90ed46, type: 3}
       propertyPath: m_Name
       value: MapBuildBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7629967845267230353, guid: 6bd6f6d412a017749b1407f39c90ed46, type: 3}
+      propertyPath: m_TagString
+      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 8958559235477384364, guid: 6bd6f6d412a017749b1407f39c90ed46, type: 3}
       propertyPath: messagesManager
@@ -3850,17 +3869,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072879518}
   m_CullTransparentMesh: 1
---- !u!114 &2074153316 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
-  m_PrefabInstance: {fileID: 808668997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6640b21b24f9bc6eab92c58f605a5ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2143309084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7894020682871508659, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}

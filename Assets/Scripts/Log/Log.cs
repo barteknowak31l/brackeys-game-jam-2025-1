@@ -34,9 +34,6 @@ namespace Log
             _rotateObject.startRotation = false;
             transform.rotation = _startRotation;   
             transform.localPosition = _startPosition;
-            
-            Debug.Log("OnEnable kloda");
-
         }
 
         private void OnDisable()
@@ -61,7 +58,6 @@ namespace Log
         {
             if (dto._state == States.StartState)
             {
-                Debug.Log("StateDTO kloda");
                 _rotateObject.startRotation = false;
                 transform.rotation = _startRotation;   
                 transform.localPosition = _startPosition;

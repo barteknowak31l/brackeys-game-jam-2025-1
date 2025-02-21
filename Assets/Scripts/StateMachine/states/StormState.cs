@@ -37,7 +37,8 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Entered Storm State");
+            Debug.Log("Entered StormState variant: " + _variant.ToString());
+
             _instantiatedLightnings = new List<GameObject>();
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 

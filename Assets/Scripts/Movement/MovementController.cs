@@ -1,3 +1,4 @@
+using AudioManager;
 using Observers;
 using Observers.dto;
 using StateMachine;
@@ -5,6 +6,7 @@ using StateMachine.states;
 using System.Collections;
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -66,6 +68,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isCrouching;
     private float randomTiltChange = 0f;
     private float tiltSpeedMultiplier = 1f;
+    public SmoothCameraSwitch cam;
 
     private Coroutine resetTiltCoroutine;
     private CapsuleCollider capsuleCollider;
@@ -78,11 +81,13 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private Coroutine ufoLiftCoroutine;
     private bool isBeingLifted = false;
     private Vector3 liftStartPosition;
+    private bool wasSprinting;
 
 
     public float randomTiltChangeMin = 0.8f;
     public float randomTiltChangeMax = 1.8f;
     public float sprintTiltMultiplier = 2f;
+    public AudioSource audioSource;
     [Header("Ufo stuff")]
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
@@ -128,10 +133,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         {
             //     InstantKill(); 
         }
-        HandleMovement();
-        HandleMouseLook();
-        HandleTilting();
-        UpdateTiltUI();
+        
+        if(SmoothCameraSwitch.currentCameraIndex == 0)
+        {
+
+        }
+        else
+        {
+            HandleMovement();
+            HandleMouseLook();
+            HandleTilting();
+            UpdateTiltUI();
+        }
 
     }
 
@@ -165,6 +178,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     
     void ResetPlayer()
     {
+        audioSource.enabled = true;
+
         isFalling = false;
         hasFallen = false;
         instantKill = false;
@@ -295,6 +310,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     void HandleTilting()
     {
+        Audio();
         if (!canTilt) return;
 
         randomTiltChange -= Time.deltaTime;
@@ -314,18 +330,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
             currentTilt -= tiltSpeed * Time.deltaTime * 50f;
         }
 
+
         if (isSprinting)
         {
-
+          
             currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * sprintTiltMultiplier * Time.deltaTime * 10f;
-
         }
         else
         {
+        
             currentTilt += targetTiltDirection * tiltSpeed * tiltMultiplier * tiltSpeedMultiplier * Time.deltaTime * 10f;
-
-
         }
+
         currentTilt = Mathf.Clamp(currentTilt, -maxTiltAngle, maxTiltAngle);
 
         Quaternion tiltRotation = Quaternion.Euler(0f, 0f, currentTilt);
@@ -338,7 +354,45 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         }
         if (hasFallen)
         {
+            audioSource.enabled = false;
+
             FallOver();
+        }
+    }
+    private void Audio()
+    {
+        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
+
+        if (isMoving && audioSource.enabled)
+        {
+
+            if (isSprinting)
+            {
+                if (!audioSource.isPlaying || wasSprinting == false)
+                {
+                    wasSprinting = true;
+                    audioSource.loop = true;
+                    AudioManager.AudioManager.PlaySound(AudioClips.SprintSteps, audioSource, 1);
+                }
+            }
+            else
+            {
+                if (!audioSource.isPlaying || wasSprinting == true)
+                {
+                    wasSprinting = false;
+                    audioSource.loop = true;
+                    AudioManager.AudioManager.PlaySound(AudioClips.WalkingSteps, audioSource, 1);
+                }
+            }
+        }
+        else
+        {
+
+            if (audioSource.isPlaying)
+            {
+
+                audioSource.Stop();
+            }
         }
     }
 
@@ -426,6 +480,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
     void InstantKill()
     {
+        audioSource.enabled = false ;
+
         instantKill = true;
         tiltSpeed *= 15f;
     }
@@ -529,8 +585,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(StateDTO dto)
     {
-
-        Debug.Log(" movement dto state: " +dto._state);
 
         switch (dto._state)
         {

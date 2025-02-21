@@ -14,8 +14,7 @@ namespace StateMachine.states
             Debug.Log("Entered DefaultState");
             _ctx = ctx;
             
-            if(!ctx.IsDebugMode)
-                    StartCoroutine(ChangeStateCoroutine());
+            StartCoroutine(ChangeStateCoroutine());
         }
 
         public void UpdateState(StateMachineManager ctx)

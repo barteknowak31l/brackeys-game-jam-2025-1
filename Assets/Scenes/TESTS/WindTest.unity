@@ -169,13 +169,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2088993917}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: birdState
+      value: 
+      objectReference: {fileID: 137353629}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: tiltArrow
       value: 
       objectReference: {fileID: 1650726441}
-    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
-      propertyPath: tiltSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: windState
       value: 
@@ -189,6 +189,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 303032764}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: sharkState
+      value: 
+      objectReference: {fileID: 710244328}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: stormState
       value: 
       objectReference: {fileID: 9070628}
@@ -196,17 +200,9 @@ PrefabInstance:
       propertyPath: beaverState
       value: 
       objectReference: {fileID: 1126616197}
-    - target: {fileID: 3362864783282080190, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
     - target: {fileID: 4836880426463935938, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: m_Name
       value: Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870327075720484449, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5218508351471380344, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1582,6 +1578,14 @@ PrefabInstance:
     - target: {fileID: 4800769069750617156, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477037608941483338, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _fallSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477037608941483338, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _fallDistance
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5937852388575250116, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_Name

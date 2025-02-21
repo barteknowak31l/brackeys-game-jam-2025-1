@@ -472,6 +472,8 @@ MonoBehaviour:
   _anvilDamage: 1
   _anvilDamageVariant2: 2
   _pianoZOffset: 0
+  _fallSpeed: 3
+  _fallDistance: 7
   _anvilPrefab: {fileID: 2410525137869794300, guid: 7602b65f517565b9db1822288e7f1f9e, type: 3}
   _pianoPrefab: {fileID: 6019068984755545214, guid: 6e8f3fd4ef8ffe10ea3ae5dd3dbcd5ff, type: 3}
 --- !u!1 &6287924663733848714
@@ -764,8 +766,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   beaverPrefab: {fileID: 1893391983549471899, guid: e4fe427c480ebab429951fabd8699ed7, type: 3}
+  _beaverSpawnDistance: 45
   pigPrefab: {fileID: 3854740789552345405, guid: 22bf94059a597ef358669c1991e960f5, type: 3}
   portalPrefab: {fileID: 5569337670587186830, guid: c870f8a6cd3c5e644b77d4f38a5ae0a6, type: 3}
-  _beaverSpawnDistance: 45
-  _portalSpawnDistance: 55
   pigAmount: 50
+  _pigSpawnDistance: 15
+  _portalSpawnDistance: 55
+  _pigSpawnBaseTime: 3
+  _pigSpawnTimeRandomness: 2

@@ -8,6 +8,7 @@ public class Bird : MonoBehaviour
     private BirdState _ctx;
 
     [SerializeField] private float _birdSpeed;
+    [SerializeField] private float _birdSpeedRandomer;
     public Vector3 direction = Vector3.back;
     
     private AudioSource _audioSource;
@@ -17,6 +18,7 @@ public class Bird : MonoBehaviour
         _audioSource = gameObject.AddComponent<AudioSource>();
         _audioSource.playOnAwake = false;
         _audioSource.loop = true;
+        _birdSpeed *= Random.Range(1f, _birdSpeedRandomer);
         
         AudioManager.AudioManager.PlaySound(AudioClips.BirdSound, _audioSource, 1.0f);
         

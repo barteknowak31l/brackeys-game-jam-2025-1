@@ -13,6 +13,7 @@ namespace StateMachine.states
         [SerializeField] float _lightningOffsetBase = 5.0f;
         [SerializeField] float _lightningOffsetRandomness = 2.0f;
         [SerializeField] float _lightningRotationY = 90.0f;
+        [SerializeField] float _lightingParticleSpawnYOffset = 0.604f;
         
         
         [Space]
@@ -20,6 +21,7 @@ namespace StateMachine.states
          
         private List<GameObject> _instantiatedLightnings;
         private Transform _playerTransform;
+
         
         private Variant _variant;
         
@@ -40,7 +42,7 @@ namespace StateMachine.states
             _instantiatedLightnings = new List<GameObject>();
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
-            Vector3 playerPos = _playerTransform.position;
+            Vector3 playerPos = new Vector3(_playerTransform.position.x, _lightingParticleSpawnYOffset, _playerTransform.position.z);
             // wylosuj x pozycji i utworz tam particle, dodaj je do listy
             for (int i = 0; i < _lightningCount; i++)
             {

@@ -26,6 +26,7 @@ namespace StateMachine.states
         [Header("Common")]
         [SerializeField] private float _fallSpeed;
         [SerializeField] private float _fallDistance;
+        [SerializeField] private float _spawnYOffset = 0.604f;
         
         [Space]
         [SerializeField] private GameObject _anvilPrefab;
@@ -70,7 +71,7 @@ namespace StateMachine.states
         private void SpawnAnvil()
         {
             // random position based on player pos
-            Vector3 position = _playerTransform.position + _playerTransform.forward * Random.Range(1.0f, _anvilSpawnPositionOffsetXZ);
+            Vector3 position = new Vector3(_playerTransform.position.x,_spawnYOffset,_playerTransform.position.z) + _playerTransform.forward * Random.Range(1.0f, _anvilSpawnPositionOffsetXZ);
             // move position up
             position.y += _anvilSpawnPositionOffsetY;
             

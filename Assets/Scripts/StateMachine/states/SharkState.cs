@@ -31,6 +31,7 @@ namespace StateMachine.states
         [SerializeField] private float _sideOffset = 5.0f;
         [SerializeField] float _frontOffsetBase = 10.0f;
         [SerializeField] float _frontOffsetBaseRandomness = 2.0f;
+        [SerializeField] float _logPositionY = 0.604f;
         
         [Space]
         [SerializeField] GameObject _sharkSpawnerPrefab;
@@ -52,7 +53,7 @@ namespace StateMachine.states
             _instantiatedSharkSpawners = new List<GameObject>();
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
 
-            Vector3 playerPos = _playerTransform.position;
+            Vector3 playerPos = new Vector3(_playerTransform.position.x, _logPositionY, _playerTransform.position.z);
 
             // shark spawners
             for (int i = 0; i < _numberOfSharkSpawners; i++)

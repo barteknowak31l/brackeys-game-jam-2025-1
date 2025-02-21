@@ -15,6 +15,7 @@ namespace StateMachine.states
         [SerializeField] float _bananaOffsetBase = 5.0f;
         [SerializeField] float _bananaOffsetRandomness = 2.0f;
         [SerializeField] float _bananaRotationX = 0;
+        [SerializeField] private float _bananaYPosition = 0.604f;
         [Space]
         [SerializeField] GameObject _bananaPrefab;         
         private List<GameObject> _instantiatedBanana;
@@ -33,6 +34,7 @@ namespace StateMachine.states
         private Vector3 _targetPosition;
         [SerializeField] private Ship _ship;
 
+
         private Transform _playerTransform;
         
         private Variant _variant;
@@ -45,13 +47,13 @@ namespace StateMachine.states
                 _instantiatedBanana = new List<GameObject>();
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
-                Vector3 playerPos = _playerTransform.position;
+                Vector3 playerPos = new Vector3(_playerTransform.position.x, _bananaYPosition, _playerTransform.position.z);
                 // wylosuj x pozycji i utworz tam particle, dodaj je do listy
                 for (int i = 0; i < _bananaCount; i++)
                 {
-                    var pos = playerPos
-                              + _playerTransform.forward * _bananaOffsetBase * (i + 1)
-                              + _playerTransform.forward * Random.Range(0, _bananaOffsetRandomness);
+                var pos = playerPos
+                          + _playerTransform.forward * _bananaOffsetBase * (i + 1)
+                          + _playerTransform.forward * Random.Range(0, _bananaOffsetRandomness);
                     var rot = Quaternion.Euler(_bananaRotationX, 0, 0);
                     GameObject banana = Instantiate(_bananaPrefab, pos, rot);
                     banana.GetComponent<Banana>().Setup(this);

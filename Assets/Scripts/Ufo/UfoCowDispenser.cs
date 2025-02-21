@@ -6,7 +6,8 @@ public class UfoCowDispenser : MonoBehaviour
 {
     public float _orbitRadius;
     public float _orbitSpeed;
-    public float _angle = 180.0f; 
+    public float _angle = 180.0f;
+    private float _ufoYOffset = 0.604f;
 
     public UfoState _ctx;
     public Transform _playerTransform;
@@ -16,6 +17,7 @@ public class UfoCowDispenser : MonoBehaviour
     public Transform _cowSpawnPoint;
     
     private AudioSource _audioSource;
+
     
     
     public void Setup(UfoState ctx, Transform playerTransform, float offsetY, GameObject cowPrefab)
@@ -24,7 +26,7 @@ public class UfoCowDispenser : MonoBehaviour
         _playerTransform = playerTransform;
         _orbitRadius = ctx.orbitRadius;
         _orbitSpeed = ctx.orbitSpeed;
-        transform.position = new Vector3(transform.position.x, transform.position.y + offsetY, transform.position.z);
+        transform.position = new Vector3(transform.position.x, _ufoYOffset + offsetY, transform.position.z);
         _cowPrefab = cowPrefab;
         _cow = null;
         SpawnCow();

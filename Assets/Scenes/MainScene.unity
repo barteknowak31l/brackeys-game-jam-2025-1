@@ -1122,6 +1122,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2321729046406771893, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a7a3e507c156fe438f4452f8c420869, type: 2}
     - target: {fileID: 2321729046406771894, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
       propertyPath: m_Name
       value: WaterBlock_50m

@@ -1,8 +1,13 @@
+using NUnit.Framework;
 using Observers;
 using StateMachine;
 using StateMachine.states;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace StateMachine.states
 {
@@ -19,16 +24,17 @@ namespace StateMachine.states
         [SerializeField] private float _birdSpawnTimeOffset;
         [SerializeField] private float _birdDamage;
         [SerializeField] private float _birdDamageVariant2;
+        [SerializeField] private int _birdCount;
+        [SerializeField] private float _birdYOffset = 1.5f;
 
         [Space]
         [SerializeField] private GameObject _littleBirdPrefab;
         [SerializeField] private GameObject _bigBirdPrefab;
 
+        private List<GameObject> _instantiatedBird;
+
         public void EnterState(StateMachineManager ctx)
         {
-            //var dto = new BirdDTO().Damage(10);
-            //NotifyObservers(dto);
-            Debug.Log("Wariant ptaka - " + _variant.ToString());
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
             StartCoroutine(SpawnBirdCoroutine());
         }
@@ -61,26 +67,25 @@ namespace StateMachine.states
 
         private void SpawnBird()
         {
-
-            Vector3 position = _playerTransform.position + _playerTransform.forward * _birdSpawnDistance;
+            _birdSpawnDistance *= Random.Range(0.9f, 1.1f);
+            Vector3 position = new Vector3(_playerTransform.position.x, _birdYOffset, _playerTransform.position.z) + _playerTransform.forward * _birdSpawnDistance;
 
             float side = Random.Range(0, 2) == 0 ? -1f : 1f;
             position += _playerTransform.right * side * _birdSideOffset;
-
-            var prefab = _variant == Variant.First ? _littleBirdPrefab : _bigBirdPrefab;
-            var rotation = Quaternion.Euler(0, 0, 0);
-            if (side == -1f)
+            for (int i = 0; i < _birdCount; i++)
             {
-                rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                rotation = Quaternion.Euler(0, 180, 0);
-            }
 
 
-            var bird = Instantiate(prefab, position, rotation).GetComponent<Bird>();
-            bird.Setup(this);
+                var prefab = _variant == Variant.First ? _littleBirdPrefab : _bigBirdPrefab;
+
+                var rotation = side == -1f ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);
+
+
+
+                GameObject bird = Instantiate(prefab, position, rotation);
+                bird.GetComponent<Bird>().Setup(this);
+            }
+
         }
 
         public void OnBirdHitPlayer()

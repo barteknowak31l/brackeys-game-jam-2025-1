@@ -329,10 +329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18047f660a106f4dad5fceb25caa4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyDelay: 5
-  _birdSpeed: 2
+  _destroyDelay: 2
+  _birdSpeed: 5
   direction: {x: 0, y: 0, z: -1}
-  _explosion: {fileID: 6280150413201585988, guid: 812e838beaee18a938f1a94c5da8bcf5, type: 3}
 --- !u!65 &5480742583866254210
 BoxCollider:
   m_ObjectHideFlags: 0

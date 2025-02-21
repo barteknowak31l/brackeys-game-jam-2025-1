@@ -67,6 +67,7 @@ public class Beaver : MonoBehaviour
             _isMoving = true;
             StopCoroutine(Timer());
             StartCoroutine(MoveRightAndDestroy());
+
         }
     }
 
@@ -101,8 +102,8 @@ public class Beaver : MonoBehaviour
         }
         yield return new WaitForSeconds(5f);
 
-        transform.position = targetPosition; 
-        Destroy(gameObject); 
+        transform.position = targetPosition;
+        DestroyBeaver();
     }
     public void Setup(BeaverState ctx)
     {
@@ -115,7 +116,7 @@ public class Beaver : MonoBehaviour
         if (!_isMoving) 
         {
             _ctx.EndTime();
-            // DestroyBeaver();
+            DestroyBeaver();
         }
     }
     public void DestroyBeaver()

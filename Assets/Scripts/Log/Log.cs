@@ -29,6 +29,7 @@ namespace Log
             _rb = GetComponent<Rigidbody>();
             _rotateObject = GetComponent<RotateObject>();
             StateMachineManager.instance.AddObserver(this);
+            _rb.isKinematic = true;
             _rb.useGravity = false;
             _rotateObject.startRotation = false;
             transform.rotation = _startRotation;   
@@ -50,6 +51,7 @@ namespace Log
         {
             if (dto._endTime)
             {
+                _rb.isKinematic = false;
                 _rb.useGravity = true;
                 _rotateObject.startRotation = true;
             }

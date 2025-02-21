@@ -2620,6 +2620,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6669962188187195481}
     m_Modifications:
+    - target: {fileID: 633947722014337829, guid: 7160faf6586c37d86b7932cb0903135f, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 1134340826556786568, guid: 7160faf6586c37d86b7932cb0903135f, type: 3}
       propertyPath: m_Name
       value: Log

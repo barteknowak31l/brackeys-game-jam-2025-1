@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980ee1530496a8fbb81f14c4e113ceff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDebugMode: 1
   _defaultState: {fileID: 5079638188790003363}
   _windState: {fileID: 1887961440605467601}
   _anvilState: {fileID: 5477037608941483338}

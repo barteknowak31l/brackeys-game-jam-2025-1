@@ -527,7 +527,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     public void OnNotify(StateDTO dto)
     {
 
-
+        Debug.Log(" movement dto state: " +dto._state);
 
         switch (dto._state)
         {
@@ -551,6 +551,15 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
                 ResetPlayer();
                 break;
             }
+
+            case States.Default:
+            {
+                rain.Stop();
+                rain.Clear();
+                break;
+            }
+            
+            
         }
         
     }

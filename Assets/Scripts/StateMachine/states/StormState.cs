@@ -35,6 +35,7 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered Storm State");
             _instantiatedLightnings = new List<GameObject>();
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
@@ -64,6 +65,7 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {
+            Debug.Log("Exit Storm State");
             StopRainSound();
             foreach (var lightning in _instantiatedLightnings)
             {

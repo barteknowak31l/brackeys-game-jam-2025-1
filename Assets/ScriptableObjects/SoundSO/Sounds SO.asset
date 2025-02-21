@@ -27,7 +27,9 @@ MonoBehaviour:
     volume: 1
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
     sounds:
-    - {fileID: 8300000, guid: b6a2b63815db7b7c9bf60ddde927ca7f, type: 3}
+    - {fileID: 8300000, guid: dd10827f468189061a1e9ea223a76b89, type: 3}
+    - {fileID: 8300000, guid: 016a72f28a0ccdf8b9edf5ae8ce4311c, type: 3}
+    - {fileID: 8300000, guid: cd76613d69426aabf989f1eaa96e125f, type: 3}
   - name: Wind
     volume: 1
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
@@ -131,8 +133,10 @@ MonoBehaviour:
   - name: SprintSteps
     volume: 1
     mixer: {fileID: 0}
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 130f07fbf1ba471339bd4dc18f2c04cc, type: 3}
   - name: WalkingSteps
     volume: 1
     mixer: {fileID: 0}
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 2332a8fe5c80ae599bd54ac233fd9f05, type: 3}

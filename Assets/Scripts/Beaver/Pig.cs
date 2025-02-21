@@ -1,3 +1,4 @@
+using System;
 using AudioManager;
 using StateMachine.states;
 using UnityEngine;
@@ -45,5 +46,8 @@ public class Pig : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
+    private void OnDestroy()
+    {
+        _ctx.RemovePigFromList(this);
+    }
 }

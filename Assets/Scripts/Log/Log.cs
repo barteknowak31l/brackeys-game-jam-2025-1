@@ -58,7 +58,6 @@ namespace Log
         {
             if (dto._state == States.StartState)
             {
-                Debug.Log("StateDTO kloda");
                 _rotateObject.startRotation = false;
                 transform.rotation = _startRotation;   
                 transform.localPosition = _startPosition;

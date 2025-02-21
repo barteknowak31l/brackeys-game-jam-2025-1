@@ -464,16 +464,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  _firstAnvilSpawnDelay: 0.5
-  _anvilSpawnTimeBase: 3
+  _firstAnvilSpawnDelay: 1
+  _anvilSpawnTimeBase: 6
   _anvilSpawnTimeOffset: 1.5
-  _anvilSpawnPositionOffsetXZ: 10
+  _anvilSpawnPositionOffsetXZ: 15
   _anvilSpawnPositionOffsetY: 30
   _anvilDamage: 1
   _anvilDamageVariant2: 2
-  _pianoZOffset: 0
-  _fallSpeed: 3
-  _fallDistance: 7
+  _pianoZOffset: 0.9
+  _fallSpeed: 15
+  _fallDistance: 100
   _anvilPrefab: {fileID: 2410525137869794300, guid: 7602b65f517565b9db1822288e7f1f9e, type: 3}
   _pianoPrefab: {fileID: 6019068984755545214, guid: 6e8f3fd4ef8ffe10ea3ae5dd3dbcd5ff, type: 3}
 --- !u!1 &6287924663733848714

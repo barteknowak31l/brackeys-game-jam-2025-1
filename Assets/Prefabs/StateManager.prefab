@@ -258,7 +258,7 @@ MonoBehaviour:
   _stopPositionOffset: 10
   _stationaryPhaseDuration: 5
   _stationaryPhaseDurationRandomness: 2
-  _shipStartPositionOffset: {x: -10, y: -3, z: -4.5}
+  _shipStartPositionOffset: {x: -10, y: -2, z: -4.5}
   _shipPrefab: {fileID: 157793829894124985, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
   _ship: {fileID: 2464080612223138036, guid: b7666a33a860fb14f948069a0cb4ace2, type: 3}
 --- !u!1 &4162882145564319112

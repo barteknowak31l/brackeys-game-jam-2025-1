@@ -50,17 +50,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Choppiness: 0.35
-    - _Flow_Speed: 0.01
-    - _Flow_Strenght: 0
-    - _Foam_DIstance: 0
+    - _Choppiness: 0.4
+    - _Flow_Speed: 0.005
+    - _Flow_Strenght: 0.1
+    - _Foam_DIstance: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Size: 2
     m_Colors:
-    - _Dark_Foam_Color: {r: 0.03529412, g: 0.007843138, b: 0.18039218, a: 1}
-    - _Light_Foam_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Water_Color: {r: 0.02352941, g: 0.19607836, b: 0.4705882, a: 1}
+    - _Dark_Foam_Color: {r: 0.08553116, g: 0, b: 0.5376241, a: 1}
+    - _Light_Foam_Color: {r: 0.55266356, g: 0.55266356, b: 0.55266356, a: 1}
+    - _Water_Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &493804262235886016

@@ -426,8 +426,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
     void InstantKill()
     {
-        instantKill = true;
-        tiltSpeed *= 15f;
+        // instantKill = true;
+        // tiltSpeed *= 15f;
     }
 
     private void OnTriggerExit(Collider other)
@@ -529,8 +529,6 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
 
     public void OnNotify(StateDTO dto)
     {
-
-        Debug.Log(" movement dto state: " +dto._state);
 
         switch (dto._state)
         {

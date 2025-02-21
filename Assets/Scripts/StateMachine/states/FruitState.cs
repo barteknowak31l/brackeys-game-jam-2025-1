@@ -40,6 +40,7 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered FruitState variant: " + _variant.ToString());
 
                 _instantiatedBanana = new List<GameObject>();
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;

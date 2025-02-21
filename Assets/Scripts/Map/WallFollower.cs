@@ -42,11 +42,9 @@ public class WallFollower : MonoBehaviour, IObserver<StateDTO>
     }
     public void OnNotify(StateDTO dto)
     {
-        Debug.Log("Dostaje wiadomoœæ");
         States state = dto._state;
         if (state == States.StartState)
         {
-            Debug.Log("Dzia³a State");
             ResetPosition();
         }
     }
@@ -55,6 +53,5 @@ public class WallFollower : MonoBehaviour, IObserver<StateDTO>
         float playerY = _player.position.y;
         maxDistance = -9.495f;
         transform.position = new Vector3(maxDistance, playerY, transform.position.z);
-        Debug.Log("Dzia³a reset");
     }
 }

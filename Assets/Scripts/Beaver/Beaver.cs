@@ -95,7 +95,12 @@ public class Beaver : MonoBehaviour
         if (!_isMoving) 
         {
             _ctx.EndTime();
+            DestroyBeaver();
         }
+    }
+    public void DestroyBeaver()
+    {
+        Destroy(gameObject, 1);
     }
 
    

@@ -1085,6 +1085,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 383691931}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: birdState
+      value: 
+      objectReference: {fileID: 1697207983}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: tiltArrow
       value: 
       objectReference: {fileID: 864275065}
@@ -1464,6 +1468,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8209888925423351109, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
   m_PrefabInstance: {fileID: 438838922}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1697207983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7644304328137147912, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+  m_PrefabInstance: {fileID: 1035387438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee101feb200ae49a581a14ac659fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1818026003
 GameObject:
   m_ObjectHideFlags: 0

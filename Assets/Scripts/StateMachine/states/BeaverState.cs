@@ -23,6 +23,7 @@ namespace StateMachine.states
         private GameObject _portal;
         public int pigAmount = 0;
         private Coroutine _spawnPigsCoroutine;
+        private Beaver beaver;
 
         public void EnterState(StateMachineManager ctx)
         {
@@ -34,7 +35,7 @@ namespace StateMachine.states
                 if (beaverPrefab != null && _playerTransform != null)
                 {
                     Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _beaverSpawnDistance, 0.605f, _playerTransform.position.z);
-                    var beaver = Instantiate(beaverPrefab, spawnPosition, Quaternion.identity).GetComponent<Beaver>();
+                    beaver = Instantiate(beaverPrefab, spawnPosition, Quaternion.identity).GetComponent<Beaver>();
 
                     beaver.Setup(this);
 
@@ -44,7 +45,7 @@ namespace StateMachine.states
             {
                 if (portalPrefab != null && _playerTransform != null)
                 {
-                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance , 0.405f, _playerTransform.position.z);
+                    Vector3 spawnPosition = new Vector3(_playerTransform.position.x + _portalSpawnDistance, 0.405f, _playerTransform.position.z);
                     _portal = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
 
 
@@ -63,7 +64,7 @@ namespace StateMachine.states
             yield return new WaitForSeconds(2f);
 
             int pigCount = 0;
-            while (pigCount < pigAmount) 
+            while (pigCount < pigAmount)
             {
                 if (pigPrefab != null && _playerTransform != null)
                 {
@@ -73,21 +74,25 @@ namespace StateMachine.states
                     var pig = Instantiate(pigPrefab, spawnPosition, Quaternion.identity).GetComponent<Pig>();
                     pig.Setup(this);
                 }
-
+                
                 pigCount++;
-                yield return new WaitForSeconds(3f); 
+                yield return new WaitForSeconds(3f);
             }
         }
 
 
         public void ExitState(StateMachineManager ctx)
-        {
-          if(_variant== Variant.Second)
+        {   
+            if (_variant == Variant.First)
+            {
+                beaver.DestroyBeaver();
+            }
+            if (_variant == Variant.Second)
             {
                 if (_spawnPigsCoroutine != null)
                 {
                     StopCoroutine(_spawnPigsCoroutine);
-                    _spawnPigsCoroutine = null; 
+                    _spawnPigsCoroutine = null;
                 }
                 Animator portalAnimator = _portal.GetComponentInChildren<Animator>();
                 if (portalAnimator != null)
@@ -95,7 +100,7 @@ namespace StateMachine.states
                     portalAnimator.SetTrigger("Destroy");
                 }
 
-                 Destroy(_portal,1f);
+                Destroy(_portal, 1f);
 
             }
 
@@ -125,11 +130,11 @@ namespace StateMachine.states
 
         public void EndTime()
         {
-           
-                BeaverDTO beaverDTO = new BeaverDTO().EndTime(true);
-                NotifyObservers(beaverDTO);
-            
-            
+
+            BeaverDTO beaverDTO = new BeaverDTO().EndTime(true);
+            NotifyObservers(beaverDTO);
+
+
         }
 
         public void OnPlayerCollisionChange(bool playerInCollider)
@@ -137,8 +142,8 @@ namespace StateMachine.states
             BeaverDTO beaverDto = new BeaverDTO().PlayerInCollider(playerInCollider);
             NotifyObservers(beaverDto);
         }
-        
-        
+
+
 
 
     }

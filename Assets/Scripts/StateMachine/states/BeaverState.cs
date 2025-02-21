@@ -83,12 +83,12 @@ namespace StateMachine.states
         }
         private IEnumerator SpawnPigs()
         {
-            yield return new WaitForSeconds(_pigSpawnBaseTime);
+           yield return new WaitForSeconds(_pigSpawnBaseTime);
 
             int pigCount = 0;
             while (pigCount < pigAmount)
             {
-                float pigSpawnDelay = _pigSpawnBaseTime + Random.Range(0.0f, _pigSpawnTimeRandomness);
+                float pigSpawnDelay = _pigSpawnBaseTime * Random.Range(0.0f, _pigSpawnTimeRandomness);
                 
                 if (pigPrefab != null && _playerTransform != null)
                 {

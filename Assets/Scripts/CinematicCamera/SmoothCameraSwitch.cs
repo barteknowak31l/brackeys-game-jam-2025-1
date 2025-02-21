@@ -5,9 +5,9 @@ public class SmoothCameraSwitch : MonoBehaviour
 {
     public Camera[] cameras; // Lista kamer
     public float transitionTime = 1.0f; // Czas przejœcia
-    private int currentCameraIndex = 0;
-    private bool isSwitching = false;
-    private bool hasSwitched = false; // Flaga blokuj¹ca kolejn¹ zmianê
+    public static int currentCameraIndex = 0;
+    private bool _isSwitching = false;
+    private bool _hasSwitched = false; // Flaga blokuj¹ca kolejn¹ zmianê
 
     private Vector3[] originalPositions;
     private Quaternion[] originalRotations;
@@ -28,17 +28,17 @@ public class SmoothCameraSwitch : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) && !isSwitching) // Prze³¹czanie kamery na spacjê
+        if (Input.GetKeyDown(KeyCode.J) && !_isSwitching && !_hasSwitched) // Prze³¹czanie kamery na spacjê
         {
             int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
             StartCoroutine(SwitchCamera(nextCameraIndex));
-            hasSwitched = true;
+            _hasSwitched = true;
         }
     }
 
     IEnumerator SwitchCamera(int newIndex)
     {
-        isSwitching = true;
+        _isSwitching = true;
         Camera currentCamera = cameras[currentCameraIndex];
         Camera nextCamera = cameras[newIndex];
 
@@ -63,6 +63,6 @@ public class SmoothCameraSwitch : MonoBehaviour
 
         currentCamera.enabled = false;
         currentCameraIndex = newIndex;
-        isSwitching = false;
+        _isSwitching = false;
     }
 }

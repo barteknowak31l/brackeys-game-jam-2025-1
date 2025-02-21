@@ -68,6 +68,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private bool isCrouching;
     private float randomTiltChange = 0f;
     private float tiltSpeedMultiplier = 1f;
+    public SmoothCameraSwitch cam;
 
     private Coroutine resetTiltCoroutine;
     private CapsuleCollider capsuleCollider;
@@ -132,10 +133,18 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         {
             //     InstantKill(); 
         }
-        HandleMovement();
-        HandleMouseLook();
-        HandleTilting();
-        UpdateTiltUI();
+        
+        if(SmoothCameraSwitch.currentCameraIndex == 0)
+        {
+
+        }
+        else
+        {
+            HandleMovement();
+            HandleMouseLook();
+            HandleTilting();
+            UpdateTiltUI();
+        }
 
     }
 
@@ -354,7 +363,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     {
         bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
 
-        if (isMoving)
+        if (isMoving && audioSource.enabled)
         {
 
             if (isSprinting)

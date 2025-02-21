@@ -42,8 +42,9 @@ public class Pig : MonoBehaviour
         if (other.gameObject.CompareTag(_ctx._playerTag))
         {
             _ctx.EndTime();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+  
     }
 
     private void OnDestroy()

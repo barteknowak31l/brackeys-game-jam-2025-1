@@ -31,23 +31,11 @@ namespace StateMachine.states
 
         private List<Pig> _pigs;
 
-
-        // public static BeaverState Instance { get; private set; }
-        //
-        // private void Awake()
-        // {
-        //     if (Instance == null)
-        //     {
-        //         Instance = this;
-        //     }
-        //     else
-        //     {
-        //         Destroy(gameObject);
-        //     }
-        // }
         
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered BeaverState variant: " + _variant.ToString());
+
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 
             if (_variant == Variant.First)
@@ -83,12 +71,12 @@ namespace StateMachine.states
         }
         private IEnumerator SpawnPigs()
         {
-            yield return new WaitForSeconds(_pigSpawnBaseTime);
+           yield return new WaitForSeconds(_pigSpawnBaseTime);
 
             int pigCount = 0;
             while (pigCount < pigAmount)
             {
-                float pigSpawnDelay = _pigSpawnBaseTime * Random.Range(0.0f, _pigSpawnTimeRandomness);
+                float pigSpawnDelay = _pigSpawnBaseTime + Random.Range(0.0f, _pigSpawnTimeRandomness);
                 
                 if (pigPrefab != null && _playerTransform != null)
                 {
@@ -106,10 +94,6 @@ namespace StateMachine.states
 
         public void ExitState(StateMachineManager ctx)
         {   
-            if (_variant == Variant.First)
-            {
-                beaver.DestroyBeaver();
-            }
             if (_variant == Variant.Second)
             {
                 if (_spawnPigsCoroutine != null)

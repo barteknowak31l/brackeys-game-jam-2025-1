@@ -5,7 +5,7 @@ namespace StateMachine.states
 {
     public class StartState : Observable<StartDTO>, IBaseState
     {
-        private Variant _variant;
+        private Variant _variant = Variant.First;
 
         [SerializeField] string _playerTag;
         [SerializeField] GameObject _playerObject;
@@ -13,6 +13,8 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
+            Debug.Log("Entered StartState variant: " + _variant.ToString());
+
             _playerObject = GameObject.FindGameObjectWithTag(_playerTag);
             SetupPlayerObject();
         }

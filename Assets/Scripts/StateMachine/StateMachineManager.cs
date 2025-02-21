@@ -102,8 +102,8 @@ namespace StateMachine
             InitQueue();
             if (_currentState != null) _currentState.ExitState(this);
             _currentState = _startState;
-            _currentState.EnterState(this);
             NotifyObservers(createDTO(_currentState));
+            _currentState.EnterState(this);
         }
         
         private StateDTO createDTO(IBaseState state, bool isDefault = false)
@@ -131,15 +131,19 @@ namespace StateMachine
         private int iterator = 0;
         private void ForceNextState(Variant variant)
         {
-            _currentState.ExitState(this);
-            _currentState = _defaultState;
-            _currentState.EnterState(this);
-            NotifyObservers(createDTO(_currentState));
-            _currentState.ExitState(this);
             iterator += 1;
             if(iterator >= states.Count) iterator = 0;
+            
+            _currentState.ExitState(this);
+            _currentState = _defaultState;
+
+            // simulate default state
+            NotifyObservers(createDTO(states[iterator].SetVariant(variant), true)); // send next state from default
+            _currentState.EnterState(this);
+            _currentState.ExitState(this);
+            
+            // set next state
             _currentState = states[iterator];
-            _currentState.SetVariant(variant);
             _currentState.EnterState(this);
             NotifyObservers(createDTO(_currentState));
 

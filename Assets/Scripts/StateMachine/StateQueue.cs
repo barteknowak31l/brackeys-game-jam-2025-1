@@ -26,6 +26,8 @@ namespace StateMachine
           _variant = Variant.First; 
           CreateUnvisitedStates();
 
+          _stateCounter = 0;
+
           // get 3 states ahead
           AddRandomState();
           AddRandomState();
@@ -72,7 +74,7 @@ namespace StateMachine
 
         public IBaseState Peek()
         {
-            return _queue.Peek();
+            return _queue.Peek().SetVariant(_variant);
         }
         
     }

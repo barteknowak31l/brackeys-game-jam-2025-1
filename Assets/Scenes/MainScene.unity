@@ -905,7 +905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7084071354685950582, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: IsDebugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1122,6 +1122,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2321729046406771893, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a7a3e507c156fe438f4452f8c420869, type: 2}
     - target: {fileID: 2321729046406771894, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
       propertyPath: m_Name
       value: WaterBlock_50m
@@ -1291,6 +1295,10 @@ PrefabInstance:
       propertyPath: tiltArrow
       value: 
       objectReference: {fileID: 864275065}
+    - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
+      propertyPath: tiltSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746772843946554183, guid: 87e9c8b4990f2f34ebcbd10204b7246e, type: 3}
       propertyPath: windState
       value: 

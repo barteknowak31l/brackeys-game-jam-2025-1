@@ -109,9 +109,9 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         jumpAction = playerInput.actions["Jump"];
         crouchAction = playerInput.actions["Crouch"];
         kickAction = playerInput.actions["Kick"];
-        crouchAction.performed += _ => ToggleCrouch();
         kickAction.performed += _ => Kick();
-
+        crouchAction.started += _ => StartCrouch();
+        crouchAction.canceled += _ => StopCrouch();
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -196,27 +196,28 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
 
 
-    void ToggleCrouch()
+    void StartCrouch()
     {
         if (!isGrounded) return;
-        if (isCrouching)
-        {
-            isCrouching = false;
-            animator.SetBool("Crouch", false);
-            capsuleCollider.height = originalColliderHeight;
-            capsuleCollider.center = originalColliderCenter;
-            StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
-        }
-        else
-        {
-            isCrouching = true;
-            animator.SetBool("Crouch", true);
-            capsuleCollider.height = originalColliderHeight / 2f;
 
-            capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
+        isCrouching = true;
+        animator.SetBool("Crouch", true);
+        capsuleCollider.height = originalColliderHeight / 2f;
+        capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
 
-            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
-        }
+        StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
+    }
+
+    void StopCrouch()
+    {
+        if (!isCrouching) return;
+
+        isCrouching = false;
+        animator.SetBool("Crouch", false);
+        capsuleCollider.height = originalColliderHeight;
+        capsuleCollider.center = originalColliderCenter;
+
+        StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
     }
     void Kick()
     {
@@ -361,7 +362,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
     private void Audio()
     {
-        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
+        bool isMoving = moveForwardAction.ReadValue<float>() > 0 || moveBackwardAction.ReadValue<float>() > 0;
 
         if (isMoving && audioSource.enabled)
         {

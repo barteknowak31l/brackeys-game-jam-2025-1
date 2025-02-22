@@ -12,6 +12,7 @@ namespace StateMachine.states
         PlayerDeath,
         Bird,
         SharkState,
-        StartState
+        StartState,
+        MainMenuState,
     }
 }

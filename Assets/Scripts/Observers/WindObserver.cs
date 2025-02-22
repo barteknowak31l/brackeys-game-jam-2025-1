@@ -44,27 +44,37 @@ namespace Observers
         
         public void OnNotify(WindDTO dto)
         {
-            Debug.Log("received WindDTO: " +  + dto._speed + " " + dto._direction);
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("received WindDTO: " +  + dto._speed + " " + dto._direction);
+
         }
 
         public void OnNotify(AnvilDTO dto)
         {
-            Debug.Log("received AnvilDTO: " + dto._damage);
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("received AnvilDTO: " + dto._damage);
+
         }
 
         public void OnNotify(StateDTO dto)
         {
-            Debug.Log("received StateDTO: " + dto._state + " " + dto._isDefault);
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("received StateDTO: " + dto._state + " " + dto._isDefault);
+
         }
         
         public void OnNotify(StormDTO dto)
         {
-            Debug.Log("Lightning has struck player");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Lightning has struck player");
+
         }
 
         public void OnNotify(UfoDTO dto)
         {
-            Debug.Log($"UFO!!! player in beam: {dto._playerInBeam}, cow hit: {dto._cowHit}");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log($"UFO!!! player in beam: {dto._playerInBeam}, cow hit: {dto._cowHit}");
+
         }
 
         public void OnNotify(PlayerDeathDTO dto)
@@ -73,12 +83,16 @@ namespace Observers
            
         public void OnNotify(BirdDTO dto)
         {
-            Debug.Log(dto._damage + "Bird!!!");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log(dto._damage + "Bird!!!");
+
         }
 
         public void OnNotify(SharkDTO dto)
         {
-            Debug.unityLogger.Log("Got SharkDTO");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.unityLogger.Log("Got SharkDTO");
+
         }
     }
 }

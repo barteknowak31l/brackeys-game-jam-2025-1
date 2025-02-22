@@ -197,12 +197,16 @@ MonoBehaviour:
   - {fileID: 24100000, guid: bddd92f9387d68a29a03e563f6441c28, type: 2}
   - {fileID: 24100000, guid: 867fc92f2a14e33ae9ba0429d9bc6cee, type: 2}
   - {fileID: 24100000, guid: 4a0047f92629c6dfa8e1a655c49c655e, type: 2}
+  - {fileID: 24100000, guid: 31322fd4789a36cb2bf5670e6c4078e2, type: 2}
+  - {fileID: 24100000, guid: 07ed04fc624e725e1992a58557cc9f95, type: 2}
   volumeParameters:
   - MainVolume
   - FruitVolume
   - StepsVolume
   - ThunderVolume
   - UfoVolume
+  - SharkHitVolume
+  - MusicVolume
   volumeSlider: {fileID: 4479650988407378059}
 --- !u!1 &7095278487030318951
 GameObject:

@@ -1,72 +1,85 @@
 using System.Collections;
+using Observers;
+using Observers.dto;
+using StateMachine;
+using StateMachine.states;
 using UnityEngine;
 
-public class SmoothCameraSwitch : MonoBehaviour
+namespace CinematicCamera
 {
-    public Camera[] cameras; // Lista kamer
-    public GameObject menuCanvas;
-    public GameObject tiltBarCanvas;
-    public float transitionTime = 1.0f; // Czas przejœcia
-    public static int currentCameraIndex = 0;
-    private bool _isSwitching = false;
-    private bool _hasSwitched = false; // Flaga blokuj¹ca kolejn¹ zmianê
-
-    private Vector3[] originalPositions;
-    private Quaternion[] originalRotations;
-
-    void Start()
+    public class SmoothCameraSwitch : Observable<MainMenuDTO>
     {
-        // Zapamiêtaj pocz¹tkowe pozycje i rotacje kamer
-        originalPositions = new Vector3[cameras.Length];
-        originalRotations = new Quaternion[cameras.Length];
+        public Camera[] cameras; // Lista kamer
+        public GameObject menuCanvas;
+        public GameObject tiltBarCanvas;
+        public float transitionTime = 1.0f; // Czas przejï¿½cia
+        public static int currentCameraIndex = 0;
+        public KeyCode switchKey = KeyCode.J;
+        private bool _isSwitching = false;
+        private bool _hasSwitched = false; // Flaga blokujï¿½ca kolejnï¿½ zmianï¿½
 
-        for (int i = 0; i < cameras.Length; i++)
+        private Vector3[] originalPositions;
+        private Quaternion[] originalRotations;
+
+        void Start()
         {
-            originalPositions[i] = cameras[i].transform.position;
-            originalRotations[i] = cameras[i].transform.rotation;
-            cameras[i].enabled = (i == currentCameraIndex);
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J) && !_isSwitching && !_hasSwitched) // Prze³¹czanie kamery na spacjê
-        {
-            int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
-            StartCoroutine(SwitchCamera(nextCameraIndex));
-            _hasSwitched = true;
-            menuCanvas.SetActive(false);
-            tiltBarCanvas.SetActive(true);
-        }
-    }
-
-    IEnumerator SwitchCamera(int newIndex)
-    {
-        _isSwitching = true;
-        Camera currentCamera = cameras[currentCameraIndex];
-        Camera nextCamera = cameras[newIndex];
-
-        // Resetujemy pozycjê i rotacjê kamery docelowej do jej oryginalnych wartoœci
-        nextCamera.transform.position = originalPositions[newIndex];
-        nextCamera.transform.rotation = originalRotations[newIndex];
-        nextCamera.enabled = true;
-
-        float elapsedTime = 0;
-        while (elapsedTime < transitionTime)
-        {
-            float t = elapsedTime / transitionTime;
-            nextCamera.transform.position = Vector3.Lerp(currentCamera.transform.position, originalPositions[newIndex], t);
-            nextCamera.transform.rotation = Quaternion.Lerp(currentCamera.transform.rotation, originalRotations[newIndex], t);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            // Zapamiï¿½taj poczï¿½tkowe pozycje i rotacje kamer
+            originalPositions = new Vector3[cameras.Length];
+            originalRotations = new Quaternion[cameras.Length];
+            for (int i = 0; i < cameras.Length; i++)
+            {
+                originalPositions[i] = cameras[i].transform.position;
+                originalRotations[i] = cameras[i].transform.rotation;
+                cameras[i].enabled = (i == currentCameraIndex);
+            }
         }
 
-        // Ostatecznie ustawiamy dok³adnie oryginaln¹ pozycjê
-        nextCamera.transform.position = originalPositions[newIndex];
-        nextCamera.transform.rotation = originalRotations[newIndex];
+        void Update()
+        {
+            if (Input.GetKeyDown(switchKey) && !_isSwitching && !_hasSwitched) // Przeï¿½ï¿½czanie kamery na spacjï¿½
+            {
+                int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
+                StartCoroutine(SwitchCamera(nextCameraIndex));
+                _hasSwitched = true;
+                menuCanvas.SetActive(false);
+                tiltBarCanvas.SetActive(true);
+                
+                if (StateMachineManager.instance.GetCurrentState() is MainMenuState)
+                {
+                    NotifyObservers(new MainMenuDTO());
+                    StateMachineManager.instance.StartState();
+                }
+            }
+        }
 
-        currentCamera.enabled = false;
-        currentCameraIndex = newIndex;
-        _isSwitching = false;
+        IEnumerator SwitchCamera(int newIndex)
+        {
+            _isSwitching = true;
+            Camera currentCamera = cameras[currentCameraIndex];
+            Camera nextCamera = cameras[newIndex];
+
+            // Resetujemy pozycjï¿½ i rotacjï¿½ kamery docelowej do jej oryginalnych wartoï¿½ci
+            nextCamera.transform.position = originalPositions[newIndex];
+            nextCamera.transform.rotation = originalRotations[newIndex];
+            nextCamera.enabled = true;
+
+            float elapsedTime = 0;
+            while (elapsedTime < transitionTime)
+            {
+                float t = elapsedTime / transitionTime;
+                nextCamera.transform.position = Vector3.Lerp(currentCamera.transform.position, originalPositions[newIndex], t);
+                nextCamera.transform.rotation = Quaternion.Lerp(currentCamera.transform.rotation, originalRotations[newIndex], t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Ostatecznie ustawiamy dokï¿½adnie oryginalnï¿½ pozycjï¿½
+            nextCamera.transform.position = originalPositions[newIndex];
+            nextCamera.transform.rotation = originalRotations[newIndex];
+
+            currentCamera.enabled = false;
+            currentCameraIndex = newIndex;
+            _isSwitching = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using AudioManager;
 using StateMachine.states;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,12 +18,14 @@ namespace Sharknado
         [SerializeField] private bool _moveLeft;
 
         public GameObject lightning;
+        private AudioSource _audioSource;
 
         void Start()
         {
             lightning.SetActive(false);
             transform.localScale = Vector3.zero;
             StartCoroutine(ScaleOverTime(2.0f, Vector3.zero, Vector3.one));
+            _audioSource = gameObject.AddComponent<AudioSource>();
         }
         
         
@@ -83,6 +86,7 @@ namespace Sharknado
         {
             if (other.CompareTag(_ctx.PlayerTag))
             {
+                AudioManager.AudioManager.PlaySound(AudioClips.SharknadoDeath, _audioSource, 1.0f);   
                 _ctx.OnSharknadoHitPlayer();
             }
             

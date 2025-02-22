@@ -42,7 +42,8 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Entered FruitState variant: " + _variant.ToString());
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Entered FruitState variant: " + _variant.ToString());
 
                 _instantiatedBanana = new List<GameObject>();
                 _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
@@ -104,7 +105,10 @@ namespace StateMachine.states
         public void OnFruitHitPlayer()
         {
             NotifyObservers(new FruitDTO());
-            Debug.Log("Hit");
+
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Hit");
+
         }
         public void EnterMovementPhase()
         {

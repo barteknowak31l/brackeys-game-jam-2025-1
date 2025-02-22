@@ -40,7 +40,12 @@ namespace Lightning
                     _boxCollider.enabled = _particleSystem.particleCount > 0;
                     AudioManager.AudioManager.PlaySound(AudioClips.Thunder, _audioSource, 1.0f);    
                 }
+                else
+                {
+                    _boxCollider.enabled = false;
+                }
             }
+
             
         }
 

@@ -37,7 +37,10 @@ namespace StateMachine.states
 
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Entered AnvilState variant: " + _variant.ToString());
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Entered AnvilState variant: " + _variant.ToString());
+
+
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
             StartCoroutine(SpawnAnvilCoroutine());
             Invoke("SpawnAnvil", _firstAnvilSpawnDelay);

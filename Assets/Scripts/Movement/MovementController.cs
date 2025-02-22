@@ -96,6 +96,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     [Header("Bird stuff")]
     [SerializeField] private ParticleSystem _explosionParticleSystem;
     [SerializeField] private AudioSource _explosionAudioSource;
+    [SerializeField] private AudioSource _musicAudioSource;
     
     void Awake()
     {
@@ -129,6 +130,11 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     {
         _explosionAudioSource = gameObject.AddComponent<AudioSource>();
         _explosionAudioSource.playOnAwake = false;
+        
+        _musicAudioSource = gameObject.AddComponent<AudioSource>();
+        _musicAudioSource.playOnAwake = false;
+        _musicAudioSource.loop = true;
+        AudioManager.AudioManager.PlaySound(AudioClips.Music, _musicAudioSource, 1.0f);
     }
 
 
@@ -806,8 +812,5 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-
-
-
 }
 

@@ -31,5 +31,6 @@ namespace AudioManager
         UfoDeath,
         PlayerHit,
         SharknadoDeath,
+        Music,
     }
 }

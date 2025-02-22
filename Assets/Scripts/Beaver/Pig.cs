@@ -10,6 +10,7 @@ public class Pig : MonoBehaviour
     private int _pigDestroyTime = 20;
     
     private AudioSource _audioSourceScream;
+    private AudioSource _audioSourceHit;
     
     void Start()
     {
@@ -17,6 +18,7 @@ public class Pig : MonoBehaviour
         transform.Rotate(0, 270, 0);
         
         _audioSourceScream = gameObject.AddComponent<AudioSource>();
+        _audioSourceHit = gameObject.AddComponent<AudioSource>();
         
         _audioSourceScream.playOnAwake = false;
         _audioSourceScream.loop = true;
@@ -36,7 +38,8 @@ public class Pig : MonoBehaviour
         if (other.gameObject.CompareTag(_ctx._playerTag))
         {
             _ctx.EndTime();
-            Destroy(gameObject);
+            AudioManager.AudioManager.PlaySound(AudioClips.PlayerHit, _audioSourceHit, 1.0f);
+            Destroy(gameObject,1.0f);
         }
   
     }

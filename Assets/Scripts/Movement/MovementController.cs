@@ -708,6 +708,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
             if (transform.position.y >= _ufoLiftThreshold)
             {
                 InstantKill();
+                AudioManager.AudioManager.PlaySound(AudioClips.UfoDeath);
                 yield break;
             }
 

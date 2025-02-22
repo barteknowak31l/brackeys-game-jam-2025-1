@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using CinematicCamera;
 
 public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>, Observers.IObserver<MainMenuDTO>
 {

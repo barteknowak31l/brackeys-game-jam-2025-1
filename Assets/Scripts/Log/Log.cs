@@ -46,7 +46,7 @@ namespace Log
 
         public void OnNotify(BeaverDTO dto)
         {
-            if (dto._endTime)
+            if (dto._endTime&& _state.GetVariant() == Variant.First)
             {
                 _rb.isKinematic = false;
                 _rb.useGravity = true;

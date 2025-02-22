@@ -1,4 +1,5 @@
 using System;
+using AudioManager;
 using StateMachine.states;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,12 +14,16 @@ namespace Lightning
         
         StormState _stormState;
         
+        AudioSource _audioSource;
+        
         void Start()
         {
             _particleSystem = GetComponent<ParticleSystem>();
             _boxCollider = GetComponent<BoxCollider>();
             _boxCollider.isTrigger = true;
             _boxCollider.enabled = false;
+            
+            _audioSource = gameObject.AddComponent<AudioSource>();
         }
 
         public void Setup(StormState stormState)
@@ -30,8 +35,17 @@ namespace Lightning
         {
             if (_particleSystem && _boxCollider)
             {
-                _boxCollider.enabled = _particleSystem.particleCount > 0;
+                if (_particleSystem.particleCount > 0)
+                {
+                    _boxCollider.enabled = _particleSystem.particleCount > 0;
+                    AudioManager.AudioManager.PlaySound(AudioClips.Thunder, _audioSource, 1.0f);    
+                }
+                else
+                {
+                    _boxCollider.enabled = false;
+                }
             }
+
             
         }
 

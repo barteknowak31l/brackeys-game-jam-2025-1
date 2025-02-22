@@ -1,5 +1,5 @@
+using System;
 using AudioManager;
-using Observers;
 using Observers.dto;
 using StateMachine;
 using StateMachine.states;
@@ -9,8 +9,9 @@ using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>, IObserver<BirdDTO>
+public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -33,6 +34,8 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private InputAction kickAction;
     private InputAction moveForwardAction;
     private InputAction moveBackwardAction;
+    private InputAction tiltLeftAction;
+    private InputAction tiltRightAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -92,9 +95,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
 
-
+    [Header("Bird stuff")]
     [SerializeField] private ParticleSystem _explosionParticleSystem;
-
+    [SerializeField] private AudioSource _explosionAudioSource;
+    
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -109,9 +113,12 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         jumpAction = playerInput.actions["Jump"];
         crouchAction = playerInput.actions["Crouch"];
         kickAction = playerInput.actions["Kick"];
-        crouchAction.performed += _ => ToggleCrouch();
+        tiltLeftAction = playerInput.actions["tiltLeft"];
+        tiltRightAction = playerInput.actions["tiltRight"];
+        kickAction = playerInput.actions["Kick"];
         kickAction.performed += _ => Kick();
-
+        crouchAction.started += _ => StartCrouch();
+        crouchAction.canceled += _ => StopCrouch();
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -121,6 +128,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
+    private void Start()
+    {
+        _explosionAudioSource = gameObject.AddComponent<AudioSource>();
+        _explosionAudioSource.playOnAwake = false;
+    }
 
 
     void Update()
@@ -196,27 +208,28 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
 
 
-    void ToggleCrouch()
+    void StartCrouch()
     {
         if (!isGrounded) return;
-        if (isCrouching)
-        {
-            isCrouching = false;
-            animator.SetBool("Crouch", false);
-            capsuleCollider.height = originalColliderHeight;
-            capsuleCollider.center = originalColliderCenter;
-            StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
-        }
-        else
-        {
-            isCrouching = true;
-            animator.SetBool("Crouch", true);
-            capsuleCollider.height = originalColliderHeight / 2f;
 
-            capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
+        isCrouching = true;
+        animator.SetBool("Crouch", true);
+        capsuleCollider.height = originalColliderHeight / 2f;
+        capsuleCollider.center = new Vector3(originalColliderCenter.x, originalColliderCenter.y - originalColliderHeight / 4f, originalColliderCenter.z);
 
-            StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
-        }
+        StartCoroutine(CrouchCameraTransition(originalCameraPosition - new Vector3(0, originalColliderHeight / 3.1f, 0), 0.2f));
+    }
+
+    void StopCrouch()
+    {
+        if (!isCrouching) return;
+
+        isCrouching = false;
+        animator.SetBool("Crouch", false);
+        capsuleCollider.height = originalColliderHeight;
+        capsuleCollider.center = originalColliderCenter;
+
+        StartCoroutine(CrouchCameraTransition(originalCameraPosition, 0.2f));
     }
     void Kick()
     {
@@ -321,11 +334,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
             randomTiltChange = Random.Range(3f, 6f);
         }
 
-        if (Input.GetKey(KeyCode.A) && !instantKill)
+        if (tiltLeftAction.ReadValue<float>()  == 1 && !instantKill)
         {
             currentTilt += tiltSpeed * Time.deltaTime * 50f;
         }
-        if (Input.GetKey(KeyCode.D) && !instantKill)
+        if (tiltRightAction.ReadValue<float>() == 1 && !instantKill)
         {
             currentTilt -= tiltSpeed * Time.deltaTime * 50f;
         }
@@ -361,7 +374,7 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     }
     private void Audio()
     {
-        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
+        bool isMoving = moveForwardAction.ReadValue<float>() > 0 || moveBackwardAction.ReadValue<float>() > 0;
 
         if (isMoving && audioSource.enabled)
         {
@@ -644,6 +657,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
                 playerInput.actions["Crouch"].Disable();
                 ufoLiftCoroutine = StartCoroutine(LiftPlayer());
             }
+            SwapTiltControls(true); 
+
+
+
+
         }
         else
         {
@@ -659,6 +677,24 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
                 playerInput.actions["Jump"].Enable();
                 playerInput.actions["Crouch"].Enable();
             }
+            SwapTiltControls(false);
+
+        }
+    }
+    private void SwapTiltControls(bool invert)
+    {
+        if (invert)
+        {
+  
+
+            tiltRightAction = playerInput.actions["tiltLeft"];
+            tiltLeftAction = playerInput.actions["tiltRight"];
+        }
+        else
+        {
+            tiltRightAction = playerInput.actions["tiltRight"];
+            tiltLeftAction = playerInput.actions["tiltLeft"];
+        
         }
     }
 
@@ -743,11 +779,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private void StartExplosion()
     {
         _explosionParticleSystem.Play();
+        AudioManager.AudioManager.PlaySound(AudioClips.Explosion, _explosionAudioSource, 1.0f);
     }
 
     private void StopExplosion()
     {
         _explosionParticleSystem.Stop();
+        AudioManager.AudioManager.StopSound(AudioClips.Explosion, _explosionAudioSource);
+
     }
 
 

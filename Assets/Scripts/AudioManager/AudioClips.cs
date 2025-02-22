@@ -27,5 +27,6 @@ namespace AudioManager
         BeaverKickScream,
         SprintSteps,
         WalkingSteps,
+        Explosion,
     }
 }

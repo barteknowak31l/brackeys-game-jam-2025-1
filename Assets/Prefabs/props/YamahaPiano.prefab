@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4611157559637894522}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 9.29, z: -0.06}
+  m_LocalPosition: {x: 0.19, y: 10.55, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,11 +43,11 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 0.7176471, g: 0.47843137, b: 0, a: 1}
-  m_Intensity: 600
-  m_Range: 100
-  m_SpotAngle: 49.09851
-  m_InnerSpotAngle: 21.80208
+  m_Color: {r: 0.9339623, g: 0.7166975, b: 0.2775454, a: 1}
+  m_Intensity: 1500
+  m_Range: 150
+  m_SpotAngle: 52.149643
+  m_InnerSpotAngle: 24.853216
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -82,7 +82,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingLayerMask: 2
+  m_RenderingLayerMask: 4294967295
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
-  m_RenderingLayers: 2
+  m_RenderingLayers: 4294967295
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
   m_ShadowRenderingLayers: 1
@@ -358,7 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3bc06c8cebd6669ac435c801098bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyDelay: 5
 --- !u!65 &2244929841650177443
 BoxCollider:
   m_ObjectHideFlags: 0

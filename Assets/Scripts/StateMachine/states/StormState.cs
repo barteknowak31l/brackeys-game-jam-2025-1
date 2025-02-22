@@ -72,7 +72,7 @@ namespace StateMachine.states
             StopRainSound();
             foreach (var lightning in _instantiatedLightnings)
             {
-                Destroy(lightning);   
+                Destroy(lightning, 1.0f);   
             }
         }
 

@@ -34,7 +34,9 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
+            if(StateMachineManager.instance.IsDebugMode)
             Debug.Log("Entered BeaverState variant: " + _variant.ToString());
+
 
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
 

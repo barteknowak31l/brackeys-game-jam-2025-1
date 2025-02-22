@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Observers.dto;
+using StateMachine;
 using UnityEngine;
 
 namespace Observers
@@ -22,7 +23,9 @@ namespace Observers
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                if (StateMachineManager.instance.IsDebugMode)
+                    Debug.LogException(e);
+
             }
         }
 
@@ -34,7 +37,9 @@ namespace Observers
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                if (StateMachineManager.instance.IsDebugMode)
+                    Debug.LogException(e);
+
             }
         }
 

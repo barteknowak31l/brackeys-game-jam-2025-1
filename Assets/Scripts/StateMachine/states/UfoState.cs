@@ -36,7 +36,10 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Enter UfoState");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Enter UfoState");
+
+
             _playerTransform = GameObject.FindGameObjectWithTag(PlayerTag).transform;
             Vector3 ufoPosition = new Vector3(_playerTransform.position.x, _ufoStartPositionOffset.y, _playerTransform.position.z);
             _ufo = Instantiate(_ufoPrefab, ufoPosition, Quaternion.identity).GetComponent<Ufo>();
@@ -68,8 +71,10 @@ namespace StateMachine.states
             {
                 _ufoCowDispenser.EndPhase();
             }
-            
-            Debug.Log("Exit UfoState");
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Exit UfoState");
+
+
         }
 
         public IBaseState SetVariant(Variant variant)

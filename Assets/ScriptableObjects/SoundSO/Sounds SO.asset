@@ -150,3 +150,8 @@ MonoBehaviour:
     mixer: {fileID: 24300002, guid: 686a377427899693c81bd5ac5351e092, type: 2}
     sounds:
     - {fileID: 8300000, guid: f9dc795ce9284e1c89267fcb8a85ffe9, type: 3}
+  - name: PlayerHit
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 0a4f25f984f526659aff48d3d48349b8, type: 3}

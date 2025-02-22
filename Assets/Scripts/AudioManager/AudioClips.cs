@@ -29,5 +29,6 @@ namespace AudioManager
         WalkingSteps,
         Explosion,
         UfoDeath,
+        PlayerHit,
     }
 }

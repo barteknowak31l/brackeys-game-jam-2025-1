@@ -10,6 +10,8 @@ namespace CinematicCamera
     public class SmoothCameraSwitch : Observable<MainMenuDTO>
     {
         public Camera[] cameras; // Lista kamer
+        public GameObject menuCanvas;
+    public GameObject tiltBarCanvas;
         public float transitionTime = 1.0f; // Czas przej�cia
         public static int currentCameraIndex = 0;
         public KeyCode switchKey = KeyCode.J;
@@ -40,6 +42,8 @@ namespace CinematicCamera
                 int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
                 StartCoroutine(SwitchCamera(nextCameraIndex));
                 _hasSwitched = true;
+                 menuCanvas.SetActive(false);
+            tiltBarCanvas.SetActive(true);
                 
                 if (StateMachineManager.instance.GetCurrentState() is MainMenuState)
                 {

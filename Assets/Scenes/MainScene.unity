@@ -992,6 +992,14 @@ PrefabInstance:
       propertyPath: _sharkYOffset
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _numberOfSharknados
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _numberOfSharkSpawners
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4800769069750617156, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.211555
@@ -1096,6 +1104,14 @@ PrefabInstance:
       propertyPath: _bigBirdFrontPrefab
       value: 
       objectReference: {fileID: 1385667145152164623, guid: 09466f45ef73f314bb8d9929806a7ea6, type: 3}
+    - target: {fileID: 7894020682871508659, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _ufoSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894020682871508659, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _stationaryPhaseDuration
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9170069364485191352, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _lightningCount
       value: 8

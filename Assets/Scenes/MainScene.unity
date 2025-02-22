@@ -940,6 +940,14 @@ PrefabInstance:
       propertyPath: _sharkYOffset
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _numberOfSharknados
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _numberOfSharkSpawners
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4800769069750617156, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.211555
@@ -2112,8 +2120,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 50, y: 50, z: 200}
-  m_Center: {x: 0, y: -20, z: 50}
+  m_Size: {x: 50, y: 85.590225, z: 200}
+  m_Center: {x: 0, y: -37.795113, z: 50}
 --- !u!114 &2018070396
 MonoBehaviour:
   m_ObjectHideFlags: 0

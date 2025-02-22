@@ -97,6 +97,6 @@ public class Ship : MonoBehaviour
         StopAllCoroutines();
         Vector3 end = playerTransform.position + -playerTransform.forward * 10.0f + playerTransform.right * 10.0f + playerTransform.up * offsetY;
         MovePhase(end, speed);
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 2.0f);
     }
 }

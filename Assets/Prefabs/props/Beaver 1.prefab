@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToKill: 11
-  beaverKickRange: 15
+  beaverKickRange: 40
   beaverKickDuration: 2
 --- !u!95 &5322543133802181096
 Animator:

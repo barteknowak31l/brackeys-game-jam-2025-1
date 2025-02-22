@@ -77,7 +77,7 @@ namespace StateMachine.states
         {
             foreach (var banana in _instantiatedBanana)
             {
-                Destroy(banana);   
+                Destroy(banana,1);   
             }
             if (_variant == Variant.Second)
             {

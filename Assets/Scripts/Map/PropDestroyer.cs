@@ -4,8 +4,11 @@ using UnityEngine;
 public class PropDestroyer : MonoBehaviour
 {
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(collision.gameObject);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Prop"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

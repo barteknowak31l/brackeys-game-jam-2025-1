@@ -103,7 +103,7 @@ namespace Sharknado
                 yield return null;
             }
             transform.localScale = endScale;
-            //lightning.SetActive(true);
+            lightning.SetActive(true);
 
             if(destroy)
                 Destroy(gameObject);

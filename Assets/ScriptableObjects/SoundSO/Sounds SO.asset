@@ -132,11 +132,16 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 10a9642ae046a553ba8a8f80dd8322b4, type: 3}
   - name: SprintSteps
     volume: 1
-    mixer: {fileID: 0}
+    mixer: {fileID: 24300002, guid: bddd92f9387d68a29a03e563f6441c28, type: 2}
     sounds:
-    - {fileID: 8300000, guid: 130f07fbf1ba471339bd4dc18f2c04cc, type: 3}
+    - {fileID: 8300000, guid: c376ee94844f9b7328b8cebf1ee4b0e1, type: 3}
   - name: WalkingSteps
     volume: 1
-    mixer: {fileID: 0}
+    mixer: {fileID: 24300002, guid: bddd92f9387d68a29a03e563f6441c28, type: 2}
     sounds:
-    - {fileID: 8300000, guid: 2332a8fe5c80ae599bd54ac233fd9f05, type: 3}
+    - {fileID: 8300000, guid: b9d16e42bf6b50cd2a28e234020b6170, type: 3}
+  - name: Explosion
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 4ae7bd39c4dfe7844bb65cb208a777af, type: 3}

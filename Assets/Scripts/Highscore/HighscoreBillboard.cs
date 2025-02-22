@@ -29,6 +29,6 @@ public class HighscoreBillboard : MonoBehaviour, IObserver<StateDTO>
 
     private void ChangeScores()
     {
-        textMeshPro.text = $"Highscore:\n{highscoreData.highscore}\nLast score:\n{highscoreData.lastDistance}";
+        textMeshPro.text = $"Highscore: {highscoreData.highscore.ToString()} Last score: {highscoreData.lastDistance.ToString()}";
     }
 }

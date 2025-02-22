@@ -4,8 +4,6 @@ using UnityEngine;
 public class SmoothCameraSwitch : MonoBehaviour
 {
     public Camera[] cameras; // Lista kamer
-    public GameObject menuCanvas;
-    public GameObject tiltBarCanvas;
     public float transitionTime = 1.0f; // Czas przejœcia
     public static int currentCameraIndex = 0;
     private bool _isSwitching = false;
@@ -35,8 +33,6 @@ public class SmoothCameraSwitch : MonoBehaviour
             int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
             StartCoroutine(SwitchCamera(nextCameraIndex));
             _hasSwitched = true;
-            menuCanvas.SetActive(false);
-            tiltBarCanvas.SetActive(true);
         }
     }
 

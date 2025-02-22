@@ -21,8 +21,7 @@ namespace Lightning
 
             int currentParticleCount = _particleSystem.particleCount;
 
-            // Wykrywanie burstu jako nagłego wzrostu liczby cząsteczek
-            if (currentParticleCount > _previousParticleCount + 1) // 1 jako próg burstu
+            if (currentParticleCount > _previousParticleCount + 1)
             {
                 OnParticleBurst();
             }

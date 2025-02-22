@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18047f660a106f4dad5fceb25caa4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyDelay: 2
-  _birdSpeed: 5
+  _destroyDelay: 5
+  _birdSpeed: 3.5
   _birdSpeedRandomer: 1.3
   direction: {x: 0, y: 0, z: -1}
 --- !u!65 &5140792575624397473

@@ -56,16 +56,16 @@ namespace StateMachine
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && IsDebugMode)
             {
                 EndMechanicState();
             }
             
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O) && IsDebugMode)
             {
                 ForceNextState(Variant.First);
             }
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) && IsDebugMode)
             {
                 ForceNextState(Variant.Second);
             }

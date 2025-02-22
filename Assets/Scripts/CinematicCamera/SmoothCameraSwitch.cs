@@ -11,7 +11,7 @@ namespace CinematicCamera
     {
         public Camera[] cameras; // Lista kamer
         public GameObject menuCanvas;
-    public GameObject tiltBarCanvas;
+        public GameObject tiltBarCanvas;
         public float transitionTime = 1.0f; // Czas przej�cia
         public static int currentCameraIndex = 0;
         public KeyCode switchKey = KeyCode.J;
@@ -26,7 +26,6 @@ namespace CinematicCamera
             // Zapami�taj pocz�tkowe pozycje i rotacje kamer
             originalPositions = new Vector3[cameras.Length];
             originalRotations = new Quaternion[cameras.Length];
-
             for (int i = 0; i < cameras.Length; i++)
             {
                 originalPositions[i] = cameras[i].transform.position;
@@ -42,8 +41,8 @@ namespace CinematicCamera
                 int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
                 StartCoroutine(SwitchCamera(nextCameraIndex));
                 _hasSwitched = true;
-                 menuCanvas.SetActive(false);
-            tiltBarCanvas.SetActive(true);
+                menuCanvas.SetActive(false);
+                tiltBarCanvas.SetActive(true);
                 
                 if (StateMachineManager.instance.GetCurrentState() is MainMenuState)
                 {

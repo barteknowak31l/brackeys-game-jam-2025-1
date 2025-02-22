@@ -4949,7 +4949,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5510,7 +5510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  sprintSpeed: 5
+  sprintSpeed: 3.5
   jumpForce: 5
   mouseSensitivity: 0.1
   tiltSpeed: 0.5
@@ -5545,6 +5545,7 @@ MonoBehaviour:
   _ufoLiftSpeed: 2
   _ufoLiftThreshold: 8
   _explosionParticleSystem: {fileID: 1515945848363129308}
+  _explosionAudioSource: {fileID: 0}
 --- !u!114 &5160884440384293200
 MonoBehaviour:
   m_ObjectHideFlags: 0

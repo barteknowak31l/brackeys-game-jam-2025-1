@@ -15,6 +15,7 @@ namespace StateMachine
         public bool IsDebugMode;
         
         [SerializeField] DefaultState _defaultState;
+        [SerializeField] MainMenuState _mainMenuState;
         [SerializeField] WindState _windState;
         [SerializeField] AnvilState _anvilState;
         [SerializeField] StormState _stormState;
@@ -48,7 +49,7 @@ namespace StateMachine
         void Start()
         {
             InitQueue();
-            _currentState = _startState;
+            _currentState = _mainMenuState;
             NotifyObservers(createDTO(_currentState));
             _currentState.EnterState(this);
         }
@@ -105,6 +106,12 @@ namespace StateMachine
             NotifyObservers(createDTO(_currentState));
             _currentState.EnterState(this);
         }
+
+        public IBaseState GetCurrentState()
+        {
+            return _currentState;
+        }
+        
         
         private StateDTO createDTO(IBaseState state, bool isDefault = false)
         {
@@ -148,6 +155,5 @@ namespace StateMachine
             NotifyObservers(createDTO(_currentState));
 
         }
-        
     }
 }

@@ -34,6 +34,8 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     private InputAction kickAction;
     private InputAction moveForwardAction;
     private InputAction moveBackwardAction;
+    private InputAction tiltLeftAction;
+    private InputAction tiltRightAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -110,6 +112,9 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"];
         crouchAction = playerInput.actions["Crouch"];
+        kickAction = playerInput.actions["Kick"];
+        tiltLeftAction = playerInput.actions["tiltLeft"];
+        tiltRightAction = playerInput.actions["tiltRight"];
         kickAction = playerInput.actions["Kick"];
         kickAction.performed += _ => Kick();
         crouchAction.started += _ => StartCrouch();
@@ -329,11 +334,11 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
             randomTiltChange = Random.Range(3f, 6f);
         }
 
-        if (Input.GetKey(KeyCode.A) && !instantKill)
+        if (tiltLeftAction.ReadValue<float>()  == 1 && !instantKill)
         {
             currentTilt += tiltSpeed * Time.deltaTime * 50f;
         }
-        if (Input.GetKey(KeyCode.D) && !instantKill)
+        if (tiltRightAction.ReadValue<float>() == 1 && !instantKill)
         {
             currentTilt -= tiltSpeed * Time.deltaTime * 50f;
         }
@@ -652,6 +657,11 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
                 playerInput.actions["Crouch"].Disable();
                 ufoLiftCoroutine = StartCoroutine(LiftPlayer());
             }
+            SwapTiltControls(true); 
+
+
+
+
         }
         else
         {
@@ -667,6 +677,24 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
                 playerInput.actions["Jump"].Enable();
                 playerInput.actions["Crouch"].Enable();
             }
+            SwapTiltControls(false);
+
+        }
+    }
+    private void SwapTiltControls(bool invert)
+    {
+        if (invert)
+        {
+  
+
+            tiltRightAction = playerInput.actions["tiltLeft"];
+            tiltLeftAction = playerInput.actions["tiltRight"];
+        }
+        else
+        {
+            tiltRightAction = playerInput.actions["tiltRight"];
+            tiltLeftAction = playerInput.actions["tiltLeft"];
+        
         }
     }
 

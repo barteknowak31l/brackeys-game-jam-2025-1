@@ -112,6 +112,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TiltLeft",
+                    "type": "Button",
+                    "id": "b2ac8791-8900-452b-a58a-7d25b3040245",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TiltRight",
+                    "type": "Button",
+                    "id": "21ec4ddc-c1b6-4077-8b9b-033bdef08834",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -530,6 +548,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc0c730a-4348-4c16-85bc-4a556678605b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TiltLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bcbe2617-1fce-4dad-a675-c3c2fd94ce2c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TiltRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

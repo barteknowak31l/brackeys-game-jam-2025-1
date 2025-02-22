@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireForce: 12
-  _angle: -60
+  _angle: -50
   _rotation: 180
   _shootInterval: 1.4
   _shootTimer: 0

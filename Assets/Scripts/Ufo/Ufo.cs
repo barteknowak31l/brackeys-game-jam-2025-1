@@ -80,7 +80,7 @@ public class Ufo : MonoBehaviour
         StopAllCoroutines();
         Vector3 end = playerTransform.position + -playerTransform.forward * 10.0f + playerTransform.right * 10.0f + playerTransform.up * offsetY;
         MovePhase(end, speed, false);
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 2.0f);
         AudioManager.AudioManager.StopSound(AudioClips.UfoKidnapping);
     }
 

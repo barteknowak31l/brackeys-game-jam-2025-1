@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: _spawnPoint
       value: 
       objectReference: {fileID: 1818026004}
+    - target: {fileID: 1771219503634535438, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _beaverSpawnDistance
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2158536418599122583, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _sharkHeight
       value: 6.5
@@ -990,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _shipStartPositionOffset.y
-      value: -3
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _shipStartPositionOffset.z
@@ -1282,7 +1286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2321729046406771915, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2321729046406771915, guid: 32a57e70aeeb8a840a8f8e29254c9c18, type: 3}
       propertyPath: m_LocalScale.z

@@ -15,7 +15,9 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: a6ee8625f85a7d6d79a8e7c35e94382d
+    name: ThunderVolume
   m_AudioMixerGroupViews:
   - guids:
     - 17c7d63a2daed6be4b6d2fc7aa78e2a9

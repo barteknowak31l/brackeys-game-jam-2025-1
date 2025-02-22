@@ -28,5 +28,9 @@ namespace AudioManager
         SprintSteps,
         WalkingSteps,
         Explosion,
+        UfoDeath,
+        PlayerHit,
+        SharknadoDeath,
+        Music,
     }
 }

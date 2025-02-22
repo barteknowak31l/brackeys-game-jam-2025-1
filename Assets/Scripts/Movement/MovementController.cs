@@ -4,14 +4,12 @@ using Observers.dto;
 using StateMachine;
 using StateMachine.states;
 using System.Collections;
-using System.Threading;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using CinematicCamera;
 
-public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>
+public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>, Observers.IObserver<MainMenuDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -98,6 +96,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     [Header("Bird stuff")]
     [SerializeField] private ParticleSystem _explosionParticleSystem;
     [SerializeField] private AudioSource _explosionAudioSource;
+    [SerializeField] private AudioSource _musicAudioSource;
     
     void Awake()
     {
@@ -120,18 +119,22 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         crouchAction.started += _ => StartCrouch();
         crouchAction.canceled += _ => StopCrouch();
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         originalColliderCenter = capsuleCollider.center;
 
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
+    
     private void Start()
     {
         _explosionAudioSource = gameObject.AddComponent<AudioSource>();
         _explosionAudioSource.playOnAwake = false;
+        
+        _musicAudioSource = gameObject.AddComponent<AudioSource>();
+        _musicAudioSource.playOnAwake = false;
+        _musicAudioSource.loop = true;
+        AudioManager.AudioManager.PlaySound(AudioClips.Music, _musicAudioSource, 1.0f);
     }
 
 
@@ -171,6 +174,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         beaverState.AddObserver(this);
         sharkState.AddObserver(this);
         birdState.AddObserver(this);
+        cam.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -184,6 +188,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         beaverState.RemoveObserver(this);
         sharkState.RemoveObserver(this);
         birdState.RemoveObserver(this);
+        cam.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -709,6 +714,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
             if (transform.position.y >= _ufoLiftThreshold)
             {
                 InstantKill();
+                AudioManager.AudioManager.PlaySound(AudioClips.UfoDeath);
                 yield break;
             }
 
@@ -767,6 +773,12 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         }
 
     }
+    
+    public void OnNotify(MainMenuDTO dto)
+    {
+        LockCursor();
+    }
+    
     public void OnWallEnter()
     {
         moveBackwardAction.Disable();
@@ -788,7 +800,17 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         AudioManager.AudioManager.StopSound(AudioClips.Explosion, _explosionAudioSource);
 
     }
+    
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
-
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }
 

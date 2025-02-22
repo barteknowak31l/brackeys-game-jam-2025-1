@@ -13,7 +13,9 @@ namespace StateMachine.states
         
         public void EnterState(StateMachineManager ctx)
         {
-            Debug.Log("Entered StartState variant: " + _variant.ToString());
+            if (StateMachineManager.instance.IsDebugMode)
+                Debug.Log("Entered StartState variant: " + _variant.ToString());
+
 
             _playerObject = GameObject.FindGameObjectWithTag(_playerTag);
             SetupPlayerObject();

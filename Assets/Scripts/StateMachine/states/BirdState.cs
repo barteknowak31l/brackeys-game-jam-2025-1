@@ -26,16 +26,24 @@ namespace StateMachine.states
         [SerializeField] private float _birdDamageVariant2;
         [SerializeField] private int _birdCount;
         [SerializeField] private float _birdYOffset = 1.5f;
+        [SerializeField] private float _frontBirdDistance;
+        [SerializeField] private float _birdFrontYOffset;
+
 
         [Space]
         [SerializeField] private GameObject _littleBirdPrefab;
         [SerializeField] private GameObject _bigBirdPrefab;
+        [SerializeField] private GameObject _bigBirdFrontPrefab;
 
 
         public void EnterState(StateMachineManager ctx)
         {
             _playerTransform = GameObject.FindGameObjectWithTag(_playerTag).transform;
             StartCoroutine(SpawnBirdCoroutine());
+            if (_variant == Variant.Second)
+            {
+                StartCoroutine(SpawnFrontBird());
+            }
         }
 
         public void ExitState(StateMachineManager ctx)
@@ -89,6 +97,21 @@ namespace StateMachine.states
             }
 
         }
+        IEnumerator SpawnFrontBird()
+        {
+            while (true)
+            {
+                Vector3 position = new Vector3(_playerTransform.position.x, _birdFrontYOffset, _playerTransform.position.z) + _playerTransform.forward * _frontBirdDistance;
+                var prefab = _bigBirdFrontPrefab;
+                var rotation = Quaternion.Euler(0, 90, 0);
+
+                float spawnDelay = Random.Range(4f, 8f);
+                yield return new WaitForSeconds(spawnDelay);
+                GameObject bird = Instantiate(prefab, position, rotation);
+                bird.GetComponent<Bird>().Setup(this);
+
+            }
+        }
 
         public void OnBirdHitPlayer()
         {
@@ -105,6 +128,7 @@ namespace StateMachine.states
                 var spawnTime = _birdSpawnTimeBase + Random.Range(-_birdSpawnTimeOffset, _birdSpawnTimeOffset);
                 yield return new WaitForSeconds(spawnTime);
                 StartCoroutine(SpawnBird());
+
             }
         }
     }

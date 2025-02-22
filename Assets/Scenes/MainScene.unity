@@ -989,6 +989,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
+      propertyPath: _stopPositionOffset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812904069164970109, guid: cc03b2f96defee7e9a403d42229ff502, type: 3}
       propertyPath: _bananaOffsetRandomness
       value: 2
       objectReference: {fileID: 0}
@@ -1358,7 +1362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1151498371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,8 +1375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6789d7b244e4f974a965b91c8f59aabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  offset: 5
+  player: {fileID: 1099888219}
+  offset: 3
 --- !u!65 &1151498372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1415,7 +1419,7 @@ Transform:
   m_GameObject: {fileID: 1151498370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.51, y: 1.59, z: 5.71}
+  m_LocalPosition: {x: -11.74, y: 1.59, z: 5.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

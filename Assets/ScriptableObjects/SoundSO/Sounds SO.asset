@@ -160,3 +160,8 @@ MonoBehaviour:
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
     sounds:
     - {fileID: 8300000, guid: e4837b97713edfbaa965146ea3e5bf6f, type: 3}
+  - name: Music
+    volume: 1
+    mixer: {fileID: 24300002, guid: 07ed04fc624e725e1992a58557cc9f95, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: b78bd0e8c606ad7839d3aee82ee7a2c9, type: 3}

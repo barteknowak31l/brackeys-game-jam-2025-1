@@ -15,7 +15,9 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 87dcd24f1359f5bb7bdf396eed7c7ed7
+    name: UfoVolume
   m_AudioMixerGroupViews:
   - guids:
     - 9ef8b3197b3c0294386f12252795429b

@@ -15,7 +15,9 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 108051d434eba4c8181124bf3c7c5505
+    name: FruitVolume
   m_AudioMixerGroupViews:
   - guids:
     - 3bf8ce631c920d04a8193fbef5d86df1
@@ -64,5 +66,6 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: c5c8af6d197ec4a38b4550675d9f1419
-  m_FloatValues: {}
+  m_FloatValues:
+    108051d434eba4c8181124bf3c7c5505: -14.761096
   m_TransitionOverrides: {}

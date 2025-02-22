@@ -52,9 +52,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 8e86670dc0ebac06e89a0276920cfa29, type: 3}
   - name: Thunder
     volume: 1
-    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    mixer: {fileID: 24300002, guid: 867fc92f2a14e33ae9ba0429d9bc6cee, type: 2}
     sounds:
-    - {fileID: 8300000, guid: 6ea27055ea1ea2009a39072795cf60df, type: 3}
+    - {fileID: 8300000, guid: a852eb7b7e0c96d9d9d04e558c9f263b, type: 3}
   - name: UfoShip
     volume: 1
     mixer: {fileID: 24300002, guid: 4a0047f92629c6dfa8e1a655c49c655e, type: 2}

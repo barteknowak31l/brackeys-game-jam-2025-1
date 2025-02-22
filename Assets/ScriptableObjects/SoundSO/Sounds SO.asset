@@ -117,7 +117,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 20ff801049ce15c39bc659ef3331141b, type: 3}
   - name: SharkHit
     volume: 1
-    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    mixer: {fileID: 24300002, guid: 31322fd4789a36cb2bf5670e6c4078e2, type: 2}
     sounds:
     - {fileID: 8300000, guid: 8e1997bde7714cbadbd129b3d7e42909, type: 3}
   - name: FruitHit
@@ -155,3 +155,8 @@ MonoBehaviour:
     mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
     sounds:
     - {fileID: 8300000, guid: 0a4f25f984f526659aff48d3d48349b8, type: 3}
+  - name: SharknadoDeath
+    volume: 1
+    mixer: {fileID: 24300002, guid: 84bb0c2447ee42f27b42b6bf35477578, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: e4837b97713edfbaa965146ea3e5bf6f, type: 3}

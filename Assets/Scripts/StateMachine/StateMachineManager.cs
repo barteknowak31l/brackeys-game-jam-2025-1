@@ -27,6 +27,8 @@ namespace StateMachine
         [SerializeField] SharkState _sharkState;
         [SerializeField] StartState _startState;
 
+        public bool story = false;
+
         private List<IBaseState> states;
 
         [SerializeField] private StateQueue _stateQueue;

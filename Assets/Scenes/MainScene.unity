@@ -810,37 +810,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1522979435038546011, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 3371914692172878087, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -76
       objectReference: {fileID: 0}
-    - target: {fileID: 3098655628900420460, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 3456207733506036528, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
+      propertyPath: texts.Array.size
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: audioMixers.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: 'audioMixers.Array.data[5]'
+    - target: {fileID: 3456207733506036528, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
+      propertyPath: 'texts.Array.data[5]'
       value: 
-      objectReference: {fileID: 24100000, guid: 31322fd4789a36cb2bf5670e6c4078e2, type: 2}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: 'audioMixers.Array.data[6]'
-      value: 
-      objectReference: {fileID: 24100000, guid: 07ed04fc624e725e1992a58557cc9f95, type: 2}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: volumeParameters.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: 'volumeParameters.Array.data[5]'
-      value: SharkHitVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557694410737710545, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
-      propertyPath: 'volumeParameters.Array.data[6]'
-      value: MusicVolume
       objectReference: {fileID: 0}
     - target: {fileID: 6300404364190322772, guid: 44c86fc18bc905641a17d28af3faa713, type: 3}
       propertyPath: m_Pivot.x

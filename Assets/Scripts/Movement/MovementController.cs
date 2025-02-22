@@ -1,5 +1,5 @@
+using System;
 using AudioManager;
-using Observers;
 using Observers.dto;
 using StateMachine;
 using StateMachine.states;
@@ -9,8 +9,9 @@ using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
-public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<AnvilDTO>, IObserver<StormDTO>, IObserver<StateDTO>, IObserver<UfoDTO>, IObserver<FruitDTO>, IObserver<BeaverDTO>, IObserver<SharkDTO>, IObserver<BirdDTO>
+public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -92,9 +93,10 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     [SerializeField] private float _ufoLiftSpeed = 3.0f;
     [SerializeField] private float _ufoLiftThreshold = 5.0f;
 
-
+    [Header("Bird stuff")]
     [SerializeField] private ParticleSystem _explosionParticleSystem;
-
+    [SerializeField] private AudioSource _explosionAudioSource;
+    
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -121,6 +123,11 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
+    private void Start()
+    {
+        _explosionAudioSource = gameObject.AddComponent<AudioSource>();
+        _explosionAudioSource.playOnAwake = false;
+    }
 
 
     void Update()
@@ -743,11 +750,14 @@ public class MovementController : MonoBehaviour, IObserver<WindDTO>, IObserver<A
     private void StartExplosion()
     {
         _explosionParticleSystem.Play();
+        AudioManager.AudioManager.PlaySound(AudioClips.Explosion, _explosionAudioSource, 1.0f);
     }
 
     private void StopExplosion()
     {
         _explosionParticleSystem.Stop();
+        AudioManager.AudioManager.StopSound(AudioClips.Explosion, _explosionAudioSource);
+
     }
 
 

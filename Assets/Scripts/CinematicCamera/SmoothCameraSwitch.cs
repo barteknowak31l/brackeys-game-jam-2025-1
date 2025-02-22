@@ -36,7 +36,7 @@ namespace CinematicCamera
 
         void Update()
         {
-            if (Input.GetKeyDown(switchKey) && !_isSwitching && !_hasSwitched) // Prze��czanie kamery na spacj�
+            if (Input.GetKeyDown(switchKey) && !_isSwitching && !_hasSwitched && StateMachineManager.instance.story ==true) // Prze��czanie kamery na spacj�
             {
                 int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
                 StartCoroutine(SwitchCamera(nextCameraIndex));

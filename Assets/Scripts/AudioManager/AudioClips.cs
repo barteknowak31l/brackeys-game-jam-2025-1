@@ -28,5 +28,6 @@ namespace AudioManager
         SprintSteps,
         WalkingSteps,
         Explosion,
+        UfoDeath,
     }
 }

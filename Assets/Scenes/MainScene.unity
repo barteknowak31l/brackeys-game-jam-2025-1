@@ -2328,6 +2328,18 @@ PrefabInstance:
       propertyPath: sprintSpeed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6386410645677603681, guid: 98f28a16d1ba8b14eb5ff8e1ca6f4430, type: 3}
+      propertyPath: _ufoLiftSpeed
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386410645677603681, guid: 98f28a16d1ba8b14eb5ff8e1ca6f4430, type: 3}
+      propertyPath: randomTiltChangeMax
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386410645677603681, guid: 98f28a16d1ba8b14eb5ff8e1ca6f4430, type: 3}
+      propertyPath: randomTiltChangeMin
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

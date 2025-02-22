@@ -5,13 +5,14 @@ using StateMachine;
 using StateMachine.states;
 using System.Collections;
 using System.Threading;
+using CinematicCamera;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>
+public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, Observers.IObserver<AnvilDTO>, Observers.IObserver<StormDTO>, Observers.IObserver<StateDTO>, Observers.IObserver<UfoDTO>, Observers.IObserver<FruitDTO>, Observers.IObserver<BeaverDTO>, Observers.IObserver<SharkDTO>, Observers.IObserver<BirdDTO>, Observers.IObserver<MainMenuDTO>
 {
     public float moveSpeed = 2f;
     public float sprintSpeed = 5f;
@@ -120,14 +121,13 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         crouchAction.started += _ => StartCrouch();
         crouchAction.canceled += _ => StopCrouch();
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         originalColliderCenter = capsuleCollider.center;
 
         tiltCoroutine = StartCoroutine(ChangeTiltDirection());
     }
 
+    
     private void Start()
     {
         _explosionAudioSource = gameObject.AddComponent<AudioSource>();
@@ -171,6 +171,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         beaverState.AddObserver(this);
         sharkState.AddObserver(this);
         birdState.AddObserver(this);
+        cam.AddObserver(this);
         StateMachineManager.instance.AddObserver(this);
     }
 
@@ -184,6 +185,7 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         beaverState.RemoveObserver(this);
         sharkState.RemoveObserver(this);
         birdState.RemoveObserver(this);
+        cam.RemoveObserver(this);
         StateMachineManager.instance.RemoveObserver(this);
     }
 
@@ -767,6 +769,12 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         }
 
     }
+    
+    public void OnNotify(MainMenuDTO dto)
+    {
+        LockCursor();
+    }
+    
     public void OnWallEnter()
     {
         moveBackwardAction.Disable();
@@ -788,6 +796,19 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         AudioManager.AudioManager.StopSound(AudioClips.Explosion, _explosionAudioSource);
 
     }
+    
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
 
 
 }

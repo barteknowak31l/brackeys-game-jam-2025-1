@@ -51,8 +51,13 @@ MonoBehaviour:
   _birdSpawnTimeOffset: 2
   _birdDamage: 1
   _birdDamageVariant2: 2
+  _birdCount: 0
+  _birdYOffset: 1.5
+  _frontBirdDistance: 0
+  _birdFrontYOffset: 0
   _littleBirdPrefab: {fileID: 275038033600180627, guid: cd42a13abc5db0f40a6888a1592c88f4, type: 3}
   _bigBirdPrefab: {fileID: 1385667145152164623, guid: 0211e5310979f3c40a712d771586f722, type: 3}
+  _bigBirdFrontPrefab: {fileID: 0}
 --- !u!1 &866901730166817725
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +116,7 @@ MonoBehaviour:
   _sideOffset: 7
   _frontOffsetBase: 6
   _frontOffsetBaseRandomness: 4
+  _logPositionY: 0.604
   _sharkSpawnerPrefab: {fileID: 8605858652484952148, guid: 823ba8109624f8fa1b3ff20ae50c6d89, type: 3}
   _sharkPrefab: {fileID: 7429858741289453057, guid: 89e72d60ae03bd74ca5b87d4a7435c99, type: 3}
   _sharknadoPrefab: {fileID: 7791993261431097802, guid: 936ba80276cb6c8618341c2df11d0f9e, type: 3}
@@ -154,6 +160,7 @@ Transform:
   - {fileID: 7731074026002837084}
   - {fileID: 343391625033618608}
   - {fileID: 6511034392659084962}
+  - {fileID: 7722679101166783281}
   m_Father: {fileID: 4800769069750617156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1735461019236268430
@@ -252,6 +259,7 @@ MonoBehaviour:
   _bananaOffsetBase: 4
   _bananaOffsetRandomness: 2
   _bananaRotationX: 0
+  _bananaYPosition: 0.604
   _bananaPrefab: {fileID: 6023229418488684101, guid: 36eb003109614a64ba8ebfb76d689406, type: 3}
   _shipSpeed: 3
   _startPositionOffset: 2
@@ -409,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDebugMode: 0
   _defaultState: {fileID: 5079638188790003363}
+  _mainMenuState: {fileID: 8852158805950252938}
   _windState: {fileID: 1887961440605467601}
   _anvilState: {fileID: 5477037608941483338}
   _stormState: {fileID: 9170069364485191352}
@@ -474,6 +483,7 @@ MonoBehaviour:
   _pianoZOffset: 0.9
   _fallSpeed: 15
   _fallDistance: 100
+  _spawnYOffset: 0.604
   _anvilPrefab: {fileID: 2410525137869794300, guid: 7602b65f517565b9db1822288e7f1f9e, type: 3}
   _pianoPrefab: {fileID: 6019068984755545214, guid: 6e8f3fd4ef8ffe10ea3ae5dd3dbcd5ff, type: 3}
 --- !u!1 &6287924663733848714
@@ -525,7 +535,52 @@ MonoBehaviour:
   _lightningOffsetBase: 5
   _lightningOffsetRandomness: 2
   _lightningRotationY: 90
+  _lightingParticleSpawnYOffset: 0.604
   _LightningParticleSystemPrefab: {fileID: 5559473655129061108, guid: 6fd310f6ac7c8f524940ddd1262c97ae, type: 3}
+--- !u!1 &6626839086132770838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7722679101166783281}
+  - component: {fileID: 8852158805950252938}
+  m_Layer: 0
+  m_Name: MainMenuState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7722679101166783281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626839086132770838}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4846109104091899049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8852158805950252938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626839086132770838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877f58beb5e2be30d8d28c942d238699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7241254126076116527
 GameObject:
   m_ObjectHideFlags: 0

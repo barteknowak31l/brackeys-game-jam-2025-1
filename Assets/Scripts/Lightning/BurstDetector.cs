@@ -1,4 +1,4 @@
-    using AudioManager;
+using AudioManager;
 using UnityEngine;
 
 namespace Lightning

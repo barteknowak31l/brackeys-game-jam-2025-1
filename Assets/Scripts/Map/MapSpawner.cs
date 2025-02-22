@@ -6,21 +6,21 @@ public class MapSpawner : MonoBehaviour
     [SerializeField]
     ObjectPooler objectPooler;
     [SerializeField]
-    Transform transform;
+    Transform spawnPositon;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
     {
-        transform = GetComponent<Transform>();
+        spawnPositon = GetComponent<Transform>();
     }
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Spawner"))
         {
-            objectPooler.SpawnObject(transform);
+            objectPooler.SpawnObject(spawnPositon);
         }
 
     }

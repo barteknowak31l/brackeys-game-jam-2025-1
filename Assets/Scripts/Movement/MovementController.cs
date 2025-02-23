@@ -134,7 +134,6 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         _musicAudioSource = gameObject.AddComponent<AudioSource>();
         _musicAudioSource.playOnAwake = false;
         _musicAudioSource.loop = true;
-        AudioManager.AudioManager.PlaySound(AudioClips.Music, _musicAudioSource, 1.0f);
     }
 
 
@@ -812,5 +811,10 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
+    public void PlayMusic()
+    {
+        AudioManager.AudioManager.PlaySound(AudioClips.Music, _musicAudioSource, 1.0f);
+    }    
 }
 

@@ -3045,6 +3045,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6386410645677603681, guid: 98f28a16d1ba8b14eb5ff8e1ca6f4430, type: 3}
+      propertyPath: spawnerCollider
+      value: 
+      objectReference: {fileID: 2018070395}
+    - target: {fileID: 6386410645677603681, guid: 98f28a16d1ba8b14eb5ff8e1ca6f4430, type: 3}
       propertyPath: randomTiltChangeMax
       value: 1.7
       objectReference: {fileID: 0}

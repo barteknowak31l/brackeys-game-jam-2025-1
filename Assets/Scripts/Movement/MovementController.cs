@@ -97,6 +97,9 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     [SerializeField] private ParticleSystem _explosionParticleSystem;
     [SerializeField] private AudioSource _explosionAudioSource;
     [SerializeField] private AudioSource _musicAudioSource;
+
+
+    public BoxCollider spawnerCollider;
     
     void Awake()
     {
@@ -209,6 +212,8 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
 
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
+        spawnerCollider.enabled = true;
     }
 
 
@@ -417,6 +422,8 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     {
         playerInput.enabled = false;
         hasFallen = true;
+        spawnerCollider.enabled = false;
+
         if (!isFalling)
         {
             StateMachineManager.instance.PlayerDeathState();

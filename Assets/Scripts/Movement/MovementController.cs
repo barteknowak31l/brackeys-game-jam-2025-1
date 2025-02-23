@@ -497,10 +497,10 @@ public class MovementController : MonoBehaviour, Observers.IObserver<WindDTO>, O
     }
     void InstantKill()
     {
-        audioSource.enabled = false;
-
-        instantKill = true;
-        tiltSpeed *= 15f;
+        // audioSource.enabled = false;
+        //
+        // instantKill = true;
+        // tiltSpeed *= 15f;
     }
 
     private void OnTriggerExit(Collider other)

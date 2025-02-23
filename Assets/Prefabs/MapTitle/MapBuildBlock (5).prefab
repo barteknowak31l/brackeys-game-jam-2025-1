@@ -1375,8 +1375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPooler: {fileID: 0}
-  transform: {fileID: 0}
-  isSpawned: 0
+  spawnPositon: {fileID: 0}
 --- !u!65 &2157271280392365116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1520,6 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 2533679598076053202}
   messagesManager: {fileID: 0}
+  DeathTextDuration: 0.1
 --- !u!1 &5150388628955810236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,8 +2270,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.33467, y: 2.2497206, z: 0}
-  m_Center: {x: 0.16733506, y: 0.6248603, z: 0.00000001014224}
+  m_Size: {x: 1.33467, y: 2.2497206, z: 0.12731329}
+  m_Center: {x: 0.16733503, y: 0.6248603, z: -0.06365666}
 --- !u!1 &6566171173903142829
 GameObject:
   m_ObjectHideFlags: 0

@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3e6b5af1be7534581d9a34884b2b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToKill: 11
+  timeToKill: 14
   beaverKickRange: 40
   beaverKickDuration: 2
 --- !u!95 &5322543133802181096

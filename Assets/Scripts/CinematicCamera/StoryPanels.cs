@@ -20,6 +20,8 @@ public class StoryPanels : MonoBehaviour
     private AudioSource _audio;
     private bool _sound = true;
 
+    private MovementController _player;
+
     void Start()
     {
         StateMachineManager.instance.story = false;
@@ -27,6 +29,8 @@ public class StoryPanels : MonoBehaviour
         {
             displayText.text = texts[currentIndex];
         }
+        
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementController>();
     }
 
     void Update()
@@ -57,10 +61,11 @@ public class StoryPanels : MonoBehaviour
            
 
             yield return new WaitForSeconds(2f);
-            AudioManager.AudioManager.PlaySound(AudioClips.Explosion);
+            AudioManager.AudioManager.PlaySound(AudioClips.SharkHit);
             yield return new WaitForSeconds(3f); 
-
+            
             ShowMenu();
+            _player.PlayMusic();
         }
     }
 

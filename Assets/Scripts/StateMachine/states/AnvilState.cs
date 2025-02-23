@@ -74,7 +74,7 @@ namespace StateMachine.states
         private void SpawnAnvil()
         {
             // random position based on player pos
-            Vector3 position = new Vector3(_playerTransform.position.x,_spawnYOffset,_playerTransform.position.z) + _playerTransform.forward * Random.Range(1.0f, _anvilSpawnPositionOffsetXZ);
+            Vector3 position = new Vector3(_playerTransform.position.x,_spawnYOffset,_playerTransform.position.z) + _playerTransform.forward * Random.Range(2.5f, _anvilSpawnPositionOffsetXZ);
             // move position up
             position.y += _anvilSpawnPositionOffsetY;
             

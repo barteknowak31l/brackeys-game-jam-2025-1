@@ -1354,6 +1354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 651166193399792064, guid: 3952848e427aceb21b27007bf605e48d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3426221405408697923, guid: 3952848e427aceb21b27007bf605e48d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1991,6 +1995,10 @@ PrefabInstance:
     - target: {fileID: 8393274072584271100, guid: 92dcd3c16cf22f54497af24caf65a783, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393274072584271100, guid: 92dcd3c16cf22f54497af24caf65a783, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9201675565034397708, guid: 92dcd3c16cf22f54497af24caf65a783, type: 3}
       propertyPath: m_Pivot.x
@@ -2651,6 +2659,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8209888925423351109, guid: 2ad1654fd06195c4ca1a6abc537c3cb0, type: 3}
   m_PrefabInstance: {fileID: 1284799541}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1978317795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 651166193399792064, guid: 3952848e427aceb21b27007bf605e48d, type: 3}
+  m_PrefabInstance: {fileID: 1108535130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2010367541 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6805453443113531283, guid: 225b538aef081984a919cb1593804a02, type: 3}
@@ -2779,6 +2792,10 @@ PrefabInstance:
       propertyPath: switchKey
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 5304314268142140470, guid: 144069efb19ab9a4197b54f735ad0d0b, type: 3}
+      propertyPath: gameCanvas
+      value: 
+      objectReference: {fileID: 1978317795}
     - target: {fileID: 5304314268142140470, guid: 144069efb19ab9a4197b54f735ad0d0b, type: 3}
       propertyPath: menuCanvas
       value: 

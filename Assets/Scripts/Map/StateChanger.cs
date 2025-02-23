@@ -20,6 +20,7 @@ public class StateChanger : MonoBehaviour
     {
         if (other.CompareTag("Player") && _active == false)
         {
+            Debug.Log("COLLIDER!!!!!!!!!!!");
             _stateMachineBehaviour.EndMechanicState();
             _active = true;
         }

@@ -74,7 +74,12 @@ namespace StateMachine
 
         public IBaseState Peek()
         {
-            return _queue.Peek().SetVariant(_variant);
+            Variant v = Variant.First;
+            if (_stateCounter + 1 > _statesCount)
+            {
+               v = Variant.Second;
+            }
+            return _queue.Peek().SetVariant(v);
         }
         
     }

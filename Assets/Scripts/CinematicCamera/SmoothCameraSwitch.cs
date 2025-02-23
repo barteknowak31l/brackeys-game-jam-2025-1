@@ -9,21 +9,21 @@ namespace CinematicCamera
 {
     public class SmoothCameraSwitch : Observable<MainMenuDTO>
     {
-        public Camera[] cameras; // Lista kamer
+        public Camera[] cameras;
         public GameObject menuCanvas;
         public GameObject tiltBarCanvas;
-        public float transitionTime = 1.0f; // Czas przej�cia
+        public GameObject gameCanvas;
+        public float transitionTime = 1.0f;
         public static int currentCameraIndex = 0;
         public KeyCode switchKey = KeyCode.J;
         private bool _isSwitching = false;
-        private bool _hasSwitched = false; // Flaga blokuj�ca kolejn� zmian�
+        private bool _hasSwitched = false; 
 
         private Vector3[] originalPositions;
         private Quaternion[] originalRotations;
 
         void Start()
         {
-            // Zapami�taj pocz�tkowe pozycje i rotacje kamer
             originalPositions = new Vector3[cameras.Length];
             originalRotations = new Quaternion[cameras.Length];
             for (int i = 0; i < cameras.Length; i++)
@@ -36,14 +36,16 @@ namespace CinematicCamera
 
         void Update()
         {
-            if (Input.GetKeyDown(switchKey) && !_isSwitching && !_hasSwitched && StateMachineManager.instance.story ==true) // Prze��czanie kamery na spacj�
+            if (Input.GetKeyDown(switchKey) && !_isSwitching && !_hasSwitched && StateMachineManager.instance.story ==true)
             {
                 int nextCameraIndex = (currentCameraIndex + 1) % cameras.Length;
                 StartCoroutine(SwitchCamera(nextCameraIndex));
                 _hasSwitched = true;
                 menuCanvas.SetActive(false);
                 tiltBarCanvas.SetActive(true);
-                
+                gameCanvas.SetActive(true);
+
+
                 if (StateMachineManager.instance.GetCurrentState() is MainMenuState)
                 {
                     NotifyObservers(new MainMenuDTO());
@@ -58,7 +60,6 @@ namespace CinematicCamera
             Camera currentCamera = cameras[currentCameraIndex];
             Camera nextCamera = cameras[newIndex];
 
-            // Resetujemy pozycj� i rotacj� kamery docelowej do jej oryginalnych warto�ci
             nextCamera.transform.position = originalPositions[newIndex];
             nextCamera.transform.rotation = originalRotations[newIndex];
             nextCamera.enabled = true;
@@ -73,7 +74,6 @@ namespace CinematicCamera
                 yield return null;
             }
 
-            // Ostatecznie ustawiamy dok�adnie oryginaln� pozycj�
             nextCamera.transform.position = originalPositions[newIndex];
             nextCamera.transform.rotation = originalRotations[newIndex];
 
